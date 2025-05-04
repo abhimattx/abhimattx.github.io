@@ -430,3 +430,13 @@ footer {
 footer p {
   text-align: center;
 }
+
+#projects ul{
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+#projects li{
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
