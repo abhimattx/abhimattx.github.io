@@ -3,307 +3,291 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Portfolio</title>
+  <meta name="description" content="Portfolio of Abhishek Singh, AI/ML Engineer & Computer Vision Specialist." />
+  <meta name="keywords" content="AI, ML, Computer Vision, Robotics, Portfolio, Abhishek Singh" />
+  <title>Abhishek Singh - Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="mediaqueries.css" />
 </head>
 
 <body>
-  <nav id="desktop-nav">
-    <div class="logo">Abhishek Singh</div>
-    <div>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-  <nav id="hamburger-nav">
-    <div class="logo">Abishek Singh</div>
-    <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+  <header>
+    <nav id="desktop-nav" aria-label="Main Navigation">
+      <div class="logo">Abhishek Singh</div>
+      <div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-      <div class="menu-links">
-        <li><a href="#about" onclick="toggleMenu()">About</a></li>
-        <li><a href="#experience" onclick="toggleMenu()">Skills</a></li>
-        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-      </div>
-    </div>
-  </nav>
-  <section id="profile">
-    <div class="section__pic-container">
-      <img src="./assets/proPic.png" alt="John Doe profile picture" />
-    </div>
-    <div class="section__text">
-      <p class="section__text__p1">Hello, I'm</p>
-      <h1 class="title">Abhishek Singh</h1>
-      <p class="section__text__p2">
-        AI/ML Engineer & Computer Vision Specialist
-      </p>
-      <div class="btn-container">
-        <button class="btn btn-color-2" onclick="window.open('./assets/Resume.pdf')">
-          Download CV
+    </nav>
+    <nav id="hamburger-nav" aria-label="Mobile Navigation">
+      <div class="logo">Abhishek Singh</div>
+      <div class="hamburger-menu">
+        <button class="hamburger-icon" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu-links"
+          onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
-        <button class="btn btn-color-1" onclick="location.href='./#contact'">
-          Contact Info
-        </button>
+        <div id="menu-links" class="menu-links" hidden>
+          <ul>
+            <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+            <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+          </ul>
+        </div>
       </div>
-      <div id="socials-container">
-        <img src="./assets/linkedin.png" alt="My LinkedIn profile" class="icon"
-          onclick="location.href='https://www.linkedin.com/in/abhimattx/'" />
-        <img src="./assets/github.png" alt="My Github profile" class="icon"
-          onclick="location.href='https://github.com/abhimattx'" />
-      </div>
-    </div>
-  </section>
-  <section id="about">
-    <p class="section__text__p1">Get To Know More</p>
-    <h1 class="title">About Me</h1>
-    <div class="section-container">
+    </nav>
+  </header>
+
+  <main>
+    <section id="profile">
       <div class="section__pic-container">
-        <img src="./assets/AboutPic.png" alt="Profile picture" class="about-pic" />
+        <img src="./assets/proPic.png" alt="Abhishek Singh profile picture" />
       </div>
-      <div class="about-details-container">
+      <div class="section__text">
+        <p class="section__text__p1">Hello, I'm</p>
+        <h1 class="title">Abhishek Singh</h1>
+        <p class="section__text__p2">AI/ML Engineer & Computer Vision Specialist</p>
+        <div class="btn-container">
+          <button class="btn btn-color-2" onclick="window.open('./assets/Resume.pdf')">Download CV</button>
+          <button class="btn btn-color-1" onclick="location.href='#contact'">Contact Info</button>
+        </div>
+        <div id="socials-container">
+          <a href="https://www.linkedin.com/in/abhimattx/" aria-label="LinkedIn profile">
+            <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon" />
+          </a>
+          <a href="https://github.com/abhimattx" aria-label="GitHub profile">
+            <img src="./assets/github.png" alt="GitHub icon" class="icon" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <p class="section__text__p1">Get To Know More</p>
+      <h1 class="title">About Me</h1>
+      <div class="section-container">
+        <div class="section__pic-container">
+          <img src="./assets/AboutPic.png" alt="Profile picture" class="about-pic" />
+        </div>
+        <div class="about-details-container">
+          <div class="about-containers">
+            <div class="details-container">
+              <img src="./assets/experience.png" alt="Experience icon" class="icon" />
+              <h3>AI & Robotics Projects</h3>
+              <p>Real-world problem-solving with AI/ML & CV. Hands-on development in Python, OpenCV, and ROS.</p>
+            </div>
+            <div class="details-container">
+              <img src="./assets/education.png" alt="Education icon" class="icon" />
+              <h3>Education</h3>
+              <p>B.Sc. Bachelors Degree in Intelligent Systems with Robotics.</p>
+            </div>
+          </div>
+          <div class="text-container">
+            <p>I design and build intelligent systems that combine machine learning, computer vision, and robotics. My
+              work focuses on solving real-world challenges — from OpenCV-based vision systems to ROS-integrated
+              robotics and AI-driven automation. I bring strong Python skills, hands-on experience with AI tools, and a
+              passion for turning complex problems into working solutions. Whether it’s contributing to a fast-moving
+              tech team or developing innovative prototypes, I’m all about impact, learning fast, and building smarter
+              systems that make a difference.</p>
+          </div>
+        </div>
+      </div>
+      <button class="arrow-btn" aria-label="Go to skills section" onclick="location.href='#skills'">
+        <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" />
+      </button>
+    </section>
+
+    <section id="skills">
+      <p class="section__text__p1">Explore My</p>
+      <h1 class="title">Skills</h1>
+      <div class="experience-details-container">
         <div class="about-containers">
           <div class="details-container">
-            <img src="./assets/experience.png" alt="Experience icon" class="icon" />
-            <h3>AI & Robotics Projects</h3>
-            <p>
-              Real-world problem-solving with AI/ML & CV <br />Hands-on
-              development in Python, OpenCV, and ROS
-            </p>
+            <h2 class="experience-sub-title">AI & Programming</h2>
+            <div class="article-container">
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>Python</h3>
+                  <p>Proficient</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>OpenCV</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>Machine Learning</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>ROS/ROS2</h3>
+                  <p>Basic-Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>C++</h3>
+                  <p>Basic</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>Git</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+            </div>
           </div>
           <div class="details-container">
-            <img src="./assets/education.png" alt="Education icon" class="icon" />
-            <h3>Education</h3>
-            <p>
-              B.Sc. Bachelors Degree<br /><i></i>Intelligent systems with
-              Robotics
-            </p>
-          </div>
-        </div>
-        <div class="text-container">
-          <p>
-            I design and build intelligent systems that combine machine
-            learning, computer vision, and robotics. My work focuses on
-            solving real-world challenges — from OpenCV-based vision systems
-            to ROS-integrated robotics and AI-driven automation. I bring
-            strong Python skills, hands-on experience with AI tools, and a
-            passion for turning complex problems into working solutions.
-            Whether it’s contributing to a fast-moving tech team or developing
-            innovative prototypes, I’m all about impact, learning fast, and
-            building smarter systems that make a difference.
-          </p>
-        </div>
-      </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#experience'" />
-  </section>
-  <section id="experience">
-    <p class="section__text__p1">Explore My</p>
-    <h1 class="title">Skills</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="details-container">
-          <h2 class="experience-sub-title">AI & Programming</h2>
-          <div class="article-container">
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Python</h3>
-                <p>Proficient</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>OpenCV</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Machine learning</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>ROS/ROS2</h3>
-                <p>Basic-Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>C++</h3>
-                <p>Basic</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Git</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Tools & Frameworks</h2>
-          <div class="article-container">
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Jupyter Notebooks / Google Colab</h3>
-                <p>Proficient</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Scikit-learn</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>NumPy / Pandas</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>TensorFlow / PyTorch</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Linux / Ubuntu</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
+            <h2 class="experience-sub-title">Tools & Frameworks</h2>
+            <div class="article-container">
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>Jupyter Notebooks / Google Colab</h3>
+                  <p>Proficient</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>Scikit-learn</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>NumPy / Pandas</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>TensorFlow / PyTorch</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
+                <div>
+                  <h3>Linux / Ubuntu</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#projects'" />
-  </section>
-  <section id="projects">
-    <p class="section__text__p1">Browse My Recent</p>
-    <h1 class="title">Projects</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/Project1.png" alt="Project 1" class="project-img" />
+      <button class="arrow-btn" aria-label="Go to projects section" onclick="location.href='#projects'">
+        <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" />
+      </button>
+    </section>
+
+    <section id="projects">
+      <p class="section__text__p1">Browse My Recent</p>
+      <h1 class="title">Projects</h1>
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="./assets/Project1.png" alt="GPT Summarizer Project" class="project-img" />
+            </div>
+            <h2 class="experience-sub-title project-title">GPT Summarizer</h2>
+            <p>A natural language processing app that summarizes long PDF documents using OpenAI’s GPT API. Users
+              upload a PDF, and the app parses, chunks, and generates human-like summaries in seconds.</p>
+            <ul>
+              <li>Built with Python, OpenAI API (v1), PyMuPDF, and Streamlit</li>
+              <li>Handled token limitations by implementing dynamic text chunking and prompt formatting</li>
+              <li>Reduced manual document reading time by 90% — ideal for students, researchers, and professionals</li>
+            </ul>
+            <div class="btn-container">
+              <a href="https://github.com/abhimattx/SummarizerOpenAI" class="btn btn-color-2 project-btn">GitHub</a>
+              <a href="https://summarizeropenai.streamlit.app/" class="btn btn-color-2 project-btn">Live Demo</a>
+            </div>
           </div>
-          <h2 class="experience-sub-title project-title">
-            GPT Summarizer
-          </h2>
-          <p style="text-align: center; padding: 0 10px">
-            A natural language processing app that summarizes long PDF documents using OpenAI’s GPT API. Users upload a
-            PDF, and the app parses, chunks, and generates human-like summaries in seconds.</p>
-          <ul>
-            <li>🛠️ Built with Python, OpenAI API (v1), PyMuPDF, and Streamlit</li>
-            <li>🧠 Handled token limitations by implementing dynamic text chunking and prompt formatting</li>
-            <li>📊 Reduced manual document reading time by 90% — ideal for students, researchers, and professionals</li>
-          </ul>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="location.href='https://github.com/abhimattx/SummarizerOpenAI'">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn"
-              onclick="location.href='https://summarizeropenai.streamlit.app/'">
-              Live Demo
-            </button>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="./assets/Project2.png" alt="SmartVision AI Project" class="project-img" />
+            </div>
+            <h2 class="experience-sub-title project-title">SmartVision AI</h2>
+            <p>Real-time object detection app using YOLOv8 and OpenCV. The UI includes webcam feed, confidence threshold
+              controls, and fallback demo mode with FPS tracking.</p>
+            <ul>
+              <li>Built with YOLOv8, OpenCV, Streamlit, Python multithreading</li>
+              <li>Used background thread architecture for fluid UI updates and camera access handling</li>
+              <li>Deployed via Streamlit Cloud with wide compatibility and smooth performance</li>
+            </ul>
+            <div class="btn-container">
+              <a href="https://github.com/abhimattx/SmartVisionAI" class="btn btn-color-2 project-btn">GitHub</a>
+              <a href="https://smartvisionai.streamlit.app/" class="btn btn-color-2 project-btn">Demo</a>
+            </div>
           </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/Project2.png" alt="Project 2" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">SmartVision AI</h2>
-          <p style="text-align: center; padding: 0 10px">
-            Real-time object detection app using YOLOv8 and OpenCV. The UI includes webcam feed, confidence threshold
-            controls, and fallback demo mode with FPS tracking.</p>
-          <ul>
-            <li>🛠️ Built with YOLOv8, OpenCV, Streamlit, Python multithreading</li>
-            <li>🧠 Used background thread architecture for fluid UI updates and camera access handling</li>
-            <li>📊 Deployed via Streamlit Cloud with wide compatibility and smooth performance</li>
-          </ul>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="location.href='https://github.com/abhimattx/SmartVisionAI'">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href='https://smartvisionai.streamlit.app/'">
-              Demo
-            </button>
-          </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/Project3.png" alt="Project 3" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">RoboVisionCalib</h2>
-          <p style="text-align: center; padding: 0 10px">
-            Built a camera-to-robot calibration system using OpenCV and ArUco markers to guide an ABB robot in
-            performing autonomous pick-and-place tasks.
-          </p>
-          <ul>
-            <li>🛠️ Used Python, OpenCV, ArUco marker detection, ABB RobotStudio</li>
-            <li>🧠 Implemented eye-on-base hand-eye calibration using OpenCV’s calibrateHandEye()</li>
-            <li>📊 Achieved accurate pose-to-motion transformation across dynamic workspaces</li>
-          </ul>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/abhimattx/RoboVisionCalib'">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/abhimattx/RoboVisionCalib'">
-              Source code
-            </button>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="./assets/Project3.png" alt="RoboVisionCalib Project" class="project-img" />
+            </div>
+            <h2 class="experience-sub-title project-title">RoboVisionCalib</h2>
+            <p>Built a camera-to-robot calibration system using OpenCV and ArUco markers to guide an ABB robot in
+              performing autonomous pick-and-place tasks.</p>
+            <ul>
+              <li>Used Python, OpenCV, ArUco marker detection, ABB RobotStudio</li>
+              <li>Implemented eye-on-base hand-eye calibration using OpenCV’s calibrateHandEye()</li>
+              <li>Achieved accurate pose-to-motion transformation across dynamic workspaces</li>
+            </ul>
+            <div class="btn-container">
+              <a href="https://github.com/abhimattx/RoboVisionCalib" class="btn btn-color-2 project-btn">GitHub</a>
+              <a href="https://github.com/abhimattx/RoboVisionCalib" class="btn btn-color-2 project-btn">Source Code</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
-  </section>
-  <section id="contact">
-    <p class="section__text__p1">Get in Touch</p>
-    <h1 class="title">Contact Me</h1>
-    <div class="contact-info-upper-container">
-      <div class="contact-info-container">
-        <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
-        <p><a href="mailto:abhimattx@gmail.com">abhimattx@gmail.com</a></p>
+      <button class="arrow-btn" aria-label="Go to contact section" onclick="location.href='#contact'">
+        <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" />
+      </button>
+    </section>
+
+    <section id="contact">
+      <p class="section__text__p1">Get in Touch</p>
+      <h1 class="title">Contact Me</h1>
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
+          <p><a href="mailto:abhimattx@gmail.com">abhimattx@gmail.com</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon" />
+          <p><a href="https://www.linkedin.com/in/abhimattx/">LinkedIn</a></p>
+        </div>
       </div>
-      <div class="contact-info-container">
-        <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon" />
-        <p><a href="https://www.linkedin.com/in/abhimattx/">Linkedin</a></p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
+
   <footer>
-    <nav>
+    <nav aria-label="Footer Navigation">
       <div class="nav-links-container">
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
-          <li><a href="#experience">Skills</a></li>
+          <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -311,7 +295,8 @@
     </nav>
     <p>Copyright &#169; 2025 Abhishek Singh. All Rights Reserved.</p>
   </footer>
-  <script src="script.js"></script>
+
+  <script defer src="script.js"></script>
 </body>
 
 </html>
