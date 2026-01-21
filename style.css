@@ -440,3 +440,132 @@ footer p {
   margin-bottom: 6px;
   line-height: 1.6;
 }
+
+/* ASK SECTION */
+
+.ask-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  min-height: 50vh;
+  padding-bottom: 4rem;
+}
+
+.ask-description {
+  text-align: center;
+  color: rgb(120, 120, 120);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.ask-container {
+  width: 100%;
+  max-width: 540px;
+}
+
+.ask-form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.ask-input {
+  flex: 1;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: rgb(30, 30, 30);
+  outline: none;
+  transition: border-color 200ms ease;
+}
+
+.ask-input::placeholder {
+  color: rgb(160, 160, 160);
+  font-weight: 400;
+}
+
+.ask-input:focus {
+  border-color: rgb(100, 100, 100);
+}
+
+.ask-submit {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.875rem 1.5rem;
+  border: 1px solid rgb(53, 53, 53);
+  border-radius: 0.5rem;
+  background: rgb(53, 53, 53);
+  color: white;
+  cursor: pointer;
+  transition: background 200ms ease, opacity 200ms ease;
+  min-width: 70px;
+}
+
+.ask-submit:hover {
+  background: rgb(30, 30, 30);
+}
+
+.ask-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ask-submit-loading {
+  letter-spacing: 0.15em;
+}
+
+.ask-response {
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+  color: rgb(50, 50, 50);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  border-top: 1px solid rgb(230, 230, 230);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInUp 400ms ease forwards;
+}
+
+.ask-response[hidden] {
+  display: none;
+}
+
+.ask-error {
+  margin-top: 1.5rem;
+  color: rgb(160, 80, 80);
+  font-size: 0.95rem;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 300ms ease forwards;
+}
+
+.ask-error[hidden] {
+  display: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -330,6 +330,30 @@
         </div>
       </div>
     </section>
+
+    <section id="ask" class="ask-section">
+      <p class="section__text__p1">Have a question?</p>
+      <h1 class="title">Ask about my work</h1>
+      <p class="ask-description">Background, projects, skills, how I work — feel free to ask.</p>
+      <div class="ask-container">
+        <form id="ask-form" class="ask-form">
+          <input
+            type="text"
+            id="ask-input"
+            class="ask-input"
+            placeholder="e.g., What projects has Abhishek worked on?"
+            autocomplete="off"
+            aria-label="Ask a question about Abhishek"
+          />
+          <button type="submit" class="ask-submit" aria-label="Submit question">
+            <span class="ask-submit-text">Ask</span>
+            <span class="ask-submit-loading" hidden>...</span>
+          </button>
+        </form>
+        <div id="ask-response" class="ask-response" aria-live="polite" hidden></div>
+        <div id="ask-error" class="ask-error" aria-live="assertive" hidden></div>
+      </div>
+    </section>
   </main>
 
   <footer>

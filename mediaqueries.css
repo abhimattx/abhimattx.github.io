@@ -100,4 +100,22 @@
   .text-container {
     text-align: justify;
   }
+  /* Ask section responsive */
+  .ask-form {
+    flex-direction: column;
+  }
+  .ask-input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .ask-submit {
+    width: 100%;
+  }
+  .ask-description {
+    font-size: 0.9rem;
+    padding: 0 1rem;
+  }
+  .ask-response {
+    font-size: 1rem;
+  }
 }
