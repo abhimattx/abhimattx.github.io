@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="AI Engineer specializing in Computer Vision, NLP, and Large Language Models. Experienced in deploying scalable AI pipelines, ML Ops, and robotics applications.">
-  <meta name="keywords" content="AI, ML, Computer Vision, Robotics, Portfolio, Abhishek Singh" />
-  <title>Abhishek Singh - Portfolio</title>
+    content="AI Systems Engineer specializing in RAG platforms, document intelligence, computer vision, and automation pipelines. Building internal AI systems for real companies.">
+  <meta name="keywords" content="AI Systems, RAG, Computer Vision, Document Intelligence, Automation, Abhishek Singh" />
+  <title>Abhishek Singh - AI Systems Engineer</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="mediaqueries.css" />
 </head>
@@ -16,30 +16,27 @@
   <header>
     <nav id="desktop-nav" aria-label="Main Navigation">
       <div class="logo">Abhishek Singh</div>
-      <div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
+      <ul class="nav-links">
+        <li><a href="#systems">Systems</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#ask">Ask</a></li>
+      </ul>
     </nav>
     <nav id="hamburger-nav" aria-label="Mobile Navigation">
       <div class="logo">Abhishek Singh</div>
       <div class="hamburger-menu">
-        <button class="hamburger-icon" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu-links"
-          onclick="toggleMenu()">
+        <button class="hamburger-icon" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <div id="menu-links" class="menu-links" hidden>
+        <div class="menu-links">
           <ul>
-            <li><a href="#about" onclick="toggleMenu()">About</a></li>
-            <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
-            <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            <li><a href="#systems" onclick="toggleMenu()">Systems</a></li>
+            <li><a href="#approach" onclick="toggleMenu()">Approach</a></li>
+            <li><a href="#stack" onclick="toggleMenu()">Stack</a></li>
+            <li><a href="#ask" onclick="toggleMenu()">Ask</a></li>
           </ul>
         </div>
       </div>
@@ -47,303 +44,72 @@
   </header>
 
   <main>
-    <section id="profile">
-      <div class="section__pic-container">
-        <img src="./assets/proPic.png" alt="Abhishek Singh profile picture" />
-      </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">Abhishek Singh</h1>
-        <p class="section__text__p2">AI Engineer | Building Scalable Intelligent Systems</p>
-        <p class="section__text__tagline">Specializing in Computer Vision, NLP, and LLM Powered Applications</p>
-        <div class="btn-container">
-          <button class="btn btn-color-2" onclick="window.open('./assets/Resume+resume.pdf')">Download CV</button>
-          <button class="btn btn-color-1" onclick="location.href='#contact'">Contact Info</button>
-        </div>
-        <div id="socials-container">
-          <a href="https://www.linkedin.com/in/abhimattx/" aria-label="LinkedIn profile">
-            <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon" />
-          </a>
-          <a href="https://github.com/abhimattx" aria-label="GitHub profile">
-            <img src="./assets/github.png" alt="GitHub icon" class="icon" />
-          </a>
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">AI Systems for Real Companies</h1>
+        <p class="hero-subtitle">
+          I design and deploy internal AI systems: document intelligence, RAG platforms,
+          automation pipelines, and evaluation loops.
+        </p>
+        <div class="hero-buttons">
+          <a href="#systems" class="btn btn-primary">View Systems</a>
+          <a href="#ask" class="btn btn-secondary">Get in Touch</a>
         </div>
       </div>
     </section>
 
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img src="./assets/AboutPic.png" alt="Profile picture" class="about-pic" />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img src="./assets/experience.png" alt="Experience icon" class="icon" />
-              <h3>Experience</h3>
-              <p><strong>AI Engineer</strong> at <a href="https://www.yungo.com/" target="_blank"
-                  rel="noopener noreferrer">Yungo</a>, Prague</p>
-            </div>
-            <div class="details-container">
-              <img src="./assets/education.png" alt="Education icon" class="icon" />
-              <h3>Education</h3>
-              <p>B.Sc. Bachelors Degree in Intelligent Systems with Robotics.</p>
-            </div>
-          </div>
-          <div class="text-container">
-            <p>I design and deploy intelligent systems that bridge AI research and real world applications from
-              vision guided robotics to LLM powered automation.
-              At Yungo, I built scalable AI pipelines that improved document retrieval efficiency by 60%
-              and automated tasks across projects.</p>
-          </div>
-        </div>
+    <!-- Systems Matrix Section -->
+    <section id="systems">
+      <p class="section-label">What I Build</p>
+      <h2 class="section-title">Systems Matrix</h2>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="rag">RAG</button>
+        <button class="filter-btn" data-filter="vision">Vision</button>
+        <button class="filter-btn" data-filter="automation">Automation</button>
       </div>
-      <button class="arrow-btn" aria-label="Go to skills section" onclick="location.href='#skills'">
-        <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" />
-      </button>
-    </section>
 
-    <section id="skills">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Skills</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="experience-sub-title">AI & Programming</h2>
-            <div class="article-container">
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>Python</h3>
-                  <p>Proficient-> used for building production-ready AI pipelines and NLP systems</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>OpenCV</h3>
-                  <p>Proficient–> developed vision-guided robotic calibration (thesis project)</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>Machine Learning</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>Supervised learning</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>C++</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>Git</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>HTML/CSS</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-            </div>
-          </div>
-          <div class="details-container">
-            <h2 class="experience-sub-title">Tools & Frameworks</h2>
-            <div class="article-container">
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>Jupyter Notebooks / Google Colab</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>Scikit-learn</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>NumPy / Pandas</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>TensorFlow / PyTorch</h3>
-                  <p>Proficient-> applied in deep learning models for computer vision & LLM fine-tuning</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Checkmark icon" class="icon" />
-                <div>
-                  <h3>Linux / Ubuntu</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="arrow-btn" aria-label="Go to projects section" onclick="location.href='#projects'">
-        <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" />
-      </button>
-    </section>
-
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <!-- First row - Projects 1 and 2 -->
-          <div class="details-container color-container">
-            <!--      <div class="article-container">
-              <img src="./assets/Project1.png" alt="GPT Summarizer Project" class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">GPT Summarizer</h2>
-            <p>A natural language processing app that summarizes long PDF documents using OpenAI's GPT API. Users
-              upload a PDF, and the app parses, chunks, and generates human-like summaries in seconds.</p>
-            <ul>
-              <li>Built with Python, OpenAI API (v1), PyMuPDF, and Streamlit</li>
-              <li>Handled token limitations by implementing dynamic text chunking and prompt formatting</li>
-              <li>Reduced manual document reading time by 90% — ideal for students, researchers, and professionals</li>
-            </ul>
-            <div class="btn-container">
-              <a href="https://github.com/abhimattx/SummarizerOpenAI" class="btn btn-color-2 project-btn">GitHub</a>
-              <a href="https://summarizeropenai.streamlit.app/" class="btn btn-color-2 project-btn">Live Demo</a>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img src="./assets/projectScope.png" alt="ScopeAI Project" class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">ScopeAI</h2>
-            <p>ScopeAI is an intelligent insight generator designed to extract meaningful knowledge from various
-              sources—>PDFs, YouTube videos, and news articles, with ease. Powered by OpenAI's GPT-3.5, it provides
-              automatic summarization, sentiment analysis, named entity recognition, and generates insightful follow-up
-              questions. The clean, interactive Streamlit UI, enriched with custom CSS, ensures an intuitive and
-              responsive user experience.</p>
-            <ul>
-              <li>Tech stack: Python, GPT-3.5 (OpenAI), VADER, PyMuPDF, yt-dlp, Whisper, BeautifulSoup, Streamlit,
-                Custom CSS</li>
-              <li>Features: Multi-source parsing, NLP analysis, responsive UI</li>
-              <li>Deployed via Streamlit Cloud with wide compatibility and smooth performance</li>
-            </ul>
-            <div class="btn-container">
-              <a href="https://github.com/abhimattx/ScopeAI" class="btn btn-color-2 project-btn">GitHub</a>
-              <a href="https://github.com/abhimattx/ScopeAI" class="btn btn-color-2 project-btn">Demo</a>
-            </div>
-          </div>
-        </div>-->
-            <!-- Create a new row for Projects 3 and 4 -->
-            <div class="about-containers">
-              <div class="details-container color-container">
-                <div class="article-container">
-                  <img src="./assets/Project3.png" alt="RoboVisionCalib Project" class="project-img" />
-                </div>
-                <h2 class="experience-sub-title project-title">Vision-Guided Robotic Pick-and-Place (Thesis Project)
-                </h2>
-                <p>Built a camera-to-robot calibration system using OpenCV and ArUco markers to guide an ABB robot in
-                  performing autonomous pick-and-place tasks.</p>
-                <ul>
-                  <li>Used Python, OpenCV, ArUco marker detection, ABB RobotStudio</li>
-                  <li>Implemented eye-on-base hand-eye calibration using OpenCV's calibrateHandEye()</li>
-                  <li>Achieved accurate pose-to-motion transformation across dynamic workspaces</li>
-                </ul>
-                <div class="btn-container">
-                  <a href="https://github.com/abhimattx/RoboVisionCalib" class="btn btn-color-2 project-btn">GitHub</a>
-                  <a href="https://github.com/abhimattx/RoboVisionCalib" class="btn btn-color-2 project-btn">Source
-                    Code</a>
-                </div>
-              </div>
-              <div class="details-container color-container">
-                <div class="article-container">
-                  <img src="./assets/Project4.png" alt="Project4" class="project-img" />
-                </div>
-                <h2 class="experience-sub-title project-title">Object Detection System</h2>
-                <p>Developed a voice-activated desktop application that composes and sends emails using natural language
-                  voice commands, powered by GPT-4 and speech recognition.</p>
-                <ul>
-                  <li>Built with Python, Tkinter, OpenAI GPT-4, Google Speech API, and pyttsx3 for a fully
-                    voice-controlled
-                    desktop email assistant</li>
-                  <li>Implemented GPT-driven intent parsing with contextual memory for multi-turn natural language
-                    conversations</li>
-                  <li>Integrated Gmail SMTP with App Password authentication, real-time TTS feedback, theme toggling,
-                    and
-                    persistent user settings for a polished UX</li>
-                </ul>
-                <div class="btn-container">
-                  <a href="https://github.com/abhimattx/voice-email-assistant"
-                    class="btn btn-color-2 project-btn">GitHub</a>
-                  <a href="https://github.com/abhimattx/voice-email-assistant"
-                    class="btn btn-color-2 project-btn">Source
-                    Code</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button class="arrow-btn" aria-label="Go to contact section" onclick="location.href='#contact'">
-            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" />
-          </button>
-    </section>
-
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
-          <p><a href="mailto:abhimattx@gmail.com">abhimattx@gmail.com</a></p>
-        </div>
-        <div class="contact-info-container">
-          <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon" />
-          <p><a href="https://www.linkedin.com/in/abhimattx/">LinkedIn</a></p>
-        </div>
+      <div class="systems-grid" id="systems-grid">
+        <!-- Cards will be populated by JavaScript -->
       </div>
     </section>
 
-    <section id="ask" class="ask-section">
-      <p class="section__text__p1">Have a question?</p>
-      <h1 class="title">Ask about my work</h1>
-      <p class="ask-description">Background, projects, skills, how I work — feel free to ask.</p>
+    <!-- How I Approach AI Section -->
+    <section id="approach">
+      <p class="section-label">Philosophy</p>
+      <h2 class="section-title">How I Approach AI</h2>
+
+      <div class="principles-grid" id="principles-grid">
+        <!-- Cards will be populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Stack Section -->
+    <section id="stack">
+      <p class="section-label">Tools</p>
+      <h2 class="section-title">Stack I Trust</h2>
+
+      <div class="stack-grid" id="stack-grid">
+        <!-- Categories will be populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Ask Section -->
+    <section id="ask">
       <div class="ask-container">
+        <p class="section-label">Have a Question?</p>
+        <h2 class="section-title">Ask About My Work</h2>
+
         <form id="ask-form" class="ask-form">
           <input
             type="text"
             id="ask-input"
             class="ask-input"
-            placeholder="e.g., What projects has Abhishek worked on?"
+            placeholder="e.g., What RAG systems have you built?"
             autocomplete="off"
-            aria-label="Ask a question about Abhishek"
+            aria-label="Ask a question about my work"
           />
           <button type="submit" class="ask-submit" aria-label="Submit question">
             <span class="ask-submit-text">Ask</span>
@@ -357,20 +123,35 @@
   </main>
 
   <footer>
-    <nav aria-label="Footer Navigation">
-      <div class="nav-links-container">
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+    <div class="footer-content">
+      <div class="footer-profile">
+        <img src="./assets/proPic.png" alt="Abhishek Singh" class="footer-avatar" />
+        <div class="footer-info">
+          <h3>Abhishek Singh</h3>
+          <p>AI Systems Engineer</p>
+        </div>
       </div>
-    </nav>
-    <p>Copyright &#169; 2025 Abhishek Singh. All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="mailto:abhimattx@gmail.com" class="footer-link">
+          <img src="./assets/email.png" alt="" class="footer-icon" />
+          <span>Email</span>
+        </a>
+        <a href="https://github.com/abhimattx" class="footer-link" target="_blank" rel="noopener noreferrer">
+          <img src="./assets/github.png" alt="" class="footer-icon" />
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/abhimattx/" class="footer-link" target="_blank" rel="noopener noreferrer">
+          <img src="./assets/linkedin.png" alt="" class="footer-icon" />
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">Copyright &copy; 2026 Abhishek Singh. All Rights Reserved.</p>
+    </div>
   </footer>
 
-  <script defer src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

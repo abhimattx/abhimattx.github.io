@@ -1,0 +1,132 @@
+{
+  "systems": [
+    {
+      "id": "rag-platform",
+      "title": "Internal RAG Platform @ Yungo",
+      "category": "rag",
+      "metrics": [
+        "281+ tools indexed",
+        "Multi-collection vector retrieval",
+        "Semantic chunking & validation",
+        "PostgreSQL logging & feedback"
+      ],
+      "caseStudy": {
+        "problem": "Engineers at Yungo couldn't find internal tool knowledge spread across PDFs, DOCX, and JSON files.",
+        "constraints": [
+          "No external APIs allowed",
+          "On-prem deployment required",
+          "Hallucination risk for technical docs"
+        ],
+        "approach": "Built a modular RAG system with semantic chunking, validation layers, and intent-aware retrieval. Added feedback loops to PostgreSQL for continuous improvement.",
+        "outcomes": [
+          "Faster onboarding for new engineers",
+          "Reduced internal support questions",
+          "60% improvement in document retrieval efficiency"
+        ]
+      }
+    },
+    {
+      "id": "vision-calibration",
+      "title": "Vision-Guided Robotic Pick-and-Place",
+      "category": "vision",
+      "metrics": [
+        "Sub-millimeter accuracy",
+        "ArUco marker detection",
+        "Eye-on-base calibration",
+        "ABB robot integration"
+      ],
+      "caseStudy": {
+        "problem": "ABB robot needed precise camera-to-robot coordinate transformation for autonomous pick-and-place in dynamic workspaces.",
+        "constraints": [
+          "Industrial environment with variable lighting",
+          "Real-time processing requirement",
+          "Integration with existing ABB controller"
+        ],
+        "approach": "Implemented hand-eye calibration using OpenCV's calibrateHandEye() with ArUco markers. Built pose-to-motion transformation pipeline for accurate object localization.",
+        "outcomes": [
+          "Achieved accurate pose-to-motion transformation",
+          "Works across dynamic workspace configurations",
+          "Thesis project successfully defended"
+        ]
+      }
+    },
+    {
+      "id": "doc-summarizer",
+      "title": "Document Intelligence Pipeline",
+      "category": "automation",
+      "metrics": [
+        "Multi-format support (PDF, DOCX)",
+        "Dynamic chunking strategy",
+        "Token-aware processing",
+        "Streamlit deployment"
+      ],
+      "caseStudy": {
+        "problem": "Researchers and professionals needed to quickly extract insights from lengthy documents without reading everything.",
+        "constraints": [
+          "Token limitations with GPT API",
+          "Variable document structures",
+          "Need for human-like summaries"
+        ],
+        "approach": "Built document parsing pipeline with PyMuPDF, implemented dynamic text chunking based on token limits, and designed prompt templates for coherent summaries.",
+        "outcomes": [
+          "90% reduction in manual reading time",
+          "Handles documents up to 100+ pages",
+          "Deployed on Streamlit Cloud"
+        ]
+      }
+    },
+    {
+      "id": "object-detection",
+      "title": "Real-Time Object Detection System",
+      "category": "vision",
+      "metrics": [
+        "YOLOv8 integration",
+        "Live webcam support",
+        "Fallback video processing",
+        "Interactive web UI"
+      ],
+      "caseStudy": {
+        "problem": "Need for accessible real-time object detection without complex setup or GPU requirements.",
+        "constraints": [
+          "Browser-based deployment",
+          "Variable hardware capabilities",
+          "Real-time performance requirement"
+        ],
+        "approach": "Integrated YOLOv8 with OpenCV for detection, built Streamlit frontend with webcam API, implemented fallback to uploaded video for environments without camera access.",
+        "outcomes": [
+          "Works on consumer hardware",
+          "Sub-second detection latency",
+          "Live demo available publicly"
+        ]
+      }
+    }
+  ],
+  "principles": [
+    {
+      "icon": "data",
+      "title": "Data First",
+      "description": "Start with data reality, not models. Understand what you have before choosing architecture."
+    },
+    {
+      "icon": "reliable",
+      "title": "Boring Works",
+      "description": "Prefer reliable, well-understood architectures over trendy solutions."
+    },
+    {
+      "icon": "measure",
+      "title": "Measure First",
+      "description": "Measure retrieval quality before generation. Evaluation drives improvement."
+    },
+    {
+      "icon": "maintain",
+      "title": "Build to Last",
+      "description": "Design for maintainability, not demos. Production systems need to evolve."
+    }
+  ],
+  "stack": {
+    "retrieval": ["Qdrant", "PostgreSQL + pgvector", "ChromaDB"],
+    "llms": ["Claude", "GPT-4", "Llama (local)"],
+    "infra": ["Docker", "FastAPI", "Railway", "Streamlit"],
+    "vision": ["OpenCV", "PyTorch", "YOLOv8", "ArUco"]
+  }
+}
