@@ -10,21 +10,27 @@
   <title>Abhishek Singh - AI Systems Engineer</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="mediaqueries.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
   <header>
     <nav id="desktop-nav" aria-label="Main Navigation">
-      <div class="logo">Abhishek Singh</div>
+      <div class="logo">
+        <img src="./pic/logo.png" alt="" class="logo-avatar" />
+        <span>Abhishek Singh</span>
+      </div>
       <ul class="nav-links">
-        <li><a href="#systems">Systems</a></li>
-        <li><a href="#approach">Approach</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#ask">Ask</a></li>
+        <li><a href="#systems">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#ask">Contact</a></li>
       </ul>
     </nav>
     <nav id="hamburger-nav" aria-label="Mobile Navigation">
-      <div class="logo">Abhishek Singh</div>
+      <div class="logo">
+        <img src="./pic/logo.png" alt="" class="logo-avatar" />
+        <span>Abhishek Singh</span>
+      </div>
       <div class="hamburger-menu">
         <button class="hamburger-icon" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
           <span></span>
@@ -33,10 +39,9 @@
         </button>
         <div class="menu-links">
           <ul>
-            <li><a href="#systems" onclick="toggleMenu()">Systems</a></li>
-            <li><a href="#approach" onclick="toggleMenu()">Approach</a></li>
-            <li><a href="#stack" onclick="toggleMenu()">Stack</a></li>
-            <li><a href="#ask" onclick="toggleMenu()">Ask</a></li>
+            <li><a href="#systems" onclick="toggleMenu()">Work</a></li>
+            <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#ask" onclick="toggleMenu()">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -46,53 +51,63 @@
   <main>
     <!-- Hero Section -->
     <section id="hero">
-      <div class="hero-content">
-        <h1 class="hero-title">AI Systems for Real Companies</h1>
-        <p class="hero-subtitle">
-          I design and deploy internal AI systems: document intelligence, RAG platforms,
-          automation pipelines, and evaluation loops.
-        </p>
-        <div class="hero-buttons">
-          <a href="#systems" class="btn btn-primary">View Systems</a>
-          <a href="#ask" class="btn btn-secondary">Get in Touch</a>
+      <div class="hero-layout">
+        <div class="hero-content">
+          <h1 class="hero-title">I build production-ready AI systems that automate internal workflows.</h1>
+          <p class="hero-subtitle">
+            Small, fixed-scope pilots. Production-focused. No hype.
+          </p>
+          <div class="hero-buttons">
+            <a href="#systems" class="btn btn-primary">View Work</a>
+            <a href="mailto:abhimattx@gmail.com" class="btn btn-secondary">Get in Touch</a>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <img src="./pic/profile_pic.png" alt="Abhishek Singh" />
         </div>
       </div>
     </section>
 
-    <!-- Systems Matrix Section -->
+    <!-- Featured Work Section -->
     <section id="systems">
-      <p class="section-label">What I Build</p>
-      <h2 class="section-title">Systems Matrix</h2>
-
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="rag">RAG</button>
-        <button class="filter-btn" data-filter="vision">Vision</button>
-        <button class="filter-btn" data-filter="automation">Automation</button>
-      </div>
+      <p class="section-label">Featured Work</p>
+      <h2 class="section-title">Production AI Systems</h2>
 
       <div class="systems-grid" id="systems-grid">
         <!-- Cards will be populated by JavaScript -->
       </div>
     </section>
 
-    <!-- How I Approach AI Section -->
-    <section id="approach">
-      <p class="section-label">Philosophy</p>
-      <h2 class="section-title">How I Approach AI</h2>
-
-      <div class="principles-grid" id="principles-grid">
-        <!-- Cards will be populated by JavaScript -->
-      </div>
-    </section>
-
-    <!-- Stack Section -->
-    <section id="stack">
-      <p class="section-label">Tools</p>
-      <h2 class="section-title">Stack I Trust</h2>
-
-      <div class="stack-grid" id="stack-grid">
-        <!-- Categories will be populated by JavaScript -->
+    <!-- About Section -->
+    <section id="about">
+      <div class="about-grid">
+        <div class="about-card">
+          <p class="section-label">About</p>
+          <p class="about-text">
+            I’m an AI engineer based in Prague, working on production-grade AI systems and exploring practical AI
+            automation for small teams at <strong>Yungo</strong>. I focus on building reliable AI systems and automation
+            tools: spanning
+            document intelligence, internal search, computer vision, and workflow automation designed for real-world
+            use.
+          </p>
+        </div>
+        <div class="about-card">
+          <p class="section-label">Connect</p>
+          <div class="about-links-grid">
+            <a href="mailto:abhimattx@gmail.com" class="about-link-item">
+              <span class="about-link-label">Email</span>
+              <span class="about-link-value">abhimattx@gmail.com</span>
+            </a>
+            <a href="https://github.com/abhimattx" class="about-link-item" target="_blank" rel="noopener">
+              <span class="about-link-label">GitHub</span>
+              <span class="about-link-value">@abhimattx</span>
+            </a>
+            <a href="https://www.linkedin.com/in/abhimattx/" class="about-link-item" target="_blank" rel="noopener">
+              <span class="about-link-label">LinkedIn</span>
+              <span class="about-link-value">/in/abhimattx</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -100,17 +115,12 @@
     <section id="ask">
       <div class="ask-container">
         <p class="section-label">Have a Question?</p>
-        <h2 class="section-title">Ask About My Work</h2>
+        <h2 class="section-title">Ask My AI</h2>
 
         <form id="ask-form" class="ask-form">
-          <input
-            type="text"
-            id="ask-input"
-            class="ask-input"
-            placeholder="e.g., What RAG systems have you built?"
-            autocomplete="off"
-            aria-label="Ask a question about my work"
-          />
+          <input type="text" id="ask-input" class="ask-input"
+            placeholder="e.g., How does your RAG system handle hybrid search?" autocomplete="off"
+            aria-label="Ask a question about my work" />
           <button type="submit" class="ask-submit" aria-label="Submit question">
             <span class="ask-submit-text">Ask</span>
             <span class="ask-submit-loading" hidden>...</span>
@@ -122,32 +132,31 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-profile">
-        <img src="./assets/proPic.png" alt="Abhishek Singh" class="footer-avatar" />
-        <div class="footer-info">
-          <h3>Abhishek Singh</h3>
-          <p>AI Systems Engineer</p>
+  <!-- Project Modal -->
+  <div id="project-modal" class="modal" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 class="modal-title"></h2>
+          <span class="modal-tag"></span>
         </div>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
       </div>
-      <div class="footer-links">
-        <a href="mailto:abhimattx@gmail.com" class="footer-link">
-          <img src="./assets/email.png" alt="" class="footer-icon" />
-          <span>Email</span>
-        </a>
-        <a href="https://github.com/abhimattx" class="footer-link" target="_blank" rel="noopener noreferrer">
-          <img src="./assets/github.png" alt="" class="footer-icon" />
-          <span>GitHub</span>
-        </a>
-        <a href="https://www.linkedin.com/in/abhimattx/" class="footer-link" target="_blank" rel="noopener noreferrer">
-          <img src="./assets/linkedin.png" alt="" class="footer-icon" />
-          <span>LinkedIn</span>
-        </a>
+      <div class="modal-body">
+        <!-- Content populated by JS -->
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copyright">Copyright &copy; 2026 Abhishek Singh. All Rights Reserved.</p>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p class="footer-copyright">&copy; 2026 Abhishek Singh</p>
+      <div class="footer-links">
+        <a href="mailto:abhimattx@gmail.com" class="footer-link">Email</a>
+        <a href="https://github.com/abhimattx" class="footer-link" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/abhimattx/" class="footer-link" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
   </footer>
 

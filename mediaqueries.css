@@ -1,4 +1,4 @@
-/* Living AI Lab - Responsive Styles */
+/* Glass + Black + Liquid - Responsive Styles */
 
 /* Large screens */
 @media screen and (max-width: 1200px) {
@@ -10,23 +10,39 @@
     display: flex;
   }
 
-  .principles-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .stack-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 /* Medium screens */
 @media screen and (max-width: 900px) {
+  .hero-layout {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-photo img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
   .hero-title {
-    font-size: 2.25rem;
+    font-size: 1.75rem;
   }
 
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
   }
 
   .systems-grid {
@@ -35,7 +51,37 @@
 
   .case-study-grid {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1rem;
+  }
+
+  .charts-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .charts-row .chart-container:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  /* 4-column charts layout for medium screens */
+  .charts-row:has(.chart-container:nth-child(4)) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .api-latency-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scalability-item {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .scalability-path {
+    grid-column: 1 / -1;
+  }
+
+  .case-study-grid {
+    grid-template-columns: 1fr;
   }
 
   .outcomes-list {
@@ -44,7 +90,7 @@
   }
 
   .section-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -55,16 +101,59 @@
   }
 
   #hero {
-    min-height: 60vh;
+    min-height: auto;
     padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-layout {
+    gap: 2rem;
+  }
+
+  .hero-photo img {
+    width: 160px;
+    height: 160px;
+  }
+
+  /* About section mobile */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .about-card {
+    padding: 1.25rem;
+  }
+
+  .about-text {
+    font-size: 0.875rem;
+  }
+
+  .about-link-label {
+    font-size: 0.6875rem;
+  }
+
+  .about-link-value {
+    font-size: 0.75rem;
+  }
+
+  /* Logo mobile */
+  .logo {
+    font-size: 0.9375rem;
+    gap: 0.625rem;
+  }
+
+  .logo-avatar {
+    width: 44px;
+    height: 44px;
   }
 
   .hero-title {
-    font-size: 1.75rem;
+    font-size: 1.625rem;
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
   }
 
   .hero-buttons {
@@ -77,92 +166,132 @@
   }
 
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
   }
 
   .section-label {
-    font-size: 0.7rem;
-  }
-
-  .filter-bar {
-    gap: 0.375rem;
-  }
-
-  .filter-btn {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.8rem;
+    font-size: 0.6875rem;
   }
 
   .system-card {
-    padding: 1.25rem;
+    padding: 1.125rem;
   }
 
   .system-title {
-    font-size: 1rem;
+    font-size: 0.9375rem;
   }
 
   .system-metrics li {
-    font-size: 0.8rem;
-  }
-
-  .expand-btn {
     font-size: 0.75rem;
-    padding: 0.375rem 0.75rem;
   }
 
   .case-study-column h4 {
-    font-size: 0.7rem;
+    font-size: 0.625rem;
   }
 
   .case-study-column p,
   .case-study-column ul li {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .case-study-outcomes {
-    padding: 0.875rem 1rem;
+    padding: 0.875rem;
   }
 
   .outcome-item {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
-  .principles-grid {
+  .charts-row {
     grid-template-columns: 1fr;
   }
 
-  .principle-card {
-    padding: 1.25rem;
+  .charts-row .chart-container:nth-child(3) {
+    grid-column: 1;
   }
 
-  .principle-title {
-    font-size: 0.95rem;
+  .chart-container {
+    padding: 0.75rem;
+    min-height: 140px;
   }
 
-  .principle-desc {
-    font-size: 0.8rem;
+  .chart-container canvas {
+    max-height: 100px;
   }
 
-  .stack-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+  .metrics-grid {
+    gap: 0.5rem;
   }
 
-  .stack-category {
-    padding: 1rem;
+  .metric-value {
+    font-size: 0.875rem;
   }
 
-  .stack-category-title {
-    font-size: 0.7rem;
+  .case-study-section-title {
+    font-size: 0.75rem;
   }
 
-  .stack-list li {
-    font-size: 0.8rem;
+  .challenge-card {
+    padding: 0.875rem;
+  }
+
+  .challenge-title {
+    font-size: 0.75rem;
+  }
+
+  .challenge-problem,
+  .challenge-solution {
+    font-size: 0.6875rem;
+  }
+
+  .tech-category {
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .tech-category-label {
+    min-width: auto;
+  }
+
+  /* API Latency mobile */
+  .latency-item {
+    padding: 0.375rem 0.625rem;
+  }
+
+  .latency-endpoint,
+  .latency-value {
+    font-size: 0.6875rem;
+  }
+
+  /* Scalability mobile */
+  .scalability-item {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .scalability-dimension {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .scalability-path {
+    grid-column: 1;
+  }
+
+  .tech-stack-tags {
+    gap: 0.25rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .tech-tag {
+    font-size: 0.625rem;
+    padding: 0.2rem 0.4rem;
   }
 
   /* Ask section */
   #ask {
-    padding: 3rem 5%;
+    padding: 2.5rem 5%;
   }
 
   .ask-form {
@@ -178,60 +307,59 @@
   }
 
   .ask-response {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    padding: 0.875rem;
+  }
+
+  /* Modal mobile */
+  .modal {
     padding: 1rem;
+  }
+
+  .modal-container {
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 1rem 1rem 0.875rem;
+  }
+
+  .modal-title {
+    font-size: 1rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .charts-row {
+    grid-template-columns: 1fr;
   }
 
   /* Footer */
   footer {
-    padding: 2rem 5%;
+    padding: 1.5rem 5%;
   }
 
   .footer-content {
     flex-direction: column;
-    text-align: center;
-    gap: 1.5rem;
-  }
-
-  .footer-profile {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .footer-avatar {
-    width: 50px;
-    height: 50px;
-  }
-
-  .footer-links {
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 1rem;
   }
 
-  .footer-link span {
-    display: none;
+  .footer-links {
+    gap: 1rem;
   }
 
-  .footer-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .footer-bottom {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-  }
-
-  .footer-copyright {
-    font-size: 0.75rem;
+  .footer-copyright,
+  .footer-link {
+    font-size: 0.6875rem;
   }
 }
 
 /* Extra small screens */
 @media screen and (max-width: 400px) {
   .hero-title {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
   }
 
   .stack-grid {
@@ -240,11 +368,7 @@
 
   .system-card-header {
     flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .system-title {
-    margin-right: 0;
+    gap: 0.375rem;
   }
 
   .category-tag {

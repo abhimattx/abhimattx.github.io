@@ -2,102 +2,90 @@
   "systems": [
     {
       "id": "rag-platform",
-      "title": "Internal RAG Platform @ Yungo",
+      "title": "Enterprise RAG Platform @ Yungo",
       "category": "rag",
+      "featured": true,
       "metrics": [
-        "281+ tools indexed",
-        "Multi-collection vector retrieval",
-        "Semantic chunking & validation",
-        "PostgreSQL logging & feedback"
+        "900x faster query resolution (15 min → 12 sec)",
+        "85% retrieval precision after reranking",
+        "100 concurrent sessions supported",
+        "4 knowledge bases unified"
       ],
       "caseStudy": {
-        "problem": "Engineers at Yungo couldn't find internal tool knowledge spread across PDFs, DOCX, and JSON files.",
+        "problem": "Employees wasted 15+ minutes per query searching through scattered docs, wikis, and databases. Knowledge was siloed, answers were inconsistent, and new hires constantly interrupted colleagues for information that existed somewhere.",
         "constraints": [
-          "No external APIs allowed",
-          "On-prem deployment required",
-          "Hallucination risk for technical docs"
+          "On-prem deployment required (no external APIs)",
+          "Mixed data: unstructured docs + structured databases",
+          "Follow-up questions needed conversation context",
+          "Must avoid hallucination on technical documentation"
         ],
-        "approach": "Built a modular RAG system with semantic chunking, validation layers, and intent-aware retrieval. Added feedback loops to PostgreSQL for continuous improvement.",
+        "approach": "Built a modular RAG system with two-pass adaptive retrieval (probe collections first, deep-retrieve from relevant ones), hybrid search combining vector embeddings with BM25 lexical matching, cross-encoder neural reranking, and intent-based SQL routing for analytical queries.",
         "outcomes": [
-          "Faster onboarding for new engineers",
-          "Reduced internal support questions",
-          "60% improvement in document retrieval efficiency"
+          "Query resolution: 15 min → 12 sec (uncached), 100ms (cached)",
+          "30-40% cache hit rate on repetitive organizational queries",
+          "New engineers self-serve answers, reduced support interruptions",
+          "Single source of truth eliminated conflicting information"
         ]
-      }
-    },
-    {
-      "id": "vision-calibration",
-      "title": "Vision-Guided Robotic Pick-and-Place",
-      "category": "vision",
-      "metrics": [
-        "Sub-millimeter accuracy",
-        "ArUco marker detection",
-        "Eye-on-base calibration",
-        "ABB robot integration"
+      },
+      "charts": {
+        "queryTime": {
+          "type": "bar",
+          "title": "Query Resolution Time",
+          "labels": ["Manual Search", "RAG (uncached)", "RAG (cached)"],
+          "data": [900, 12, 0.1],
+          "unit": "seconds"
+        },
+        "retrievalFunnel": {
+          "type": "funnel",
+          "title": "Retrieval Pipeline",
+          "steps": [
+            { "label": "Collections Probed", "value": 4 },
+            { "label": "Initial Retrieval", "value": 30 },
+            { "label": "After Reranking", "value": 15 },
+            { "label": "Used for Generation", "value": 5 }
+          ]
+        },
+        "responseSource": {
+          "type": "doughnut",
+          "title": "Response Sources",
+          "labels": ["LLM Generated", "Cached", "SQL Direct"],
+          "data": [55, 30, 15],
+          "colors": ["#3b82f6", "#a78bfa", "#22c55e"]
+        },
+        "performance": {
+          "type": "metrics",
+          "title": "Performance",
+          "items": [
+            { "label": "Cache Hit Latency", "value": "<100ms" },
+            { "label": "Time to First Token", "value": "<2s" },
+            { "label": "Retrieval Precision@15", "value": "~85%" },
+            { "label": "Cache Hit Rate", "value": "30-40%" }
+          ]
+        }
+      },
+      "challenges": [
+        {
+          "title": "Multi-Collection Efficiency",
+          "problem": "Querying all 4 collections for every query was slow and noisy.",
+          "solution": "Two-pass adaptive retrieval: probe each collection with 3 docs, rank by relevance, deep-retrieve only from promising ones. 60% faster retrieval."
+        },
+        {
+          "title": "Semantic vs Keyword Trade-off",
+          "problem": "Vector search missed exact terms; keyword search missed concepts.",
+          "solution": "Hybrid search with RRF (Reciprocal Rank Fusion) combining vector + BM25 scores. 25% improvement in retrieval relevance."
+        },
+        {
+          "title": "Structured Data Queries",
+          "problem": "Users asked analytical questions ('How many tools in category X?') that needed SQL, not document retrieval.",
+          "solution": "Intent-based query routing with pattern matching to SQL execution engine. Instant factual answers without hallucination."
+        }
       ],
-      "caseStudy": {
-        "problem": "ABB robot needed precise camera-to-robot coordinate transformation for autonomous pick-and-place in dynamic workspaces.",
-        "constraints": [
-          "Industrial environment with variable lighting",
-          "Real-time processing requirement",
-          "Integration with existing ABB controller"
-        ],
-        "approach": "Implemented hand-eye calibration using OpenCV's calibrateHandEye() with ArUco markers. Built pose-to-motion transformation pipeline for accurate object localization.",
-        "outcomes": [
-          "Achieved accurate pose-to-motion transformation",
-          "Works across dynamic workspace configurations",
-          "Thesis project successfully defended"
-        ]
-      }
-    },
-    {
-      "id": "doc-summarizer",
-      "title": "Document Intelligence Pipeline",
-      "category": "automation",
-      "metrics": [
-        "Multi-format support (PDF, DOCX)",
-        "Dynamic chunking strategy",
-        "Token-aware processing",
-        "Streamlit deployment"
-      ],
-      "caseStudy": {
-        "problem": "Researchers and professionals needed to quickly extract insights from lengthy documents without reading everything.",
-        "constraints": [
-          "Token limitations with GPT API",
-          "Variable document structures",
-          "Need for human-like summaries"
-        ],
-        "approach": "Built document parsing pipeline with PyMuPDF, implemented dynamic text chunking based on token limits, and designed prompt templates for coherent summaries.",
-        "outcomes": [
-          "90% reduction in manual reading time",
-          "Handles documents up to 100+ pages",
-          "Deployed on Streamlit Cloud"
-        ]
-      }
-    },
-    {
-      "id": "object-detection",
-      "title": "Real-Time Object Detection System",
-      "category": "vision",
-      "metrics": [
-        "YOLOv8 integration",
-        "Live webcam support",
-        "Fallback video processing",
-        "Interactive web UI"
-      ],
-      "caseStudy": {
-        "problem": "Need for accessible real-time object detection without complex setup or GPU requirements.",
-        "constraints": [
-          "Browser-based deployment",
-          "Variable hardware capabilities",
-          "Real-time performance requirement"
-        ],
-        "approach": "Integrated YOLOv8 with OpenCV for detection, built Streamlit frontend with webcam API, implemented fallback to uploaded video for environments without camera access.",
-        "outcomes": [
-          "Works on consumer hardware",
-          "Sub-second detection latency",
-          "Live demo available publicly"
-        ]
+      "techStack": {
+        "retrieval": ["ChromaDB", "BM25 Indexer", "BGE-large-en-v1.5"],
+        "reranking": ["cross-encoder/ms-marco-MiniLM-L-6-v2"],
+        "llm": ["Ollama (gemma3:27b)", "OpenAI API fallback"],
+        "backend": ["FastAPI", "PostgreSQL", "SQLite"],
+        "infra": ["Systemd services", "Redis cache"]
       }
     }
   ],
@@ -124,9 +112,9 @@
     }
   ],
   "stack": {
-    "retrieval": ["Qdrant", "PostgreSQL + pgvector", "ChromaDB"],
-    "llms": ["Claude", "GPT-4", "Llama (local)"],
-    "infra": ["Docker", "FastAPI", "Railway", "Streamlit"],
-    "vision": ["OpenCV", "PyTorch", "YOLOv8", "ArUco"]
+    "retrieval": ["ChromaDB", "PostgreSQL + pgvector", "BM25"],
+    "llms": ["Ollama", "OpenAI", "Claude"],
+    "infra": ["FastAPI", "Docker", "Redis"],
+    "ml": ["SentenceTransformers", "CrossEncoders", "spaCy"]
   }
 }

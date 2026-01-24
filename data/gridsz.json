@@ -1,0 +1,125 @@
+{
+  "systems": [
+    {
+      "id": "gridsz-automation",
+      "title": "Gridsz Automation",
+      "subtitle": "AI-Powered Ticket Automation for Field Service Operations",
+      "category": "automation",
+      "featured": true,
+      "metrics": [
+        "98.5% automation success rate",
+        "85% reduction in manual admin work",
+        "1,500+ tickets processed monthly",
+        "100% local AI (no cloud costs)"
+      ],
+      "caseStudy": {
+        "problem": "Field technicians working on fiber network installations received dozens of daily work orders through the Gridsz platform. Manually downloading tickets, organizing attachments (photos, diagrams, documents), and tracking status changes consumed 2-3 hours of administrative work per day.",
+        "constraints": [
+          "Target platform frequently updates UI, breaking traditional selectors",
+          "Mixed attachment types requiring intelligent categorization",
+          "50+ attachments per ticket with unreliable network",
+          "Long-running automation (30+ min) needed progress visibility",
+          "No external API costs—all AI must run locally"
+        ],
+        "approach": "Built an intelligent end-to-end automation system using local LLM (Ollama) for dynamic UI element detection instead of brittle CSS selectors, YOLO11 for automatic image classification, transactional download logic with SHA256 deduplication, and WebSocket-based real-time progress streaming.",
+        "outcomes": [
+          "Admin time: 2-3 hours → 15 minutes oversight (85% reduction)",
+          "Processing: 10-15 tickets/day manual → 50+ tickets/hour automated",
+          "Zero missed attachments—every file captured and classified",
+          "Consistent folder structure for field access",
+          "Hourly sync during work hours with automatic archival"
+        ]
+      },
+      "charts": {
+        "timeSavings": {
+          "type": "bar",
+          "title": "Daily Admin Time",
+          "labels": ["Manual Process", "With Automation"],
+          "data": [150, 15],
+          "unit": "minutes"
+        },
+        "cachePerformance": {
+          "type": "doughnut",
+          "title": "Selector Cache Performance",
+          "labels": ["Cache Hits", "LLM Calls"],
+          "data": [75, 25],
+          "colors": ["#22c55e", "#525252"]
+        },
+        "imageClassification": {
+          "type": "doughnut",
+          "title": "Image Classification",
+          "labels": ["FTU Photos", "Drawings", "Other"],
+          "data": [45, 30, 25],
+          "colors": ["#3b82f6", "#a78bfa", "#525252"]
+        },
+        "performance": {
+          "type": "metrics",
+          "title": "System Performance",
+          "items": [
+            { "label": "Automation Success", "value": "98.5%" },
+            { "label": "Cache Hit Rate", "value": "70-80%" },
+            { "label": "Image Classification", "value": "87%" },
+            { "label": "System Uptime", "value": "99.9%" }
+          ]
+        },
+        "aiPipeline": {
+          "type": "funnel",
+          "title": "AI Element Detection Pipeline",
+          "steps": [
+            { "label": "Full DOM (200KB)", "value": 200 },
+            { "label": "Candidate Elements", "value": 20 },
+            { "label": "LLM Context (2KB)", "value": 2 },
+            { "label": "Validated Selector", "value": 1 }
+          ]
+        }
+      },
+      "challenges": [
+        {
+          "title": "Dynamic UI Element Detection",
+          "problem": "Target platform frequently updates UI, breaking traditional CSS selectors—the #1 cause of maintenance burden in web automation.",
+          "solution": "Intent-based AI selector system using local LLM (Ollama). DOM Snapshot compression reduces 200KB+ HTML to ~2KB candidates. LLM proposes selectors with confidence scores, validated against live page, cached for 60-min TTL."
+        },
+        {
+          "title": "LLM Latency in Automation Loops",
+          "problem": "Calling LLM for every element lookup added 1-2 seconds per interaction, making automation slow.",
+          "solution": "Multi-layer caching: URL pattern + intent + DOM hash as key, 60-min TTL, 70-80% hit rate. Average element lookup dropped from 1.5s to 0.3s."
+        },
+        {
+          "title": "Unreliable File Downloads",
+          "problem": "Some tickets have 50+ attachments. Network interruptions caused incomplete downloads and duplicates.",
+          "solution": "Transactional download logic (all succeed or none committed), SHA256 deduplication, SQLite tracking, exponential backoff retry with 3 attempts."
+        },
+        {
+          "title": "Mixed Image Types",
+          "problem": "Field technicians needed to quickly identify FTU installation photos vs floor plans vs miscellaneous images.",
+          "solution": "Custom-trained YOLO11 classification model: 3 categories (FTU, Drawing, Other) + location sub-classification. 87% accuracy, 11MB model size, runs locally."
+        },
+        {
+          "title": "Real-time Progress Visibility",
+          "problem": "Long-running automation (30+ minutes) left users uncertain about progress.",
+          "solution": "WebSocket-based streaming: progress percentage, live log entries, ticket completion notifications, auto-reconnect on connection loss."
+        }
+      ],
+      "techStack": {
+        "backend": ["Python 3.11+", "FastAPI", "Playwright (async)"],
+        "ai": ["Ollama (llama3.2)", "YOLO11 (11MB)", "48 Intent Templates"],
+        "data": ["SQLite (WAL mode)", "SHA256 Dedup", "In-memory Cache"],
+        "frontend": ["React 18", "TypeScript", "Tailwind CSS", "Vite"],
+        "realtime": ["WebSocket Hub", "Progress Streaming", "Auto-reconnect"],
+        "infra": ["Systemd", "Linux Server", "Chrome Extension"]
+      },
+      "apiLatency": [
+        { "endpoint": "GET /api/tickets", "latency": "45ms" },
+        { "endpoint": "GET /api/status", "latency": "12ms" },
+        { "endpoint": "WebSocket message", "latency": "8ms" },
+        { "endpoint": "POST /api/start", "latency": "120ms" }
+      ],
+      "scalability": [
+        { "dimension": "Tickets/Run", "current": "100+", "path": "Browser parallelization" },
+        { "dimension": "Concurrent Users", "current": "10", "path": "Redis session scaling" },
+        { "dimension": "Database", "current": "10K+ tickets", "path": "PostgreSQL for >100K" },
+        { "dimension": "LLM Inference", "current": "Single GPU", "path": "Multi-GPU sharding" }
+      ]
+    }
+  ]
+}
