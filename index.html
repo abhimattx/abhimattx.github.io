@@ -149,6 +149,44 @@
     </div>
   </div>
 
+  <!-- Floating Ask Button -->
+  <button id="floating-ask-btn" class="floating-ask-btn" aria-label="Ask about this project" hidden>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span>Ask this project</span>
+  </button>
+
+  <!-- Project Chat Panel -->
+  <div id="project-chat-panel" class="chat-panel" hidden>
+    <div class="chat-panel-header">
+      <div class="chat-panel-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span>Ask about <strong>My Projects</strong></span>
+      </div>
+      <button id="chat-panel-close" class="chat-panel-close" aria-label="Close panel">&times;</button>
+    </div>
+    <div class="chat-panel-body">
+      <div id="chat-messages" class="chat-messages">
+        <div class="chat-welcome">
+          <p>Ask me anything about the RAG Platform, Gridsz Automation, or any technical details about these projects.</p>
+        </div>
+      </div>
+      <form id="chat-form" class="chat-form">
+        <input type="text" id="chat-input" class="chat-input" placeholder="How does the caching work?" autocomplete="off" />
+        <button type="submit" class="chat-submit" aria-label="Send message">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div id="chat-panel-backdrop" class="chat-panel-backdrop" hidden></div>
+
   <footer>
     <div class="footer-content">
       <p class="footer-copyright">&copy; 2026 Abhishek Singh</p>

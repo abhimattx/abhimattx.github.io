@@ -446,7 +446,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const response = await fetch('https://backendmatrix.up.railway.app/ask', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question })
+      body: JSON.stringify({ question, type: 'general' })
     });
 
     if (!response.ok) {
@@ -510,3 +510,146 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', init);
+
+// ========================================
+// Floating Ask Button & Chat Panel
+// ========================================
+(function() {
+  // DOM elements
+  const floatingBtn = document.getElementById('floating-ask-btn');
+  const chatPanel = document.getElementById('project-chat-panel');
+  const chatBackdrop = document.getElementById('chat-panel-backdrop');
+  const chatClose = document.getElementById('chat-panel-close');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+  const heroSection = document.getElementById('hero');
+
+  if (!floatingBtn || !chatPanel || !heroSection) return;
+
+  // Track scroll position to show/hide floating button
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // Show button when hero is NOT intersecting (scrolled past)
+      if (!entry.isIntersecting) {
+        floatingBtn.hidden = false;
+      } else {
+        floatingBtn.hidden = true;
+      }
+    });
+  }, {
+    threshold: 0,
+    rootMargin: '-100px 0px 0px 0px'
+  });
+
+  heroObserver.observe(heroSection);
+
+  // Open chat panel
+  function openChatPanel() {
+    chatPanel.hidden = false;
+    chatBackdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+    chatInput.focus();
+  }
+
+  // Close chat panel
+  function closeChatPanel() {
+    chatPanel.hidden = true;
+    chatBackdrop.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  // Add message to chat
+  function addMessage(content, isUser = false) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${isUser ? 'user' : 'assistant'}`;
+    messageDiv.innerHTML = `
+      <span class="chat-message-label">${isUser ? 'You' : 'AI'}</span>
+      <div class="chat-message-content">${content}</div>
+    `;
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return messageDiv;
+  }
+
+  // Show typing indicator
+  function showTyping() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-typing';
+    typingDiv.id = 'chat-typing-indicator';
+    typingDiv.innerHTML = `
+      <span class="chat-typing-dot"></span>
+      <span class="chat-typing-dot"></span>
+      <span class="chat-typing-dot"></span>
+    `;
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Hide typing indicator
+  function hideTyping() {
+    const typingIndicator = document.getElementById('chat-typing-indicator');
+    if (typingIndicator) {
+      typingIndicator.remove();
+    }
+  }
+
+  // Send message to API
+  async function sendMessage(question) {
+    const response = await fetch('https://backendmatrix.up.railway.app/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question, type: 'project' })
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.detail || 'Something went wrong. Please try again.');
+    }
+
+    const data = await response.json();
+    return data.answer;
+  }
+
+  // Handle form submission
+  chatForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const question = chatInput.value.trim();
+    if (!question) return;
+
+    // Add user message
+    addMessage(question, true);
+    chatInput.value = '';
+    chatInput.disabled = true;
+    chatForm.querySelector('.chat-submit').disabled = true;
+
+    // Show typing
+    showTyping();
+
+    try {
+      const answer = await sendMessage(question);
+      hideTyping();
+      addMessage(answer, false);
+    } catch (err) {
+      hideTyping();
+      addMessage(`Sorry, I couldn't get a response. ${err.message}`, false);
+    } finally {
+      chatInput.disabled = false;
+      chatForm.querySelector('.chat-submit').disabled = false;
+      chatInput.focus();
+    }
+  });
+
+  // Event listeners
+  floatingBtn.addEventListener('click', openChatPanel);
+  chatClose.addEventListener('click', closeChatPanel);
+  chatBackdrop.addEventListener('click', closeChatPanel);
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !chatPanel.hidden) {
+      closeChatPanel();
+    }
+  });
+})();

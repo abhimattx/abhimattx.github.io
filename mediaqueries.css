@@ -356,6 +356,72 @@
   }
 }
 
+/* Chat panel tablet */
+@media screen and (max-width: 900px) {
+  .chat-panel {
+    width: 360px;
+  }
+}
+
+/* Chat panel & floating button mobile */
+@media screen and (max-width: 600px) {
+  .floating-ask-btn {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .floating-ask-btn span {
+    display: none;
+  }
+
+  .floating-ask-btn {
+    padding: 0.875rem;
+    border-radius: 50%;
+  }
+
+  .chat-panel {
+    width: 100%;
+    border-left: none;
+  }
+
+  .chat-panel-header {
+    padding: 0.875rem 1rem;
+  }
+
+  .chat-panel-title {
+    font-size: 0.8125rem;
+  }
+
+  .chat-messages {
+    padding: 1rem;
+  }
+
+  .chat-form {
+    padding: 0.875rem 1rem;
+  }
+
+  .chat-input {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  .chat-submit {
+    width: 40px;
+    height: 40px;
+  }
+
+  .chat-message-content {
+    font-size: 0.75rem;
+    padding: 0.625rem 0.875rem;
+  }
+
+  .chat-welcome p {
+    font-size: 0.75rem;
+  }
+}
+
 /* Extra small screens */
 @media screen and (max-width: 400px) {
   .hero-title {
