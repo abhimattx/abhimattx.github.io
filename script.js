@@ -559,15 +559,84 @@ document.addEventListener('DOMContentLoaded', init);
     document.body.style.overflow = '';
   }
 
-  // Add message to chat
-  function addMessage(content, isUser = false) {
+  // Simple markdown parser for chat responses
+  function parseMarkdown(text) {
+    return text
+      // Bold
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Italic
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      // Inline code
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      // Line breaks
+      .replace(/\n/g, '<br>');
+  }
+
+  // Add message to chat with optional typewriter effect
+  function addMessage(content, isUser = false, animate = true) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `chat-message ${isUser ? 'user' : 'assistant'}`;
-    messageDiv.innerHTML = `
-      <span class="chat-message-label">${isUser ? 'You' : 'AI'}</span>
-      <div class="chat-message-content">${content}</div>
-    `;
-    chatMessages.appendChild(messageDiv);
+
+    const parsedContent = isUser ? content : parseMarkdown(content);
+
+    if (isUser) {
+      messageDiv.innerHTML = `
+        <span class="chat-message-label">You</span>
+        <div class="chat-message-content">${parsedContent}</div>
+      `;
+      chatMessages.appendChild(messageDiv);
+    } else {
+      messageDiv.innerHTML = `
+        <div class="chat-message-row">
+          <div class="chat-avatar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+          </div>
+          <div class="chat-message-body">
+            <span class="chat-message-label">matrix</span>
+            <div class="chat-message-content"></div>
+          </div>
+        </div>
+      `;
+      chatMessages.appendChild(messageDiv);
+
+      const contentDiv = messageDiv.querySelector('.chat-message-content');
+
+      if (animate && parsedContent.length < 500) {
+        // Typewriter effect for shorter responses
+        let i = 0;
+        const chars = parsedContent;
+        const speed = Math.max(5, Math.min(20, 1000 / chars.length));
+
+        function typeWriter() {
+          if (i < chars.length) {
+            // Handle HTML tags - add them all at once
+            if (chars[i] === '<') {
+              const tagEnd = chars.indexOf('>', i);
+              if (tagEnd !== -1) {
+                contentDiv.innerHTML += chars.substring(i, tagEnd + 1);
+                i = tagEnd + 1;
+              } else {
+                contentDiv.innerHTML += chars[i];
+                i++;
+              }
+            } else {
+              contentDiv.innerHTML += chars[i];
+              i++;
+            }
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            setTimeout(typeWriter, speed);
+          }
+        }
+        typeWriter();
+      } else {
+        // Instant display for longer responses
+        contentDiv.innerHTML = parsedContent;
+        contentDiv.classList.add('fade-in');
+      }
+    }
+
     chatMessages.scrollTop = chatMessages.scrollHeight;
     return messageDiv;
   }
@@ -578,9 +647,16 @@ document.addEventListener('DOMContentLoaded', init);
     typingDiv.className = 'chat-typing';
     typingDiv.id = 'chat-typing-indicator';
     typingDiv.innerHTML = `
-      <span class="chat-typing-dot"></span>
-      <span class="chat-typing-dot"></span>
-      <span class="chat-typing-dot"></span>
+      <div class="chat-avatar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+      </div>
+      <div class="chat-typing-dots">
+        <span class="chat-typing-dot"></span>
+        <span class="chat-typing-dot"></span>
+        <span class="chat-typing-dot"></span>
+      </div>
     `;
     chatMessages.appendChild(typingDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
