@@ -381,6 +381,24 @@ section {
   color: var(--liquid-accent);
 }
 
+.about-link-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.about-link-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.about-link-item:hover .about-link-icon {
+  opacity: 1;
+}
+
 /* Systems Grid */
 .systems-grid {
   display: grid;
