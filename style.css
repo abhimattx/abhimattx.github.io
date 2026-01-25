@@ -307,6 +307,17 @@ section {
   border-color: var(--glass-border-hover);
 }
 
+.btn-tertiary {
+  background: transparent;
+  color: var(--liquid-accent);
+  border: 1px solid var(--liquid-accent);
+}
+
+.btn-tertiary:hover {
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 20px var(--liquid-glow);
+}
+
 /* About Section - Integrated */
 #about {
   padding-top: 3rem;
