@@ -2,90 +2,90 @@
   "systems": [
     {
       "id": "rag-platform",
-      "title": "Enterprise RAG Platform @ Yungo",
+      "title": "Enterprise RAG Platform ",
       "category": "rag",
       "featured": true,
       "metrics": [
-        "900x faster query resolution (15 min → 12 sec)",
-        "85% retrieval precision after reranking",
-        "100 concurrent sessions supported",
-        "4 knowledge bases unified"
+        "Substantial reduction in average answer time",
+        "High retrieval relevance after reranking",
+        "Production support for concurrent user sessions",
+        "Multiple internal knowledge sources unified"
       ],
       "caseStudy": {
-        "problem": "Employees wasted 15+ minutes per query searching through scattered docs, wikis, and databases. Knowledge was siloed, answers were inconsistent, and new hires constantly interrupted colleagues for information that existed somewhere.",
+        "problem": "Teams spent significant time searching across fragmented documentation and internal systems. Knowledge was siloed, answers were inconsistent, and onboarding required frequent interruptions to senior team members.",
         "constraints": [
-          "On-prem deployment required (no external APIs)",
-          "Mixed data: unstructured docs + structured databases",
-          "Follow-up questions needed conversation context",
-          "Must avoid hallucination on technical documentation"
+          "Strict enterprise data governance requirements",
+          "Mixed data: unstructured content and structured systems",
+          "Follow-up questions required conversation continuity",
+          "Responses needed grounded, source-backed output"
         ],
-        "approach": "Built a modular RAG system with two-pass adaptive retrieval (probe collections first, deep-retrieve from relevant ones), hybrid search combining vector embeddings with BM25 lexical matching, cross-encoder neural reranking, and intent-based SQL routing for analytical queries.",
+        "approach": "Built a modular retrieval-augmented system with adaptive multi-source retrieval, hybrid semantic plus lexical ranking, neural reranking, and intent-based routing for analytical questions.",
         "outcomes": [
-          "Query resolution: 15 min → 12 sec (uncached), 100ms (cached)",
-          "30-40% cache hit rate on repetitive organizational queries",
-          "New engineers self-serve answers, reduced support interruptions",
-          "Single source of truth eliminated conflicting information"
+          "Average time-to-answer reduced from minutes to seconds",
+          "Caching improved repeated-query responsiveness",
+          "Improved self-service and reduced internal support interruptions",
+          "Consolidated knowledge access reduced conflicting answers"
         ]
       },
       "charts": {
         "queryTime": {
           "type": "bar",
           "title": "Query Resolution Time",
-          "labels": ["Manual Search", "RAG (uncached)", "RAG (cached)"],
-          "data": [900, 12, 0.1],
-          "unit": "seconds"
+          "labels": ["Baseline", "Optimized", "Cached"],
+          "data": [100, 12, 2],
+          "unit": "relative index"
         },
         "retrievalFunnel": {
           "type": "funnel",
           "title": "Retrieval Pipeline",
           "steps": [
-            { "label": "Collections Probed", "value": 4 },
-            { "label": "Initial Retrieval", "value": 30 },
-            { "label": "After Reranking", "value": 15 },
+            { "label": "Sources Probed", "value": 5 },
+            { "label": "Initial Retrieval", "value": 25 },
+            { "label": "After Reranking", "value": 12 },
             { "label": "Used for Generation", "value": 5 }
           ]
         },
         "responseSource": {
           "type": "doughnut",
           "title": "Response Sources",
-          "labels": ["LLM Generated", "Cached", "SQL Direct"],
-          "data": [55, 30, 15],
+          "labels": ["Generated", "Cached", "Structured Query"],
+          "data": [60, 25, 15],
           "colors": ["#3b82f6", "#a78bfa", "#22c55e"]
         },
         "performance": {
           "type": "metrics",
           "title": "Performance",
           "items": [
-            { "label": "Cache Hit Latency", "value": "<100ms" },
-            { "label": "Time to First Token", "value": "<2s" },
-            { "label": "Retrieval Precision@15", "value": "~85%" },
-            { "label": "Cache Hit Rate", "value": "30-40%" }
+            { "label": "Cache Hit Latency", "value": "Sub-second" },
+            { "label": "Time to First Token", "value": "Low-latency" },
+            { "label": "Retrieval Quality", "value": "Consistently high" },
+            { "label": "Cache Utilization", "value": "Meaningful repeat-query coverage" }
           ]
         }
       },
       "challenges": [
         {
           "title": "Multi-Collection Efficiency",
-          "problem": "Querying all 4 collections for every query was slow and noisy.",
-          "solution": "Two-pass adaptive retrieval: probe each collection with 3 docs, rank by relevance, deep-retrieve only from promising ones. 60% faster retrieval."
+          "problem": "Querying all sources for every request introduced latency and noise.",
+          "solution": "Used staged retrieval to probe sources first, then deep-retrieve only from relevant ones for faster and cleaner context assembly."
         },
         {
           "title": "Semantic vs Keyword Trade-off",
           "problem": "Vector search missed exact terms; keyword search missed concepts.",
-          "solution": "Hybrid search with RRF (Reciprocal Rank Fusion) combining vector + BM25 scores. 25% improvement in retrieval relevance."
+          "solution": "Applied a hybrid retrieval strategy combining semantic and lexical scoring to improve coverage and relevance."
         },
         {
           "title": "Structured Data Queries",
           "problem": "Users asked analytical questions ('How many tools in category X?') that needed SQL, not document retrieval.",
-          "solution": "Intent-based query routing with pattern matching to SQL execution engine. Instant factual answers without hallucination."
+          "solution": "Implemented intent-based routing to structured query execution for factual analytical responses."
         }
       ],
       "techStack": {
-        "retrieval": ["ChromaDB", "BM25 Indexer", "BGE-large-en-v1.5"],
-        "reranking": ["cross-encoder/ms-marco-MiniLM-L-6-v2"],
-        "llm": ["Ollama (gemma3:27b)", "OpenAI API fallback"],
-        "backend": ["FastAPI", "PostgreSQL", "SQLite"],
-        "infra": ["Systemd services", "Redis cache"]
+        "retrieval": ["Vector search", "Lexical search", "Hybrid retrieval"],
+        "reranking": ["Neural reranking"],
+        "llm": ["Enterprise LLM runtime", "Fallback model gateway"],
+        "backend": ["API service", "Relational datastore", "Session store"],
+        "infra": ["Containerized services", "Caching layer"]
       }
     }
   ],
@@ -112,9 +112,9 @@
     }
   ],
   "stack": {
-    "retrieval": ["ChromaDB", "PostgreSQL + pgvector", "BM25"],
-    "llms": ["Ollama", "OpenAI", "Claude"],
-    "infra": ["FastAPI", "Docker", "Redis"],
-    "ml": ["SentenceTransformers", "CrossEncoders", "spaCy"]
+    "retrieval": ["Vector retrieval", "Relational vector extension", "Lexical ranking"],
+    "llms": ["Local models", "Hosted model APIs", "Vendor-neutral adapters"],
+    "infra": ["Python API services", "Container orchestration", "In-memory cache"],
+    "ml": ["Embedding models", "Rerankers", "NLP pipelines"]
   }
 }

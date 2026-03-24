@@ -17,7 +17,6 @@ let systemsData = null;
 // Project data files
 const PROJECT_FILES = [
   './data/systems.json',
-  './data/gridsz.json'
 ];
 
 // Fetch data and initialize
