@@ -2,7 +2,7 @@
    Glass and liquid are accents, not the product.
    Readability > motion. Hierarchy > decoration. */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 /* CSS Variables */
 :root {
@@ -31,6 +31,9 @@
   /* Semantic */
   --success: #22c55e;
   --success-muted: rgba(34, 197, 94, 0.15);
+
+  /* Monospace — for metrics, telemetry, latency values */
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 }
 
 /* Reset */
@@ -216,6 +219,8 @@ section {
   flex-direction: column;
   justify-content: center;
   padding-top: 2rem;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
 .hero-layout {
@@ -261,8 +266,10 @@ section {
 .hero-subtitle {
   font-size: 1.0625rem;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.6;
   margin-bottom: 2rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--liquid-accent);
 }
 
 .hero-buttons {
@@ -425,13 +432,24 @@ section {
   border-radius: 0.75rem;
   padding: 1.5rem;
   cursor: pointer;
-  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+  transition: border-color 150ms ease, background 150ms ease, translate 150ms ease, transform 400ms ease, opacity 400ms ease;
+}
+
+/* JS progressive enhancement: cards start hidden and reveal on scroll */
+.js .system-card {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.system-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .system-card:hover {
   background: var(--glass-bg-hover);
   border-color: var(--liquid-accent);
-  transform: translateY(-2px);
+  translate: 0 -2px;
 }
 
 .view-project-hint {
@@ -490,7 +508,8 @@ section {
 }
 
 .system-metrics li {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
   color: var(--text-secondary);
   padding: 0.3rem 0;
   padding-left: 1rem;
@@ -835,9 +854,55 @@ footer {
   font-weight: 500;
 }
 
-/* Featured Card */
+/* Featured Card — spans full grid width with 2-col internal layout */
 .system-card.featured {
+  grid-column: 1 / -1;
   border-color: var(--liquid-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+}
+
+.system-card.featured .live-indicator,
+.system-card.featured .system-card-header,
+.system-card.featured .view-project-hint {
+  grid-column: 1 / -1;
+}
+
+.system-card.featured .system-metrics {
+  grid-column: 1;
+}
+
+.system-card.featured .tech-stack-tags {
+  grid-column: 2;
+  align-self: start;
+  margin-bottom: 0;
+}
+
+/* Live production indicator */
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.625rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--success);
+  margin-bottom: 0.25rem;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  flex-shrink: 0;
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
 }
 
 /* Case Study Charts */
@@ -897,7 +962,8 @@ footer {
 
 .metric-value {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
+  font-family: var(--font-mono);
   color: var(--text-primary);
 }
 
@@ -938,7 +1004,8 @@ footer {
 
 .funnel-value {
   font-size: 0.6875rem;
-  font-weight: 600;
+  font-weight: 500;
+  font-family: var(--font-mono);
   color: white;
 }
 
@@ -1090,7 +1157,7 @@ footer {
 .latency-endpoint {
   font-size: 0.75rem;
   color: var(--text-secondary);
-  font-family: monospace;
+  font-family: var(--font-mono);
 }
 
 .latency-value {

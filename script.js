@@ -1,3 +1,6 @@
+// Mark document as JS-active so CSS reveal animations scope safely (no flash of hidden content without JS)
+document.documentElement.classList.add('js');
+
 // ─── Utilities ───────────────────────────────────────────────────────────────
 
 function escapeHTML(str) {
@@ -73,6 +76,7 @@ function renderSystems(systems) {
 
     return `
       <div class="system-card ${system.featured ? 'featured' : ''}" data-id="${escapeHTML(system.id)}" data-category="${escapeHTML(system.category)}">
+        ${system.featured ? `<div class="live-indicator"><span class="live-dot"></span>PRODUCTION</div>` : ''}
         <div class="system-card-header">
           <h3 class="system-title">${escapeHTML(system.title)}</h3>
           <span class="category-tag ${escapeHTML(system.category)}">${escapeHTML(system.category.toUpperCase())}</span>
@@ -85,6 +89,30 @@ function renderSystems(systems) {
       </div>
     `;
   }).join('');
+
+  initReveal();
+}
+
+function initReveal() {
+  const cards = document.querySelectorAll('.system-card');
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('revealed');
+        entry.target.style.transitionDelay = '';
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
+  );
+
+  cards.forEach((card, i) => {
+    card.style.transitionDelay = `${i * 80}ms`;
+    observer.observe(card);
+  });
 }
 
 // ─── Modal HTML builders ──────────────────────────────────────────────────────

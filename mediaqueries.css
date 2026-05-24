@@ -49,6 +49,20 @@
     grid-template-columns: 1fr;
   }
 
+  .system-card.featured {
+    grid-template-columns: 1fr;
+  }
+
+  .system-card.featured .system-metrics,
+  .system-card.featured .tech-stack-tags {
+    grid-column: 1;
+  }
+
+  .hero-subtitle {
+    padding-left: 0;
+    border-left: none;
+  }
+
   .case-study-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
