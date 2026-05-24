@@ -688,10 +688,21 @@ function initChat() {
 
 // ─── Init ────────────────────────────────────────────────────────────────────
 
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', function() {
+    const scrolled = document.documentElement.scrollTop;
+    const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    bar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+  }, { passive: true });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   loadSystems();
   initModal();
   initHamburger();
   initAskForm();
   initChat();
+  initScrollProgress();
 });
