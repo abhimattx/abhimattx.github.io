@@ -227,8 +227,6 @@ section {
 
 /* Hero Section */
 #hero {
-  position: relative;
-  overflow: hidden;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -238,27 +236,7 @@ section {
   background-size: 28px 28px;
 }
 
-/* Ambient 3D backdrop — lives behind hero content, non-interactive */
-.hero-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.4;
-  /* fade edges so the scene melts into the page instead of reading as a block */
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 65% 45%, #000 30%, transparent 75%);
-  mask-image: radial-gradient(ellipse 70% 70% at 65% 45%, #000 30%, transparent 75%);
-}
-
-.hero-canvas spline-viewer {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 .hero-layout {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1658,10 +1636,4 @@ section:not(#hero) .section-label::before {
 /* Utility */
 .hidden {
   display: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-canvas {
-    display: none;
-  }
 }
