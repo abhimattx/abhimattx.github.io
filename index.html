@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="mediaqueries.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js"></script>
 </head>
 
 <body>
@@ -52,6 +53,12 @@
   <main>
     <!-- Hero Section -->
     <section id="hero">
+      <div class="hero-canvas" aria-hidden="true">
+        <spline-viewer
+          url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+          events-target="global"
+          loading-anim-type="none"></spline-viewer>
+      </div>
       <div class="hero-layout">
         <div class="hero-content">
           <h1 class="hero-title">I build production-ready AI systems that automate internal workflows.</h1>
