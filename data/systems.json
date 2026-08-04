@@ -2,119 +2,426 @@
   "systems": [
     {
       "id": "rag-platform",
-      "title": "Enterprise RAG Platform ",
+      "title": "internal answer engine",
+      "subtitle": "retrieval over everything the company knows",
       "category": "rag",
-      "featured": true,
-      "metrics": [
-        "Substantial reduction in average answer time",
-        "High retrieval relevance after reranking",
-        "Production support for concurrent user sessions",
-        "Multiple internal knowledge sources unified"
+      "year": "2024—now",
+      "status": "in production",
+      "summary": "Our knowledge lived in a wiki nobody trusted, a ticketing system, and three people's heads. I built the thing that answers questions across all of it, with sources attached so you can check its work.",
+      "problem": "People asked the same questions over and over, got different answers depending on who they asked, and every new hire burned a senior engineer's afternoon for the first month. Search already existed. It just never found anything.",
+      "constraints": [
+        "enterprise data governance — nothing leaves the boundary",
+        "mixed sources: prose documents and relational tables",
+        "follow-up questions have to keep the thread",
+        "every answer cites where it came from, or it doesn't ship"
       ],
-      "caseStudy": {
-        "problem": "Teams spent significant time searching across fragmented documentation and internal systems. Knowledge was siloed, answers were inconsistent, and onboarding required frequent interruptions to senior team members.",
-        "constraints": [
-          "Strict enterprise data governance requirements",
-          "Mixed data: unstructured content and structured systems",
-          "Follow-up questions required conversation continuity",
-          "Responses needed grounded, source-backed output"
-        ],
-        "approach": "Built a modular retrieval-augmented system with adaptive multi-source retrieval, hybrid semantic plus lexical ranking, neural reranking, and intent-based routing for analytical questions.",
-        "outcomes": [
-          "Average time-to-answer reduced from minutes to seconds",
-          "Caching improved repeated-query responsiveness",
-          "Improved self-service and reduced internal support interruptions",
-          "Consolidated knowledge access reduced conflicting answers"
-        ]
-      },
-      "charts": {
-        "queryTime": {
-          "type": "bar",
-          "title": "Query Resolution Time",
-          "labels": ["Baseline", "Optimized", "Cached"],
-          "data": [100, 12, 2],
-          "unit": "relative index"
-        },
-        "retrievalFunnel": {
-          "type": "funnel",
-          "title": "Retrieval Pipeline",
-          "steps": [
-            { "label": "Sources Probed", "value": 5 },
-            { "label": "Initial Retrieval", "value": 25 },
-            { "label": "After Reranking", "value": 12 },
-            { "label": "Used for Generation", "value": 5 }
-          ]
-        },
-        "responseSource": {
-          "type": "doughnut",
-          "title": "Response Sources",
-          "labels": ["Generated", "Cached", "Structured Query"],
-          "data": [60, 25, 15],
-          "colors": ["#3b82f6", "#a78bfa", "#22c55e"]
-        },
-        "performance": {
-          "type": "metrics",
-          "title": "Performance",
-          "items": [
-            { "label": "Cache Hit Latency", "value": "Sub-second" },
-            { "label": "Time to First Token", "value": "Low-latency" },
-            { "label": "Retrieval Quality", "value": "Consistently high" },
-            { "label": "Cache Utilization", "value": "Meaningful repeat-query coverage" }
+      "approach": "Probe all sources cheaply first, then deep-retrieve only from the ones that look relevant. Rank semantic and lexical scores together, then rerank the shortlist with a cross-encoder. Analytical questions — \"how many tools in category X\" — get routed to SQL instead, because no amount of document retrieval answers a COUNT.",
+      "outcomes": [
+        "time-to-answer went from minutes of searching to seconds",
+        "repeat questions come back from cache",
+        "the wiki stopped being the bottleneck",
+        "fewer contradictory answers, because there is now one path to an answer"
+      ],
+      "disclosure": "The numbers below are indexed against a baseline, not absolute. This is my employer's system and I can't publish real latencies. I'd rather show you the shape than round something up.",
+      "bars": [
+        {
+          "title": "query resolution time",
+          "unit": "relative to baseline",
+          "rows": [
+            {
+              "label": "baseline",
+              "value": 100
+            },
+            {
+              "label": "optimized",
+              "value": 12
+            },
+            {
+              "label": "cached",
+              "value": 2,
+              "hi": true
+            }
           ]
         }
-      },
+      ],
+      "pipeline": [
+        {
+          "title": "retrieval pipeline",
+          "unit": "documents",
+          "steps": [
+            {
+              "label": "sources probed",
+              "value": 5
+            },
+            {
+              "label": "initial retrieval",
+              "value": 25
+            },
+            {
+              "label": "after reranking",
+              "value": 12
+            },
+            {
+              "label": "used to generate",
+              "value": 5
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "title": "where answers come from",
+          "cols": [
+            "path",
+            "share"
+          ],
+          "rows": [
+            [
+              "generated",
+              "60%"
+            ],
+            [
+              "served from cache",
+              "25%"
+            ],
+            [
+              "structured SQL query",
+              "15%"
+            ]
+          ]
+        }
+      ],
       "challenges": [
         {
-          "title": "Multi-Collection Efficiency",
-          "problem": "Querying all sources for every request introduced latency and noise.",
-          "solution": "Used staged retrieval to probe sources first, then deep-retrieve only from relevant ones for faster and cleaner context assembly."
+          "title": "querying every source, every time",
+          "problem": "Hitting all collections on every request was slow and dragged in noise from sources that had nothing to do with the question.",
+          "solution": "Two-stage retrieval. Cheap probe across everything, deep retrieval only where the probe scored. Faster, and the context got cleaner, which mattered more."
         },
         {
-          "title": "Semantic vs Keyword Trade-off",
-          "problem": "Vector search missed exact terms; keyword search missed concepts.",
-          "solution": "Applied a hybrid retrieval strategy combining semantic and lexical scoring to improve coverage and relevance."
+          "title": "semantic search misses exact terms",
+          "problem": "Vector search couldn't find an error code. Keyword search couldn't find a concept. Each one failed on the other's queries.",
+          "solution": "Run both, fuse the scores. Not clever, but it killed the class of failure where someone pastes an exact string and gets nothing back."
         },
         {
-          "title": "Structured Data Queries",
-          "problem": "Users asked analytical questions ('How many tools in category X?') that needed SQL, not document retrieval.",
-          "solution": "Implemented intent-based routing to structured query execution for factual analytical responses."
+          "title": "some questions aren't retrieval questions",
+          "problem": "\"How many X are in category Y\" has an exact answer sitting in a table, and a language model asked to read documents will happily guess at it.",
+          "solution": "Intent routing. Counting and aggregation go to SQL and come back exact. The model only writes the sentence around the number."
         }
       ],
-      "techStack": {
-        "retrieval": ["Vector search", "Lexical search", "Hybrid retrieval"],
-        "reranking": ["Neural reranking"],
-        "llm": ["Enterprise LLM runtime", "Fallback model gateway"],
-        "backend": ["API service", "Relational datastore", "Session store"],
-        "infra": ["Containerized services", "Caching layer"]
+      "stack": {
+        "retrieval": [
+          "vector search",
+          "lexical ranking",
+          "hybrid fusion"
+        ],
+        "ranking": [
+          "cross-encoder reranker"
+        ],
+        "models": [
+          "enterprise llm runtime",
+          "fallback gateway"
+        ],
+        "services": [
+          "python api",
+          "relational store",
+          "session store"
+        ],
+        "infra": [
+          "containers",
+          "cache layer"
+        ]
+      }
+    },
+    {
+      "id": "gridsz-automation",
+      "title": "ticket automation for field service",
+      "subtitle": "an automation that survives the platform changing its html",
+      "category": "automation",
+      "year": "2025",
+      "status": "running hourly",
+      "summary": "Field techs installing fiber were spending two to three hours a day downloading work orders and filing photos into folders. Now they spend about fifteen minutes checking the machine did it right.",
+      "problem": "Dozens of work orders a day, each with up to fifty attachments — photos, floor plans, documents — all needing to be pulled down, sorted and tracked by hand. It was the least interesting work in the building and it ate an afternoon.",
+      "constraints": [
+        "the target platform ships UI changes without warning",
+        "50+ attachments per ticket over unreliable site wifi",
+        "runs take 30+ minutes — people need to see progress",
+        "no external api spend; every model runs on our hardware"
+      ],
+      "approach": "CSS selectors break every time the platform touches its markup, so I stopped writing them. A local model reads a compressed snapshot of the DOM and proposes a selector by intent — \"the download button\" — which then gets validated against the live page and cached. YOLO11 sorts the images into FTU photos, drawings, and everything else. Downloads are transactional: all of a ticket's files land, or none of them do.",
+      "outcomes": [
+        "admin time: 2—3 hours a day down to ~15 minutes of oversight",
+        "throughput: 10—15 tickets/day by hand to 50+ per hour",
+        "no missed attachments — every file captured and classified",
+        "one predictable folder structure the techs can navigate on a phone"
+      ],
+      "disclosure": "These numbers are real and measured. The classifier is 87% accurate, which means roughly one image in eight lands in the wrong folder — the techs move it and get on with their day.",
+      "bars": [
+        {
+          "title": "daily admin time",
+          "unit": "minutes",
+          "rows": [
+            {
+              "label": "by hand",
+              "value": 150
+            },
+            {
+              "label": "automated",
+              "value": 15,
+              "hi": true
+            }
+          ]
+        },
+        {
+          "title": "image classifier output",
+          "unit": "% of images",
+          "rows": [
+            {
+              "label": "FTU photos",
+              "value": 45,
+              "hi": true
+            },
+            {
+              "label": "drawings",
+              "value": 30
+            },
+            {
+              "label": "other",
+              "value": 25
+            }
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "element detection — DOM to selector",
+          "unit": "KB / count",
+          "steps": [
+            {
+              "label": "full DOM",
+              "value": 200
+            },
+            {
+              "label": "candidate elements",
+              "value": 20
+            },
+            {
+              "label": "llm context",
+              "value": 2
+            },
+            {
+              "label": "validated selector",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "title": "system performance",
+          "cols": [
+            "measure",
+            "value"
+          ],
+          "rows": [
+            [
+              "automation success",
+              "98.5%"
+            ],
+            [
+              "selector cache hit rate",
+              "70—80%"
+            ],
+            [
+              "image classification",
+              "87%"
+            ],
+            [
+              "uptime",
+              "99.9%"
+            ]
+          ]
+        },
+        {
+          "title": "api latency",
+          "cols": [
+            "endpoint",
+            "p50"
+          ],
+          "rows": [
+            [
+              "GET /api/tickets",
+              "45ms"
+            ],
+            [
+              "GET /api/status",
+              "12ms"
+            ],
+            [
+              "WebSocket message",
+              "8ms"
+            ],
+            [
+              "POST /api/start",
+              "120ms"
+            ]
+          ]
+        },
+        {
+          "title": "what breaks first if this grows",
+          "cols": [
+            "dimension",
+            "today",
+            "next move"
+          ],
+          "rows": [
+            [
+              "tickets per run",
+              "100+",
+              "parallelize browsers"
+            ],
+            [
+              "concurrent users",
+              "10",
+              "redis sessions"
+            ],
+            [
+              "database",
+              "10K+ tickets",
+              "postgres past 100K"
+            ],
+            [
+              "llm inference",
+              "single gpu",
+              "shard across gpus"
+            ]
+          ]
+        }
+      ],
+      "challenges": [
+        {
+          "title": "the platform kept moving the buttons",
+          "problem": "Every UI update broke a selector somewhere. This is the number one maintenance cost in browser automation and it never stops.",
+          "solution": "Describe intent, not structure. Compress 200KB of DOM down to ~2KB of plausible candidates, have a local model pick one with a confidence score, validate it against the live page before trusting it, cache it for an hour."
+        },
+        {
+          "title": "asking a model for every click is slow",
+          "problem": "A model call per element lookup added one to two seconds per interaction. Multiply by a few hundred interactions and the run stops being worth doing.",
+          "solution": "Cache on url pattern + intent + DOM hash, 60-minute TTL. 70—80% hit rate, and average lookup dropped from 1.5s to 0.3s. The cache does most of the work; the model is the fallback."
+        },
+        {
+          "title": "half-downloaded tickets",
+          "problem": "Site wifi drops. A ticket would end up with 30 of its 50 files and nothing to indicate which 20 were missing.",
+          "solution": "Transactional commits — a ticket's files all land or none do. SHA256 dedup, SQLite for tracking, exponential backoff over three retries."
+        },
+        {
+          "title": "nobody trusts a process with no output",
+          "problem": "A 30-minute run with a silent terminal is indistinguishable from a hung one, so people kill it and start over.",
+          "solution": "WebSocket streaming: percentage, live log lines, per-ticket completions, auto-reconnect. Mostly this exists so people leave it alone while it works."
+        }
+      ],
+      "stack": {
+        "backend": [
+          "python 3.11",
+          "fastapi",
+          "playwright (async)"
+        ],
+        "models": [
+          "ollama / llama3.2",
+          "yolo11 (11MB)",
+          "48 intent templates"
+        ],
+        "data": [
+          "sqlite (WAL)",
+          "sha256 dedup",
+          "in-memory cache"
+        ],
+        "frontend": [
+          "react 18",
+          "typescript",
+          "vite"
+        ],
+        "realtime": [
+          "websocket hub",
+          "progress streaming"
+        ],
+        "infra": [
+          "systemd",
+          "linux box",
+          "chrome extension"
+        ]
       }
     }
   ],
   "principles": [
     {
-      "icon": "data",
-      "title": "Data First",
-      "description": "Start with data reality, not models. Understand what you have before choosing architecture."
+      "title": "look at the data before you pick the architecture",
+      "body": "Most retrieval problems I've been handed were data problems wearing a retrieval costume. A week reading what is actually in the corpus beats a month of tuning."
     },
     {
-      "icon": "reliable",
-      "title": "Boring Works",
-      "description": "Prefer reliable, well-understood architectures over trendy solutions."
+      "title": "boring architecture, interesting problems",
+      "body": "Postgres and a cache will outlive the framework I would have been excited about. I'd rather spend the novelty budget on the part of the system nobody has solved yet."
     },
     {
-      "icon": "measure",
-      "title": "Measure First",
-      "description": "Measure retrieval quality before generation. Evaluation drives improvement."
+      "title": "measure retrieval before you blame the model",
+      "body": "If the right document never made the shortlist, no prompt fixes that. I check what came back before I touch what generated the answer."
     },
     {
-      "icon": "maintain",
-      "title": "Build to Last",
-      "description": "Design for maintainability, not demos. Production systems need to evolve."
+      "title": "build for the second year",
+      "body": "A demo has one user who knows exactly what to type. Both systems here have run long enough to become someone else's problem on a Friday, and that changes what you build."
     }
   ],
   "stack": {
-    "retrieval": ["Vector retrieval", "Relational vector extension", "Lexical ranking"],
-    "llms": ["Local models", "Hosted model APIs", "Vendor-neutral adapters"],
-    "infra": ["Python API services", "Container orchestration", "In-memory cache"],
-    "ml": ["Embedding models", "Rerankers", "NLP pipelines"]
-  }
+    "languages": [
+      "python",
+      "c++",
+      "typescript",
+      "sql"
+    ],
+    "retrieval": [
+      "vector search",
+      "pgvector",
+      "lexical ranking",
+      "rerankers"
+    ],
+    "models": [
+      "local llms via ollama",
+      "hosted model apis",
+      "yolo",
+      "opencv",
+      "scikit-learn",
+      "tensorflow"
+    ],
+    "services": [
+      "fastapi",
+      "playwright",
+      "websockets",
+      "streamlit"
+    ],
+    "infra": [
+      "docker",
+      "systemd",
+      "azure",
+      "redis",
+      "sqlite",
+      "postgres"
+    ],
+    "tools": [
+      "git",
+      "abb robotstudio"
+    ]
+  },
+  "changelog": [
+    {
+      "date": "2026-08",
+      "note": "rebuilt this page from scratch. dropped the chart library, the modals, and about 2,000 lines of css."
+    },
+    {
+      "date": "2026-08",
+      "note": "published the fiber ticket automation writeup. it sat finished in a json file for months."
+    },
+    {
+      "date": "2025",
+      "note": "first version of this site. it had a gradient."
+    }
+  ]
 }

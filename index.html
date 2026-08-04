@@ -1,215 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="AI Systems Engineer specializing in RAG platforms, document intelligence, computer vision, and automation pipelines. Building internal AI systems for real companies.">
-  <meta name="keywords" content="AI Systems, RAG, Computer Vision, Document Intelligence, Automation, Abhishek Singh" />
-  <title>Abhishek Singh - AI Systems Engineer</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="mediaqueries.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>abhishek singh — ai systems engineer</title>
+<meta name="description" content="I build retrieval and automation systems that go into production and stay there. Two writeups, with the numbers.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="pic/logo.png">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-  <header>
-    <nav id="desktop-nav" aria-label="Main Navigation">
-      <div class="logo">
-        <img src="./pic/logo.png" alt="" class="logo-avatar" />
-        <span>Abhishek Singh</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#systems">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#ask">Contact</a></li>
-      </ul>
-    </nav>
-    <nav id="hamburger-nav" aria-label="Mobile Navigation">
-      <div class="logo">
-        <img src="./pic/logo.png" alt="" class="logo-avatar" />
-        <span>Abhishek Singh</span>
-      </div>
-      <div class="hamburger-menu">
-        <button type="button" class="hamburger-icon" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <div class="menu-links">
-          <ul>
-            <li><a href="#systems">Work</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#ask">Contact</a></li>
-          </ul>
+
+<a class="skip" href="#main">skip to content</a>
+
+<header class="id">
+  <h1 class="id-name">abhishek&nbsp;singh</h1>
+  <p class="id-role">ai systems engineer<span class="sep">·</span>prague, cz<span class="sep">·</span><span class="dim">retrieval, automation, computer vision</span></p>
+  <nav class="id-nav" aria-label="Sections">
+    <a href="#work">work</a>
+    <a href="#notes">notes</a>
+    <a href="#stack">stack</a>
+    <a href="#ask">ask</a>
+    <a href="#contact">contact</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="lede" aria-labelledby="lede-h">
+    <h2 class="vh" id="lede-h">Introduction</h2>
+    <p>I build retrieval and automation systems that go into production and stay there after the demo.</p>
+    <p>Two of them are written up below — the problem, what I tried, what the numbers did afterwards. One set of numbers is real and measured. The other is indexed against a baseline, because the system belongs to my employer and I'd rather tell you that than round something up.</p>
+
+    <figure class="block block--hero">
+      <figcaption class="block-cap">
+        <span class="block-title">daily admin time, fiber ticket ops</span>
+        <span class="block-unit">minutes</span>
+      </figcaption>
+      <div class="bars" role="img" aria-label="Daily admin time: 150 minutes by hand, 15 minutes automated.">
+        <div class="bar">
+          <span class="bar-label">by hand</span>
+          <span class="bar-fill" data-v="150" data-max="150"></span>
+          <span class="bar-val">150</span>
+        </div>
+        <div class="bar bar--hi">
+          <span class="bar-label">automated</span>
+          <span class="bar-fill" data-v="15" data-max="150"></span>
+          <span class="bar-val">15</span>
         </div>
       </div>
-    </nav>
-  </header>
+      <p class="block-note">One person, one working day. This is the whole argument for the second writeup.</p>
+    </figure>
+  </section>
 
-  <main>
-    <!-- Hero Section -->
-    <section id="hero">
-      <div class="hero-layout">
-        <div class="hero-content">
-          <h1 class="hero-title">I build production-ready AI systems that automate internal workflows.</h1>
-          <p class="hero-subtitle">
-            Small, fixed-scope pilots. Production-focused. No hype.
-          </p>
-          <div class="hero-buttons">
-            <a href="#systems" class="btn btn-primary">View Work</a>
-            <a href="mailto:abhimattx@gmail.com" class="btn btn-secondary">Get in Touch</a>
-            <a href="#ask" class="btn btn-tertiary">Ask my AI</a>
-          </div>
-        </div>
-        <div class="hero-photo">
-          <img src="./pic/profile_pic.png" alt="Abhishek Singh" />
-        </div>
-      </div>
-    </section>
+  <section id="work" class="sect" data-key="01">
+    <h2 class="sect-h"><span>work</span><i class="rule" aria-hidden="true"></i><span class="sect-meta" id="work-count">loading</span></h2>
+    <p class="sect-lede">Long-form. Expand a heading to read the constraints, the things that broke, and what the fix actually was.</p>
+    <div id="systems" class="systems"></div>
+    <noscript>
+      <p class="err">This section is built from <a href="data/systems.json">data/systems.json</a> at runtime, so it needs JavaScript. The file itself is readable without it.</p>
+    </noscript>
+  </section>
 
-    <!-- Featured Work Section -->
-    <section id="systems">
-      <p class="section-label">Featured Work</p>
-      <h2 class="section-title">Production AI Systems</h2>
+  <section id="notes" class="sect" data-key="02">
+    <h2 class="sect-h"><span>notes</span><i class="rule" aria-hidden="true"></i><span class="sect-meta">opinions, held loosely</span></h2>
+    <ul id="principles" class="principles"></ul>
+  </section>
 
-      <div class="systems-grid" id="systems-grid">
-        <!-- Cards will be populated by JavaScript -->
-      </div>
-    </section>
+  <section id="stack" class="sect" data-key="03">
+    <h2 class="sect-h"><span>stack</span><i class="rule" aria-hidden="true"></i><span class="sect-meta">things I reach for</span></h2>
+    <p class="sect-lede">Not a ranking. Roughly, what I've shipped something with.</p>
+    <dl id="stack-list" class="stack-list"></dl>
+  </section>
 
-    <!-- About Section -->
-    <section id="about">
-      <div class="about-grid">
-        <div class="about-card">
-          <p class="section-label">About</p>
-          <p class="about-text">
-            I’m an AI engineer based in Prague, working on production-grade AI systems and exploring practical AI
-            automation for small teams at <strong>Yungo</strong>. I focus on building reliable AI systems and automation
-            tools: spanning
-            document intelligence, internal search, computer vision, and workflow automation designed for real-world
-            use.
-          </p>
-        </div>
-        <div class="about-card">
-          <p class="section-label">Connect</p>
-          <div class="about-links-grid">
-            <a href="mailto:abhimattx@gmail.com" class="about-link-item">
-              <span class="about-link-left">
-                <img src="./assets/email.png" alt="" class="about-link-icon" />
-                <span class="about-link-label">Email</span>
-              </span>
-              <span class="about-link-value">abhimattx@gmail.com</span>
-            </a>
-            <a href="https://github.com/abhimattx" class="about-link-item" target="_blank" rel="noopener noreferrer">
-              <span class="about-link-left">
-                <img src="./assets/github.png" alt="" class="about-link-icon" />
-                <span class="about-link-label">GitHub</span>
-              </span>
-              <span class="about-link-value">@abhimattx</span>
-            </a>
-            <a href="https://www.linkedin.com/in/abhimattx/" class="about-link-item" target="_blank" rel="noopener noreferrer">
-              <span class="about-link-left">
-                <img src="./assets/linkedin.png" alt="" class="about-link-icon" />
-                <span class="about-link-label">LinkedIn</span>
-              </span>
-              <span class="about-link-value">/in/abhimattx</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+  <section id="ask" class="sect" data-key="04">
+    <h2 class="sect-h"><span>ask</span><i class="rule" aria-hidden="true"></i><span class="sect-meta">retrieval, on me</span></h2>
+    <p class="sect-lede">There's a small retrieval service behind this box that has read my CV and both writeups. Same idea as the first project, built much smaller. Ask it something specific and it does better.</p>
 
-    <!-- Ask Section -->
-    <section id="ask">
-      <div class="ask-container">
-        <p class="section-label">Have a Question?</p>
-        <h2 class="section-title">Ask My AI</h2>
+    <form id="ask-form" class="repl" autocomplete="off">
+      <label class="vh" for="ask-input">Your question</label>
+      <span class="repl-prompt" aria-hidden="true">&gt;</span>
+      <input type="text" id="ask-input" name="question" class="repl-input"
+             placeholder="what did the reranker actually change?" maxlength="500" required>
+      <button type="submit" class="repl-go">ask</button>
+    </form>
 
-        <form id="ask-form" class="ask-form">
-          <input type="text" id="ask-input" class="ask-input"
-            placeholder="e.g., Tell me about his education" autocomplete="off"
-            aria-label="Ask a question about my work" />
-          <button type="submit" class="ask-submit" aria-label="Submit question">
-            <span class="ask-submit-text">Ask</span>
-            <span class="ask-submit-loading" hidden>...</span>
-          </button>
-        </form>
-        <div id="ask-response" class="ask-response" aria-live="polite" hidden></div>
-        <div id="ask-error" class="ask-error" aria-live="assertive" hidden></div>
-      </div>
-    </section>
-  </main>
+    <div id="ask-out" class="repl-out" role="status" aria-live="polite"></div>
+  </section>
 
-  <!-- Project Modal -->
-  <div id="project-modal" class="modal" hidden>
-    <div class="modal-backdrop"></div>
-    <div class="modal-container">
-      <div class="modal-header">
-        <div class="modal-title-group">
-          <h2 class="modal-title"></h2>
-          <span class="modal-tag"></span>
-        </div>
-        <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <!-- Content populated by JS -->
-      </div>
-    </div>
-  </div>
+  <section id="contact" class="sect" data-key="05">
+    <h2 class="sect-h"><span>contact</span><i class="rule" aria-hidden="true"></i><span class="sect-meta">all of these work</span></h2>
+    <ul class="links">
+      <li><span class="links-k">email</span><a href="mailto:abhimattx@gmail.com">abhimattx@gmail.com</a></li>
+      <li><span class="links-k">github</span><a href="https://github.com/abhimattx" target="_blank" rel="noopener noreferrer">github.com/abhimattx</a></li>
+      <li><span class="links-k">linkedin</span><a href="https://www.linkedin.com/in/abhimattx/" target="_blank" rel="noopener noreferrer">linkedin.com/in/abhimattx</a></li>
+    </ul>
+    <p class="sect-lede">BSc Intelligent Systems with Robotics, Tomas Bata University, Czech Republic. I'm in Prague, and I'm happy to go through either of these systems in more detail than a page allows.</p>
+  </section>
 
-  <!-- Floating Ask Button -->
-  <button type="button" id="floating-ask-btn" class="floating-ask-btn" aria-label="Ask this project" hidden>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-    </svg>
-    <span>Ask about the projects</span>
-  </button>
+</main>
 
-  <!-- Project Chat Panel -->
-  <div id="project-chat-panel" class="chat-panel" hidden>
-    <div class="chat-panel-header">
-      <div class="chat-panel-title">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-        </svg>
-        <span>Ask about <strong>My Projects</strong></span>
-      </div>
-      <button type="button" id="chat-panel-close" class="chat-panel-close" aria-label="Close panel">&times;</button>
-    </div>
-    <div class="chat-panel-body">
-      <div id="chat-messages" class="chat-messages">
-        <div class="chat-welcome">
-          <p>Ask me anything about the RAG Platform, Gridsz Automation, or any technical details about these projects.</p>
-        </div>
-      </div>
-      <form id="chat-form" class="chat-form">
-        <input type="text" id="chat-input" class="chat-input" placeholder="How does the caching work?" autocomplete="off" />
-        <button type="submit" class="chat-submit" aria-label="Send message">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
-        </button>
-      </form>
-    </div>
-  </div>
-  <div id="chat-panel-backdrop" class="chat-panel-backdrop" hidden></div>
+<footer class="foot">
+  <h2 class="sect-h"><span>changelog</span><i class="rule" aria-hidden="true"></i></h2>
+  <ol id="changelog" class="changelog"></ol>
+  <p class="foot-meta">Hand-written HTML and CSS. No framework, no build step, no fonts fetched over the wire. <span class="dim">&copy; 2026 abhishek singh</span></p>
+</footer>
 
-  <footer>
-    <div class="footer-content">
-      <p class="footer-copyright">&copy; 2026 Abhishek Singh</p>
-      <div class="footer-links">
-        <a href="mailto:abhimattx@gmail.com" class="footer-link">Email</a>
-        <a href="https://github.com/abhimattx" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/abhimattx/" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js" defer></script>
+<script src="script.js" defer></script>
 </body>
-
 </html>
