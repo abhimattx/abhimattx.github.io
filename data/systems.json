@@ -1,138 +1,6 @@
 {
   "systems": [
     {
-      "id": "rag-platform",
-      "title": "internal answer engine",
-      "subtitle": "retrieval over everything the company knows",
-      "category": "rag",
-      "year": "2024—now",
-      "status": "in production",
-      "summary": "Our knowledge lived in a wiki nobody trusted, a ticketing system, and three people's heads. I built the thing that answers questions across all of it, with sources attached so you can check its work.",
-      "problem": "People asked the same questions over and over, got different answers depending on who they asked, and every new hire burned a senior engineer's afternoon for the first month. Search already existed. It just never found anything.",
-      "constraints": [
-        "enterprise data governance — nothing leaves the boundary",
-        "mixed sources: prose documents and relational tables",
-        "follow-up questions have to keep the thread",
-        "every answer cites where it came from, or it doesn't ship"
-      ],
-      "approach": "Probe all sources cheaply first, then deep-retrieve only from the ones that look relevant. Rank semantic and lexical scores together, then rerank the shortlist with a cross-encoder. Analytical questions — \"how many tools in category X\" — get routed to SQL instead, because no amount of document retrieval answers a COUNT.",
-      "outcomes": [
-        "time-to-answer went from minutes of searching to seconds",
-        "repeat questions come back from cache",
-        "the wiki stopped being the bottleneck",
-        "fewer contradictory answers, because there is now one path to an answer"
-      ],
-      "disclosure": "The numbers below are indexed against a baseline, not absolute. This is my employer's system and I can't publish real latencies. I'd rather show you the shape than round something up.",
-      "bars": [
-        {
-          "title": "query resolution time",
-          "unit": "relative to baseline",
-          "rows": [
-            {
-              "label": "baseline",
-              "value": 100
-            },
-            {
-              "label": "optimized",
-              "value": 12
-            },
-            {
-              "label": "cached",
-              "value": 2,
-              "hi": true
-            }
-          ]
-        }
-      ],
-      "pipeline": [
-        {
-          "title": "retrieval pipeline",
-          "unit": "documents",
-          "steps": [
-            {
-              "label": "sources probed",
-              "value": 5
-            },
-            {
-              "label": "initial retrieval",
-              "value": 25
-            },
-            {
-              "label": "after reranking",
-              "value": 12
-            },
-            {
-              "label": "used to generate",
-              "value": 5
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "title": "where answers come from",
-          "cols": [
-            "path",
-            "share"
-          ],
-          "rows": [
-            [
-              "generated",
-              "60%"
-            ],
-            [
-              "served from cache",
-              "25%"
-            ],
-            [
-              "structured SQL query",
-              "15%"
-            ]
-          ]
-        }
-      ],
-      "challenges": [
-        {
-          "title": "querying every source, every time",
-          "problem": "Hitting all collections on every request was slow and dragged in noise from sources that had nothing to do with the question.",
-          "solution": "Two-stage retrieval. Cheap probe across everything, deep retrieval only where the probe scored. Faster, and the context got cleaner, which mattered more."
-        },
-        {
-          "title": "semantic search misses exact terms",
-          "problem": "Vector search couldn't find an error code. Keyword search couldn't find a concept. Each one failed on the other's queries.",
-          "solution": "Run both, fuse the scores. Not clever, but it killed the class of failure where someone pastes an exact string and gets nothing back."
-        },
-        {
-          "title": "some questions aren't retrieval questions",
-          "problem": "\"How many X are in category Y\" has an exact answer sitting in a table, and a language model asked to read documents will happily guess at it.",
-          "solution": "Intent routing. Counting and aggregation go to SQL and come back exact. The model only writes the sentence around the number."
-        }
-      ],
-      "stack": {
-        "retrieval": [
-          "vector search",
-          "lexical ranking",
-          "hybrid fusion"
-        ],
-        "ranking": [
-          "cross-encoder reranker"
-        ],
-        "models": [
-          "enterprise llm runtime",
-          "fallback gateway"
-        ],
-        "services": [
-          "python api",
-          "relational store",
-          "session store"
-        ],
-        "infra": [
-          "containers",
-          "cache layer"
-        ]
-      }
-    },
-    {
       "id": "gridsz-automation",
       "title": "ticket automation for field service",
       "subtitle": "an automation that survives the platform changing its html",
@@ -169,48 +37,53 @@
               "value": 15,
               "hi": true
             }
-          ]
+          ],
+          "hero": true
         },
         {
-          "title": "image classifier output",
+          "title": "where 100 site photos go",
           "unit": "% of images",
           "rows": [
             {
               "label": "FTU photos",
               "value": 45,
-              "hi": true
+              "hi": true,
+              "icon": "photo"
             },
             {
               "label": "drawings",
-              "value": 30
+              "value": 30,
+              "icon": "plan"
             },
             {
               "label": "other",
-              "value": 25
+              "value": 25,
+              "icon": "doc"
             }
-          ]
+          ],
+          "per": 5,
+          "key": "Each pictogram is 5% of the images the classifier sorts."
         }
       ],
       "pipeline": [
         {
           "title": "element detection — DOM to selector",
-          "unit": "KB / count",
           "steps": [
             {
               "label": "full DOM",
-              "value": 200
+              "value": "200 KB"
             },
             {
               "label": "candidate elements",
-              "value": 20
+              "value": "20"
             },
             {
               "label": "llm context",
-              "value": 2
+              "value": "2 KB"
             },
             {
               "label": "validated selector",
-              "value": 1
+              "value": "1"
             }
           ]
         }
@@ -229,7 +102,7 @@
             ],
             [
               "selector cache hit rate",
-              "70—80%"
+              "70–80%"
             ],
             [
               "image classification",
@@ -348,6 +221,144 @@
           "systemd",
           "linux box",
           "chrome extension"
+        ]
+      }
+    },
+    {
+      "id": "rag-platform",
+      "title": "internal answer engine",
+      "subtitle": "retrieval over everything the company knows",
+      "category": "rag",
+      "year": "2024–now",
+      "status": "in production",
+      "summary": "Our knowledge lived in a wiki nobody trusted, a ticketing system, and three people's heads. I built the thing that answers questions across all of it, with sources attached so you can check its work.",
+      "problem": "People asked the same questions over and over, got different answers depending on who they asked, and every new hire burned a senior engineer's afternoon for the first month. Search already existed. It just never found anything.",
+      "constraints": [
+        "enterprise data governance — nothing leaves the boundary",
+        "mixed sources: prose documents and relational tables",
+        "follow-up questions have to keep the thread",
+        "every answer cites where it came from, or it doesn't ship"
+      ],
+      "approach": "Probe all sources cheaply first, then deep-retrieve only from the ones that look relevant. Rank semantic and lexical scores together, then rerank the shortlist with a cross-encoder. Analytical questions — \"how many tools in category X\" — get routed to SQL instead, because no amount of document retrieval answers a COUNT.",
+      "outcomes": [
+        "time-to-answer went from minutes of searching to seconds",
+        "repeat questions come back from cache",
+        "the wiki stopped being the bottleneck",
+        "fewer contradictory answers, because there is now one path to an answer"
+      ],
+      "disclosure": "The numbers below are indexed against a baseline, not absolute. This is my employer's system and I can't publish real latencies. I'd rather show you the shape than round something up.",
+      "bars": [
+        {
+          "title": "query resolution time",
+          "unit": "relative to baseline",
+          "rows": [
+            {
+              "label": "baseline",
+              "value": 100
+            },
+            {
+              "label": "optimized",
+              "value": 12
+            },
+            {
+              "label": "cached",
+              "value": 2,
+              "hi": true
+            }
+          ],
+          "type": "grid",
+          "key": "100 squares is the old query time. Indexed, not absolute."
+        },
+        {
+          "title": "where answers come from",
+          "unit": "% of answers",
+          "per": 5,
+          "key": "Each pictogram is 5% of answers.",
+          "rows": [
+            {
+              "label": "generated",
+              "value": 60,
+              "icon": "answer"
+            },
+            {
+              "label": "served from cache",
+              "value": 25,
+              "icon": "bolt",
+              "hi": true
+            },
+            {
+              "label": "structured SQL query",
+              "value": 15,
+              "icon": "table"
+            }
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "retrieval pipeline",
+          "unit": "documents",
+          "steps": [
+            {
+              "label": "sources probed",
+              "value": 5
+            },
+            {
+              "label": "initial retrieval",
+              "value": 25
+            },
+            {
+              "label": "after reranking",
+              "value": 12
+            },
+            {
+              "label": "used to generate",
+              "value": 5
+            }
+          ],
+          "icon": "doc",
+          "key": "Each pictogram is one document."
+        }
+      ],
+      "tables": [],
+      "challenges": [
+        {
+          "title": "querying every source, every time",
+          "problem": "Hitting all collections on every request was slow and dragged in noise from sources that had nothing to do with the question.",
+          "solution": "Two-stage retrieval. Cheap probe across everything, deep retrieval only where the probe scored. Faster, and the context got cleaner, which mattered more."
+        },
+        {
+          "title": "semantic search misses exact terms",
+          "problem": "Vector search couldn't find an error code. Keyword search couldn't find a concept. Each one failed on the other's queries.",
+          "solution": "Run both, fuse the scores. Not clever, but it killed the class of failure where someone pastes an exact string and gets nothing back."
+        },
+        {
+          "title": "some questions aren't retrieval questions",
+          "problem": "\"How many X are in category Y\" has an exact answer sitting in a table, and a language model asked to read documents will happily guess at it.",
+          "solution": "Intent routing. Counting and aggregation go to SQL and come back exact. The model only writes the sentence around the number."
+        }
+      ],
+      "stack": {
+        "retrieval": [
+          "vector search",
+          "lexical ranking",
+          "hybrid fusion"
+        ],
+        "ranking": [
+          "cross-encoder reranker"
+        ],
+        "models": [
+          "enterprise llm runtime",
+          "fallback gateway"
+        ],
+        "services": [
+          "python api",
+          "relational store",
+          "session store"
+        ],
+        "infra": [
+          "containers",
+          "cache layer"
         ]
       }
     }

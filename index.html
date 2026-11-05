@@ -3,109 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>abhishek singh — ai systems engineer</title>
-<meta name="description" content="I build retrieval and automation systems that go into production and stay there. Two writeups, with the numbers.">
-<meta name="color-scheme" content="dark">
+<title>Abhishek Singh, AI systems engineer</title>
+<meta name="description" content="AI systems engineer in Prague. I build retrieval and automation systems that run in production. My ticket automation cut a field team's daily admin from 150 minutes to 15.">
+<meta name="color-scheme" content="light">
 <link rel="icon" href="pic/logo.png">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="preload" href="assets/fonts/jost-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
-<a class="skip" href="#main">skip to content</a>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-clock" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22"/><path fill="var(--paper)" d="M22 9h4v17h-4zM22 22h13v4H22z"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 48 48"><path d="M2 12h44v8a4 4 0 0 0 0 8v8H2v-8a4 4 0 0 0 0-8z"/><path fill="var(--paper)" d="M32 14h2v4h-2zM32 21h2v6h-2zM32 30h2v4h-2zM8 19h18v3H8zM8 26h14v3H8z"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 48 48"><path d="M2 10h12l4-5h12l4 5h12v32H2z"/><circle fill="var(--paper)" cx="24" cy="25" r="10"/><circle cx="24" cy="25" r="6"/></symbol>
+  <symbol id="i-plan" viewBox="0 0 48 48"><path d="M3 3h42v42H3z"/><path fill="var(--paper)" d="M8 8h15v15H8zM27 8h13v32H27zM8 27h15v13H8z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 48 48"><path d="M8 2h22l12 12v32H8z"/><path fill="var(--paper)" d="M14 20h20v3H14zM14 27h20v3H14zM14 34h13v3H14z"/></symbol>
+  <symbol id="i-answer" viewBox="0 0 48 48"><path d="M3 5h42v30H20l-11 9v-9H3z"/><path fill="var(--paper)" d="M10 14h28v3H10zM10 22h20v3H10z"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 48 48"><path d="M28 1 7 28h14l-3 19 23-28H27z"/></symbol>
+  <symbol id="i-table" viewBox="0 0 48 48"><path d="M3 5h42v38H3z"/><path fill="var(--paper)" d="M7 16h15v8H7zM26 16h15v8H26zM7 28h15v11H7zM26 28h15v11H26z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 48 48"><path d="M4 21h28V10l14 14-14 14V27H4z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 48 48"><path d="M20 4h8v16h16v8H28v16h-8V28H4v-8h16z"/></symbol>
+</svg>
 
-<header class="id">
-  <h1 class="id-name">abhishek&nbsp;singh</h1>
-  <p class="id-role">ai systems engineer<span class="sep">·</span>prague, cz<span class="sep">·</span><span class="dim">retrieval, automation, computer vision</span></p>
-  <nav class="id-nav" aria-label="Sections">
-    <a href="#work">work</a>
-    <a href="#notes">notes</a>
-    <a href="#stack">stack</a>
-    <a href="#ask">ask</a>
-    <a href="#contact">contact</a>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="mast">
+  <a class="mast-name" href="#top">Abhishek Singh</a>
+  <nav class="mast-nav" aria-label="Sections">
+    <a href="#work">Work</a>
+    <a href="#method">Method</a>
+    <a href="#kit">Kit</a>
+    <a href="#contact">Contact</a>
   </nav>
+  <a class="btn btn--small" href="mailto:abhimattx@gmail.com?subject=Hiring%20conversation">Hire me</a>
 </header>
 
 <main id="main">
 
-  <section class="lede" aria-labelledby="lede-h">
-    <h2 class="vh" id="lede-h">Introduction</h2>
-    <p>I build retrieval and automation systems that go into production and stay there after the demo.</p>
-    <p>Two of them are written up below — the problem, what I tried, what the numbers did afterwards. One set of numbers is real and measured. The other is indexed against a baseline, because the system belongs to my employer and I'd rather tell you that than round something up.</p>
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <h1 id="hero-h" class="hero-h">One afternoon a day, given back.</h1>
+    <p class="hero-sub">I'm an AI systems engineer in Prague. My ticket automation took a fiber field team's daily admin from two to three hours down to about 15&nbsp;minutes.</p>
 
-    <figure class="block block--hero">
-      <figcaption class="block-cap">
-        <span class="block-title">daily admin time, fiber ticket ops</span>
-        <span class="block-unit">minutes</span>
-      </figcaption>
-      <div class="bars" role="img" aria-label="Daily admin time: 150 minutes by hand, 15 minutes automated.">
-        <div class="bar">
-          <span class="bar-label">by hand</span>
-          <span class="bar-fill" data-v="150" data-max="150"></span>
-          <span class="bar-val">150</span>
-        </div>
-        <div class="bar bar--hi">
-          <span class="bar-label">automated</span>
-          <span class="bar-fill" data-v="15" data-max="150"></span>
-          <span class="bar-val">15</span>
-        </div>
+    <figure class="iso iso--hero">
+      <div class="iso-row" role="img" aria-label="By hand: about 150 minutes of admin a day, shown as 15 clocks.">
+        <span class="iso-label">By hand</span>
+        <span class="iso-icons" style="--n:15">
+          <svg class="pg pg--blue" style="--i:0"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:1"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:2"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:3"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:4"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:5"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:6"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:7"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:8"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:9"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:10"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:11"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:12"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:13"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:14"><use href="#i-clock"/></svg>
+        </span>
+        <span class="iso-total">~150 min</span>
       </div>
-      <p class="block-note">One person, one working day. This is the whole argument for the second writeup.</p>
+      <div class="iso-row" role="img" aria-label="Automated: 15 minutes of checking a day, shown as one and a half clocks.">
+        <span class="iso-label">Automated</span>
+        <span class="iso-icons" style="--n:15">
+          <svg class="pg pg--red" style="--i:0"><use href="#i-clock"/></svg><svg class="pg pg--red pg--half" style="--i:1"><use href="#i-clock"/></svg>
+        </span>
+        <span class="iso-total iso-total--hi">~15 min</span>
+      </div>
+      <figcaption class="iso-key">Each clock is 10 minutes of admin, per technician, per working day. 150 is the middle of the measured two to three hours.</figcaption>
     </figure>
+
+    <div class="hero-foot">
+      <ul class="hero-facts">
+        <li><svg class="pg pg--ink" aria-hidden="true"><use href="#i-ticket"/></svg><span><b>50+ tickets an hour</b>, up from 10 to 15 a day by hand</span></li>
+        <li><svg class="pg pg--ink" aria-hidden="true"><use href="#i-photo"/></svg><span><b>87% of site photos</b> filed in the right folder by a vision model</span></li>
+      </ul>
+      <a class="btn btn--big" href="mailto:abhimattx@gmail.com?subject=Hiring%20conversation">Hire me <svg class="btn-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
   </section>
 
-  <section id="work" class="sect" data-key="01">
-    <h2 class="sect-h"><span>work</span><i class="rule" aria-hidden="true"></i><span class="sect-meta" id="work-count">loading</span></h2>
-    <p class="sect-lede">Long-form. Expand a heading to read the constraints, the things that broke, and what the fix actually was.</p>
-    <div id="systems" class="systems"></div>
-    <noscript>
-      <p class="err">This section is built from <a href="data/systems.json">data/systems.json</a> at runtime, so it needs JavaScript. The file itself is readable without it.</p>
-    </noscript>
+  <section id="work" class="sect" aria-labelledby="work-h">
+    <h2 id="work-h" class="sect-h">Work</h2>
+    <p class="sect-lede">Two systems running in production. Counted, not described.</p>
+    <div id="systems" class="systems">
+      <p class="state" id="systems-state">Loading the work…</p>
+    </div>
+    <noscript><p class="state">The work section is drawn from <a href="data/systems.json">data/systems.json</a> and needs JavaScript. The file itself is readable without it.</p></noscript>
   </section>
 
-  <section id="notes" class="sect" data-key="02">
-    <h2 class="sect-h"><span>notes</span><i class="rule" aria-hidden="true"></i><span class="sect-meta">opinions, held loosely</span></h2>
+  <section id="method" class="sect" aria-labelledby="method-h">
+    <h2 id="method-h" class="sect-h">Method</h2>
     <ul id="principles" class="principles"></ul>
   </section>
 
-  <section id="stack" class="sect" data-key="03">
-    <h2 class="sect-h"><span>stack</span><i class="rule" aria-hidden="true"></i><span class="sect-meta">things I reach for</span></h2>
-    <p class="sect-lede">Not a ranking. Roughly, what I've shipped something with.</p>
-    <dl id="stack-list" class="stack-list"></dl>
+  <section id="kit" class="sect" aria-labelledby="kit-h">
+    <h2 id="kit-h" class="sect-h">Kit</h2>
+    <dl id="stack-list" class="kit"></dl>
   </section>
 
-  <section id="ask" class="sect" data-key="04">
-    <h2 class="sect-h"><span>ask</span><i class="rule" aria-hidden="true"></i><span class="sect-meta">retrieval, on me</span></h2>
-    <p class="sect-lede">There's a small retrieval service behind this box that has read my CV and both writeups. Same idea as the first project, built much smaller. Ask it something specific and it does better.</p>
-
-    <form id="ask-form" class="repl" autocomplete="off">
-      <label class="vh" for="ask-input">Your question</label>
-      <span class="repl-prompt" aria-hidden="true">&gt;</span>
-      <input type="text" id="ask-input" name="question" class="repl-input"
-             placeholder="what did the reranker actually change?" maxlength="500" required>
-      <button type="submit" class="repl-go">ask</button>
-    </form>
-
-    <div id="ask-out" class="repl-out" role="status" aria-live="polite"></div>
-  </section>
-
-  <section id="contact" class="sect" data-key="05">
-    <h2 class="sect-h"><span>contact</span><i class="rule" aria-hidden="true"></i><span class="sect-meta">all of these work</span></h2>
-    <ul class="links">
-      <li><span class="links-k">email</span><a href="mailto:abhimattx@gmail.com">abhimattx@gmail.com</a></li>
-      <li><span class="links-k">github</span><a href="https://github.com/abhimattx" target="_blank" rel="noopener noreferrer">github.com/abhimattx</a></li>
-      <li><span class="links-k">linkedin</span><a href="https://www.linkedin.com/in/abhimattx/" target="_blank" rel="noopener noreferrer">linkedin.com/in/abhimattx</a></li>
-    </ul>
-    <p class="sect-lede">BSc Intelligent Systems with Robotics, Tomas Bata University, Czech Republic. I'm in Prague, and I'm happy to go through either of these systems in more detail than a page allows.</p>
+  <section id="contact" class="close" aria-labelledby="contact-h">
+    <img class="close-photo" src="pic/portrait-ink.webp" width="720" height="900" alt="Abhishek Singh" loading="lazy" decoding="async">
+    <div class="close-body">
+      <h2 id="contact-h" class="close-h">Hiring an AI engineer who ships to production?</h2>
+      <p class="close-sub">I'm in Prague and open to full-time roles. Happy to walk you through either system in more depth than a page allows.</p>
+      <a class="btn btn--big" href="mailto:abhimattx@gmail.com?subject=Hiring%20conversation">abhimattx@gmail.com <svg class="btn-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <ul class="close-links">
+        <li><a href="https://www.linkedin.com/in/abhimattx/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://github.com/abhimattx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+      <p class="close-meta">BSc Intelligent Systems with Robotics, Tomas Bata University, Czech Republic.</p>
+    </div>
   </section>
 
 </main>
 
 <footer class="foot">
-  <h2 class="sect-h"><span>changelog</span><i class="rule" aria-hidden="true"></i></h2>
-  <ol id="changelog" class="changelog"></ol>
-  <p class="foot-meta">Hand-written HTML and CSS. No framework, no build step, no fonts fetched over the wire. <span class="dim">&copy; 2026 abhishek singh</span></p>
+  <p>© 2026 Abhishek Singh · Prague</p>
+  <p>Hand-written HTML and CSS. Pictograms after the Vienna Method.</p>
 </footer>
 
-<script src="script.js?v=2" defer></script>
+<script src="script.js?v=4" defer></script>
 </body>
 </html>
