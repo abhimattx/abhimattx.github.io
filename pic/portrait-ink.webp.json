@@ -1,0 +1,4 @@
+{
+  "prompt": "origin: pre-existing user portrait pic/profile_pic.png, cropped 4:5, resized 720x900, then canvas luminance remap to ink #141414 -> white (black point 24, white point 230), cwebp q82. Not generated.",
+  "createdAt": "2026-11-05T02:51:18.608Z"
+}

@@ -1,2 +1,9 @@
 /.claude
 CLAUDE.md
+# design tooling scratch
+.superpowers/
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/build/
+.impeccable/live/
+.impeccable/config.local.json

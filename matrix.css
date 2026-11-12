@@ -1,0 +1,171 @@
+/* Matrix: the pictogram guide in the bottom-right corner, and its ask panel. */
+
+.matrix {
+  --mx-h: 64px;
+  --mx-edge: 1rem;
+  position: fixed; right: var(--mx-edge); bottom: var(--mx-edge); z-index: 6;
+  transition: opacity 200ms var(--ease);
+}
+.matrix[hidden] { display: none; }
+/* Steps aside instantly while it would sit on the header or a Hire-me button. */
+.matrix.is-away { visibility: hidden; opacity: 0; transition: none; }
+
+.matrix-btn {
+  display: block; padding: 0.25rem; border: 0; cursor: pointer;
+  background: var(--paper); color: var(--ink);
+}
+.matrix-btn:active { transform: translateY(1px); }
+
+.mx-fig { display: block; height: var(--mx-h); width: auto; aspect-ratio: 48 / 64; fill: currentColor; overflow: visible; }
+.mx-dog { aspect-ratio: 168 / 298; filter: url(#mx-key); }
+/* The dog's frame is see-through, so it stands on the page instead of a white tile. */
+.matrix:has(.mx-dog) { --mx-h: 11rem; }
+.matrix-btn:has(.mx-dog) { background: transparent; }
+.matrix:has(.mx-dog) .matrix-bubble { top: 55%; }
+.mx-leg, .mx-arm, .mx-eyes { transform-box: fill-box; transform-origin: 50% 0; }
+.mx-eyes { transform-origin: 50% 50%; }
+.mx-arm--wave { transform-origin: 100% 0; transition: transform 260ms var(--ease); }
+.matrix-btn:hover .mx-arm--wave,
+.matrix-btn[aria-expanded="true"] .mx-arm--wave { transform: rotate(165deg); }
+
+/* Speech bubble: a ruled frame with a solid arrowhead pointing at Matrix. */
+.matrix-bubble {
+  position: absolute; right: calc(100% + 0.75rem); top: 0.75rem;
+  padding: 0.45rem 0.75rem;
+  background: var(--paper); color: var(--ink);
+  border: 2px solid var(--ink);
+  font-size: var(--t-label); font-weight: 500; line-height: 1.2;
+  white-space: nowrap; cursor: pointer;
+}
+.matrix-bubble::after {
+  content: ""; position: absolute; left: 100%; top: 50%; margin-top: -0.4rem;
+  border: 0.4rem solid transparent; border-left: 0.55rem solid var(--ink);
+}
+
+.matrix-hide {
+  position: absolute; right: 0; bottom: 100%;
+  display: grid; place-items: center;
+  width: 1.5rem; height: 1.5rem; padding: 0; border: 0; cursor: pointer;
+  background: var(--paper); color: var(--ink-2);
+}
+.matrix-hide svg, .matrix-close svg { width: 0.7rem; height: 0.7rem; fill: currentColor; transform: rotate(45deg); }
+.matrix-hide:hover, .matrix-close:hover { color: var(--red); }
+@media (hover: hover) {
+  .matrix-hide { opacity: 0; transition: opacity 180ms var(--ease); }
+  .matrix:hover .matrix-hide, .matrix-hide:focus-visible { opacity: 1; }
+}
+
+/* ------------------------------------------------------------------ panel */
+
+.matrix-panel {
+  position: fixed; z-index: 7;
+  right: var(--mx-edge); bottom: calc(var(--mx-edge) + var(--mx-h) + 0.5rem + 0.75rem);
+  width: min(25rem, 100vw - 2 * var(--mx-edge));
+  max-height: calc(100dvh - var(--mx-h) - 8rem);
+  display: flex; flex-direction: column;
+  background: var(--paper); color: var(--ink);
+  border: 2px solid var(--ink); border-top-width: 6px;
+}
+.matrix-panel[hidden] { display: none; }
+
+.matrix-panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.75rem 0.5rem 0 1.25rem;
+}
+.matrix-panel-head h2 {
+  font-size: 1.25rem; text-transform: uppercase; letter-spacing: var(--track);
+}
+.matrix-close {
+  display: grid; place-items: center;
+  width: 2.5rem; height: 2.5rem; padding: 0; border: 0; cursor: pointer;
+  background: transparent; color: var(--ink);
+}
+.matrix-close svg { width: 1rem; height: 1rem; }
+
+.matrix-intro {
+  padding: 0.25rem 1.25rem 1rem;
+  font-size: var(--t-small); color: var(--ink-2); line-height: 1.45;
+}
+
+.matrix-log {
+  list-style: none; padding: 0 1.25rem; margin: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  font-size: var(--t-small); line-height: 1.5;
+}
+.matrix-log li { padding-block: 0.75rem; border-top: 1px solid var(--rule); }
+.matrix-log p { white-space: pre-line; overflow-wrap: anywhere; }
+.matrix-who {
+  display: block; margin-bottom: 0.15rem;
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: var(--track);
+  color: var(--ink-2);
+}
+.matrix-a .matrix-who { color: var(--blue-deep); }
+.matrix-log a { text-decoration-color: var(--red); }
+
+/* Thinking: three slots light up in turn, like the indexed grid. */
+.matrix-wait { display: flex; align-items: center; gap: 0.75rem; color: var(--ink-2); }
+.matrix-wait .matrix-who { margin: 0; }
+.matrix-slots { display: flex; gap: 4px; }
+.matrix-slots i { width: 0.6rem; height: 0.6rem; background: var(--blue); }
+
+.matrix-form {
+  display: grid; gap: 0.4rem;
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 3px solid var(--ink);
+}
+.matrix-form label {
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: var(--track);
+}
+.matrix-field { display: flex; }
+.matrix-field input {
+  flex: 1; min-width: 0;
+  padding: 0.65rem 0.75rem;
+  font: inherit; font-size: 1rem; color: var(--ink);
+  background: var(--paper); border: 2px solid var(--ink); border-right: 0; border-radius: 0;
+}
+.matrix-field:focus-within { outline: 3px solid var(--red); outline-offset: 3px; }
+.matrix-field input:focus-visible { outline: none; }
+.matrix-send {
+  border: 0; cursor: pointer; font: inherit;
+  font-size: var(--t-label); font-weight: 600;
+  padding: 0 1rem;
+}
+.matrix-send:disabled { background: var(--ink-2); cursor: progress; }
+
+/* ----------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  .matrix.is-walking .mx-fig { animation: mx-walk 1500ms cubic-bezier(0.3, 0.6, 0.4, 1) both; }
+  .matrix.is-walking .mx-body { animation: mx-bob 250ms ease-in-out 6 alternate; }
+  .matrix.is-walking .mx-leg--l { animation: mx-step 250ms ease-in-out 6 alternate; }
+  .matrix.is-walking .mx-leg--r { animation: mx-step 250ms ease-in-out 6 alternate-reverse; }
+  .matrix.is-waving .mx-arm--wave { animation: mx-wave 1400ms var(--ease); }
+  .matrix.is-here .mx-eyes { animation: mx-blink 5200ms 1800ms infinite; }
+  .matrix-bubble:not([hidden]) { animation: mx-say 320ms var(--ease) both; }
+  .matrix-slots i { animation: mx-light 900ms steps(1) infinite; background: var(--slot); }
+  .matrix-slots i:nth-child(2) { animation-delay: 300ms; }
+  .matrix-slots i:nth-child(3) { animation-delay: 600ms; }
+}
+
+@keyframes mx-walk { from { transform: translateX(140px); } to { transform: none; } }
+@keyframes mx-bob { to { transform: translateY(-1.5px); } }
+@keyframes mx-step { from { transform: rotate(16deg); } to { transform: rotate(-16deg); } }
+@keyframes mx-wave {
+  0%, 100% { transform: none; }
+  20%, 60% { transform: rotate(172deg); }
+  40%, 80% { transform: rotate(140deg); }
+}
+@keyframes mx-blink { 0%, 95%, 100% { transform: none; } 97% { transform: scaleY(0.1); } }
+@keyframes mx-say { from { opacity: 0; transform: translateX(0.5rem); } }
+@keyframes mx-light { 0%, 33% { background: var(--blue); } 34%, 100% { background: var(--slot); } }
+
+.matrix-sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+@media (max-width: 46rem) {
+  .matrix { --mx-h: 52px; --mx-edge: 0.75rem; }
+  .matrix:has(.mx-dog) { --mx-h: 8.5rem; }
+  .matrix-bubble { top: 0.4rem; }
+}
