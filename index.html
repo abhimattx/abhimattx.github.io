@@ -3,17 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhishek Singh, AI systems engineer</title>
-<meta name="description" content="AI systems engineer in Prague. I build retrieval and automation systems that run in production. My ticket automation cut a field team's daily admin from 150 minutes to 15.">
+<title>Abhishek Singh, AI engineer</title>
+<meta name="description" content="AI engineer in Prague. I build RAG, computer vision and automation systems that run in production on our own hardware. My ticket bot has handled 7,364 fiber trouble tickets.">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="pic/logo.png">
 <link rel="preload" href="assets/fonts/jost-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css?v=4">
-<link rel="stylesheet" href="matrix.css?v=1">
+<link rel="stylesheet" href="matrix.css?v=4">
 </head>
 <body>
 
 <svg class="sprite" aria-hidden="true" focusable="false">
+  <!-- Keys out the Matrix dog's cream ground (#fef7e5): alpha falls to 0 as R+G+B nears cream, and stays 0 where the input is empty. -->
+  <filter id="mx-key" color-interpolation-filters="sRGB"><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -4 -4 -4 12 -0.72"/></filter>
   <symbol id="i-clock" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22"/><path fill="var(--paper)" d="M22 9h4v17h-4zM22 22h13v4H22z"/></symbol>
   <symbol id="i-ticket" viewBox="0 0 48 48"><path d="M2 12h44v8a4 4 0 0 0 0 8v8H2v-8a4 4 0 0 0 0-8z"/><path fill="var(--paper)" d="M32 14h2v4h-2zM32 21h2v6h-2zM32 30h2v4h-2zM8 19h18v3H8zM8 26h14v3H8z"/></symbol>
   <symbol id="i-photo" viewBox="0 0 48 48"><path d="M2 10h12l4-5h12l4 5h12v32H2z"/><circle fill="var(--paper)" cx="24" cy="25" r="10"/><circle cx="24" cy="25" r="6"/></symbol>
@@ -42,31 +44,31 @@
 <main id="main">
 
   <section class="hero" id="top" aria-labelledby="hero-h">
-    <h1 id="hero-h" class="hero-h">One afternoon a day, given back.</h1>
-    <p class="hero-sub">I'm an AI systems engineer in Prague. My ticket automation took a fiber field team's daily admin from two to three hours down to about 15&nbsp;minutes.</p>
+    <h1 id="hero-h" class="hero-h">7,364 tickets. A bot opened every one.</h1>
+    <p class="hero-sub">I'm an AI engineer in Prague. I build AI systems that run in production on our own hardware, with local models and no paid cloud AI. A fiber repair team used to open every trouble ticket by hand, download its files and check its photos. My bot now does that, about 80 times a day.</p>
 
     <figure class="iso iso--hero">
-      <div class="iso-row" role="img" aria-label="By hand: about 150 minutes of admin a day, shown as 15 clocks.">
-        <span class="iso-label">By hand</span>
+      <div class="iso-row" role="img" aria-label="Tickets the bot opened: 7,364, shown as fourteen and a half tickets.">
+        <span class="iso-label">Tickets it opened</span>
         <span class="iso-icons" style="--n:15">
-          <svg class="pg pg--blue" style="--i:0"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:1"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:2"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:3"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:4"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:5"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:6"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:7"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:8"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:9"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:10"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:11"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:12"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:13"><use href="#i-clock"/></svg><svg class="pg pg--blue" style="--i:14"><use href="#i-clock"/></svg>
+          <svg class="pg pg--red" style="--i:0"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:1"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:2"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:3"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:4"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:5"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:6"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:7"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:8"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:9"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:10"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:11"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:12"><use href="#i-ticket"/></svg><svg class="pg pg--red" style="--i:13"><use href="#i-ticket"/></svg><svg class="pg pg--red pg--half" style="--i:14"><use href="#i-ticket"/></svg>
         </span>
-        <span class="iso-total">~150 min</span>
+        <span class="iso-total iso-total--hi">7,364</span>
       </div>
-      <div class="iso-row" role="img" aria-label="Automated: 15 minutes of checking a day, shown as one and a half clocks.">
-        <span class="iso-label">Automated</span>
+      <div class="iso-row" role="img" aria-label="Photos the bot checked: 2,187, shown as four and a half cameras.">
+        <span class="iso-label">Photos it checked</span>
         <span class="iso-icons" style="--n:15">
-          <svg class="pg pg--red" style="--i:0"><use href="#i-clock"/></svg><svg class="pg pg--red pg--half" style="--i:1"><use href="#i-clock"/></svg>
+          <svg class="pg pg--blue" style="--i:0"><use href="#i-photo"/></svg><svg class="pg pg--blue" style="--i:1"><use href="#i-photo"/></svg><svg class="pg pg--blue" style="--i:2"><use href="#i-photo"/></svg><svg class="pg pg--blue" style="--i:3"><use href="#i-photo"/></svg><svg class="pg pg--blue pg--half" style="--i:4"><use href="#i-photo"/></svg>
         </span>
-        <span class="iso-total iso-total--hi">~15 min</span>
+        <span class="iso-total">2,187</span>
       </div>
-      <figcaption class="iso-key">Each clock is 10 minutes of admin, per technician, per working day. 150 is the middle of the measured two to three hours.</figcaption>
+      <figcaption class="iso-key">Each pictogram is 500, rounded to the nearest half. Counted from April to November 2026.</figcaption>
     </figure>
 
     <div class="hero-foot">
       <ul class="hero-facts">
-        <li><svg class="pg pg--ink" aria-hidden="true"><use href="#i-ticket"/></svg><span><b>50+ tickets an hour</b>, up from 10 to 15 a day by hand</span></li>
-        <li><svg class="pg pg--ink" aria-hidden="true"><use href="#i-photo"/></svg><span><b>87% of site photos</b> filed in the right folder by a vision model</span></li>
+        <li><svg class="pg pg--ink" aria-hidden="true"><use href="#i-clock"/></svg><span><b>48,558 ticket changes</b> noticed and logged, around the clock</span></li>
+        <li><svg class="pg pg--ink" aria-hidden="true"><use href="#i-answer"/></svg><span><b>1,386 questions</b> answered by my on-premise RAG assistant</span></li>
       </ul>
       <a class="btn btn--big" href="mailto:abhimattx@gmail.com?subject=Hiring%20conversation">Hire me <svg class="btn-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
@@ -79,6 +81,8 @@
       <p class="state" id="systems-state">Loading the work…</p>
     </div>
     <noscript><p class="state">The work section is drawn from <a href="data/systems.json">data/systems.json</a> and needs JavaScript. The file itself is readable without it.</p></noscript>
+    <h3 class="iso-title" id="other-h">Also built</h3>
+    <dl id="other-list" class="kit" aria-labelledby="other-h"></dl>
   </section>
 
   <section id="method" class="sect" aria-labelledby="method-h">
@@ -110,6 +114,7 @@
 <footer class="foot">
   <p>© 2026 Abhishek Singh · Prague</p>
   <p>Hand-written HTML and CSS. Pictograms after the Vienna Method.</p>
+  <p>Matrix is <a href="https://rive.app/community/2849-5887-hello-dog">Hello Dog</a> by Lala, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, cropped and recoloured.</p>
 </footer>
 
 <div class="matrix" id="matrix-dock" hidden>
@@ -148,7 +153,7 @@
   </section>
 </div>
 
-<script src="script.js?v=4" defer></script>
-<script src="matrix.js?v=1" defer></script>
+<script src="script.js?v=5" defer></script>
+<script src="matrix.js?v=3" defer></script>
 </body>
 </html>

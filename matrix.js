@@ -11,6 +11,12 @@
   const BUBBLE_MS = 7000;
   const KEY_HIDDEN = 'matrix-hidden';
   const KEY_ARRIVED = 'matrix-arrived';
+  const DOG_DIR = 'assets/matrix/';
+  const DOG_MACHINE = 'State Machine 1';
+  // The dog stands in a 500x500 artboard of empty floor; show only the box around it.
+  const DOG_ARTBOARD = 500;
+  const DOG_BOUNDS = { minX: 178, minY: 10, maxX: 346, maxY: 308 }; // room above for its flying "Hi"
+  const DOG_SCALE = 2; // canvas pixels per artboard unit, sharp at 3x screens
 
   const dock = document.getElementById('matrix-dock');
   const hero = document.getElementById('top');
@@ -35,18 +41,73 @@
   let bubbleTimer = 0;
   let busy = false;
 
+  // ----------------------------------------------------------------- dog
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.append(s);
+    });
+  }
+
+  // Swaps the pictogram for the Rive dog; resolves to a function that plays its hello.
+  async function loadDog() {
+    if (!window.rive) await loadScript(`${DOG_DIR}rive.js`);
+    rive.RuntimeLoader.setWasmUrl(`${DOG_DIR}rive.wasm`);
+    const canvas = document.createElement('canvas');
+    canvas.className = 'mx-fig mx-dog';
+    canvas.setAttribute('aria-hidden', 'true');
+    const { minX, minY, maxX, maxY } = DOG_BOUNDS;
+    canvas.width = DOG_SCALE * (maxX - minX);
+    canvas.height = DOG_SCALE * (maxY - minY);
+    // Layout bounds are where the whole artboard lands on the canvas; offset it so the dog box fills it.
+    const layout = new rive.Layout({
+      fit: rive.Fit.Fill,
+      minX: -DOG_SCALE * minX,
+      minY: -DOG_SCALE * minY,
+      maxX: DOG_SCALE * (DOG_ARTBOARD - minX),
+      maxY: DOG_SCALE * (DOG_ARTBOARD - minY),
+    });
+    return new Promise((resolve, reject) => {
+      const dog = new rive.Rive({
+        src: `${DOG_DIR}hello-dog.riv`,
+        canvas,
+        autoplay: !reduced,
+        stateMachines: DOG_MACHINE,
+        layout,
+        onLoadError: reject,
+        onLoad: () => {
+          const hello = dog.stateMachineInputs(DOG_MACHINE).find((i) => i.name === 'Pressed');
+          if (!hello) return reject(new Error('dog has no hello'));
+          fig.replaceWith(canvas);
+          resolve(() => hello.fire());
+        },
+      });
+    });
+  }
+
   // ------------------------------------------------------------ entrance
 
-  function arrive() {
+  async function arrive() {
+    const hello = await loadDog().catch(() => null); // on failure the pictogram stays
+    const figure = btn.querySelector('.mx-fig');
+    if (hello) {
+      btn.addEventListener('mouseenter', hello);
+      btn.addEventListener('click', hello);
+    }
     const first = !session.get(KEY_ARRIVED);
     session.set(KEY_ARRIVED, '1');
     if (first && !reduced) {
       dock.classList.add('is-walking');
-      fig.addEventListener('animationend', function done(e) {
-        if (e.target !== fig) return;
-        fig.removeEventListener('animationend', done);
+      figure.addEventListener('animationend', function done(e) {
+        if (e.target !== figure) return;
+        figure.removeEventListener('animationend', done);
         dock.classList.replace('is-walking', 'is-here');
-        dock.classList.add('is-waving');
+        if (hello) hello();
+        else dock.classList.add('is-waving');
         showBubble();
       });
     } else {

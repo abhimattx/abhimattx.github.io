@@ -17,6 +17,11 @@
 .matrix-btn:active { transform: translateY(1px); }
 
 .mx-fig { display: block; height: var(--mx-h); width: auto; aspect-ratio: 48 / 64; fill: currentColor; overflow: visible; }
+.mx-dog { aspect-ratio: 168 / 298; filter: url(#mx-key); }
+/* The dog's frame is see-through, so it stands on the page instead of a white tile. */
+.matrix:has(.mx-dog) { --mx-h: 11rem; }
+.matrix-btn:has(.mx-dog) { background: transparent; }
+.matrix:has(.mx-dog) .matrix-bubble { top: 55%; }
 .mx-leg, .mx-arm, .mx-eyes { transform-box: fill-box; transform-origin: 50% 0; }
 .mx-eyes { transform-origin: 50% 50%; }
 .mx-arm--wave { transform-origin: 100% 0; transition: transform 260ms var(--ease); }
@@ -161,5 +166,6 @@
 
 @media (max-width: 46rem) {
   .matrix { --mx-h: 52px; --mx-edge: 0.75rem; }
+  .matrix:has(.mx-dog) { --mx-h: 8.5rem; }
   .matrix-bubble { top: 0.4rem; }
 }

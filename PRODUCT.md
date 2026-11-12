@@ -26,21 +26,22 @@ Visitors arrive from a CV, LinkedIn, GitHub or a job application, often on a lap
 
 - Static site on GitHub Pages: plain HTML, CSS and JS, no framework and no build step. Content comes from `data/systems.json`.
 - Must be served over HTTP (it uses `fetch()`), not opened as `file://`.
-- The "ask my AI" box (Railway RAG backend) is removed for now. The user plans to bring it back later with a new style and animation.
-- `data/rag.md` is removed for now.
+- Matrix, the corner guide, asks the Railway backend, which answers from `data/portfolio.md` (a public-safe copy of `profile.md`).
 - Case study copy is provisional. The user will rewrite the writeups once the design is final. The design must work with the current entries in `data/systems.json` and with rewritten ones.
 
 ## Brand Commitments
 
-- Name: Abhishek Singh. Role line: AI systems engineer, Prague, CZ.
+- Name: Abhishek Singh. Role line: AI engineer, Prague, CZ.
 - Honest voice: numbers are real and measured, or labelled as indexed against a baseline when the system belongs to an employer. Never round up or invent figures.
 - The user rejected the existing plain terminal/text-heavy look, and also generic bento, magazine-editorial and glowing "AI" dark looks, as AI slop.
 
 ## Evidence on Hand
 
+- Content source: `profile.md` (local only, not committed: it holds real customer names and private notes). The public site and `data/portfolio.md` use generic names for the employer, customers and partners, with the real measured numbers.
 - Two case studies in `data/systems.json`:
-  - Ticket automation for field service (2025, running hourly). Measured: admin time 150 to about 15 minutes a day, throughput from 10 to 15 tickets a day by hand to 50+ per hour, image classifier 87% accurate, YOLO11 sorting images (45% FTU photos, 30% drawings, 25% other).
-  - Internal answer engine (RAG, 2024 to now, in production). Numbers are indexed against a baseline (baseline 100, optimized 12, cached 2), not absolute.
+  - Ticket intake with computer vision (running around the clock). Counted, April to November 2026: 7,364 unique tickets (5,018 DFN, 1,078 ODF, 412 cable damage), 48,558 ticket changes, 2,187 photos classified by YOLO11 (603 FTU, 1,584 other), 14,500+ scheduled runs.
+  - On-premise RAG assistant (in production, sole developer). 1,386 questions in 339 sessions from 11+ named users, 73% of 269 rated answers thumbs-up, recall@10 0.976, MRR 0.953, 61% of questions about internal tools.
+- Six shorter entries in `others[]` (construction-photo AI, agent orchestration, retraining pipeline, three prototypes).
 - Principles, stack and changelog entries in `data/systems.json`.
 - Photos: `assets/proPic.png` (3072x3072, cut out on a terracotta circle) and `pic/profile_pic.png` (1024x1536, dark blue studio background).
 - Education: BSc Intelligent Systems with Robotics, Tomas Bata University, Czech Republic.

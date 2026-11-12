@@ -80,7 +80,7 @@ function rowsChart(spec) {
   rows.forEach(row => {
     const tone = row.hi ? 'red' : ROW_TONES[toneIndex++ % ROW_TONES.length];
     const count = Math.round((Number(row.value) / per) * 2) / 2;
-    fig.appendChild(isoRow(row.label, count, row.icon || spec.icon, tone, row.value + suffix, slots));
+    fig.appendChild(isoRow(row.label, count, row.icon || spec.icon, tone, Number(row.value).toLocaleString('en') + suffix, slots));
   });
   return appendAll(fig, [caption]);
 }
@@ -275,6 +275,13 @@ function renderPrinciples(principles) {
   });
 }
 
+function renderOthers(others) {
+  const mount = document.getElementById('other-list');
+  others.forEach(o => {
+    appendAll(mount, [appendAll(el('div', 'kit-row'), [el('dt', null, o.title), el('dd', null, o.body)])]);
+  });
+}
+
 function renderStack(stack) {
   const mount = document.getElementById('stack-list');
   Object.entries(stack).forEach(([group, items]) => {
@@ -321,6 +328,7 @@ async function loadPage() {
   }
 
   if (Array.isArray(data.systems)) renderSystems(data.systems);
+  if (Array.isArray(data.others)) renderOthers(data.others);
   if (Array.isArray(data.principles)) renderPrinciples(data.principles);
   if (data.stack) renderStack(data.stack);
   countIn();

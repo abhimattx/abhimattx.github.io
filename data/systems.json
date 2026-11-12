@@ -1,434 +1,401 @@
 {
   "systems": [
     {
-      "id": "gridsz-automation",
-      "title": "ticket automation for field service",
-      "subtitle": "an automation that survives the platform changing its html",
+      "id": "ticket-automation",
+      "title": "ticket intake with computer vision",
+      "subtitle": "a bot that works a fiber trouble-ticket portal around the clock",
       "category": "automation",
-      "year": "2025",
-      "status": "running hourly",
-      "summary": "Field techs installing fiber were spending two to three hours a day downloading work orders and filing photos into folders. Now they spend about fifteen minutes checking the machine did it right.",
-      "problem": "Dozens of work orders a day, each with up to fifty attachments — photos, floor plans, documents — all needing to be pulled down, sorted and tracked by hand. It was the least interesting work in the building and it ate an afternoon.",
+      "year": "2025–now",
+      "status": "running around the clock",
+      "summary": "A fiber repair team used to open every trouble ticket by hand, download its files and check its photos. A bot now does that day and night, and the team works from a live dashboard.",
+      "problem": "Every ticket had to be opened, its files downloaded and its photos checked by a person, before any real repair work could start.",
       "constraints": [
-        "the target platform ships UI changes without warning",
-        "50+ attachments per ticket over unreliable site wifi",
-        "runs take 30+ minutes — people need to see progress",
-        "no external api spend; every model runs on our hardware"
+        "runs unattended, day and night",
+        "live tickets: a mistake costs someone real work",
+        "every model runs on our own hardware, with no paid cloud AI"
       ],
-      "approach": "CSS selectors break every time the platform touches its markup, so I stopped writing them. A local model reads a compressed snapshot of the DOM and proposes a selector by intent — \"the download button\" — which then gets validated against the live page and cached. YOLO11 sorts the images into FTU photos, drawings, and everything else. Downloads are transactional: all of a ticket's files land, or none of them do.",
+      "approach": "Scheduled services check for tickets about 80 times a day and download each ticket's files. A small vision model I trained sorts the photos. Everything is stored in one database, and the team sees it live in a dashboard and a browser extension.",
       "outcomes": [
-        "admin time: 2—3 hours a day down to ~15 minutes of oversight",
-        "throughput: 10—15 tickets/day by hand to 50+ per hour",
-        "no missed attachments — every file captured and classified",
-        "one predictable folder structure the techs can navigate on a phone"
+        "7,364 tickets handled between April and November 2026",
+        "48,558 ticket changes noticed and logged",
+        "2,187 photos sorted by a vision model I trained",
+        "about 80 scheduled runs a day"
       ],
-      "disclosure": "These numbers are real and measured. The classifier is 87% accurate, which means roughly one image in eight lands in the wrong folder — the techs move it and get on with their day.",
+      "disclosure": "Counted from April to November 2026. I am the main developer, from the first prototype to the system running today.",
       "bars": [
         {
-          "title": "daily admin time",
-          "unit": "minutes",
+          "title": "what the bot did",
+          "unit": "items",
+          "hero": true,
+          "per": 500,
           "rows": [
             {
-              "label": "by hand",
-              "value": 150
+              "label": "tickets it opened",
+              "value": 7364,
+              "hi": true,
+              "icon": "ticket"
             },
             {
-              "label": "automated",
-              "value": 15,
-              "hi": true
+              "label": "photos it checked",
+              "value": 2187,
+              "icon": "photo"
             }
-          ],
-          "hero": true
+          ]
         },
         {
-          "title": "where 100 site photos go",
-          "unit": "% of images",
+          "title": "what the vision model found in 2,187 photos",
+          "unit": "photos",
+          "per": 100,
+          "key": "Each pictogram is 100 photos, rounded to the nearest half. The fiber box is the connection point installed in a customer's home.",
           "rows": [
             {
-              "label": "FTU photos",
-              "value": 45,
+              "label": "fiber box photos",
+              "value": 603,
               "hi": true,
               "icon": "photo"
             },
             {
-              "label": "drawings",
-              "value": 30,
-              "icon": "plan"
-            },
-            {
-              "label": "other",
-              "value": 25,
+              "label": "everything else",
+              "value": 1584,
               "icon": "doc"
             }
-          ],
-          "per": 5,
-          "key": "Each pictogram is 5% of the images the classifier sorts."
+          ]
         }
       ],
       "pipeline": [
         {
-          "title": "element detection — DOM to selector",
+          "title": "how the image AI evolved",
           "steps": [
             {
-              "label": "full DOM",
-              "value": "200 KB"
+              "value": "keywords",
+              "label": "matched in a model's photo description: too brittle"
             },
             {
-              "label": "candidate elements",
-              "value": "20"
+              "value": "two LLMs",
+              "label": "one describes, one classifies: accurate but slow"
             },
             {
-              "label": "llm context",
-              "value": "2 KB"
+              "value": "YOLO11",
+              "label": "a small trained classifier: runs today"
+            }
+          ]
+        }
+      ],
+      "tables": [],
+      "challenges": [
+        {
+          "title": "a language model was the wrong tool for photos",
+          "problem": "First I had a vision model describe each photo and matched keywords in the description. It was brittle: \"a small opening\" was read as \"open box\". Then two large models in a row, one to describe and one to classify. More accurate, but slow and heavy.",
+          "solution": "I trained a small YOLO11 classifier instead. It is fast, gives the same answer every time and is cheap to run. This is what runs today."
+        },
+        {
+          "title": "several services working at once",
+          "problem": "Each kind of ticket has its own scheduled service, and left alone they got in each other's way.",
+          "solution": "A shared lock, staggered start times, and one clear owner for each step."
+        },
+        {
+          "title": "outgrowing the first version",
+          "problem": "The prototype kept its state in a single file, which was fragile once the bot ran all day.",
+          "solution": "I moved it to a proper database in phases, behind feature flags, without stopping the bot."
+        }
+      ],
+      "stack": {
+        "automation": [
+          "python",
+          "playwright",
+          "celery",
+          "redis"
+        ],
+        "vision": [
+          "ultralytics yolo11"
+        ],
+        "data": [
+          "postgresql"
+        ],
+        "services": [
+          "fastapi",
+          "websockets"
+        ],
+        "frontend": [
+          "react",
+          "chrome extension"
+        ]
+      }
+    },
+    {
+      "id": "rag-assistant",
+      "title": "on-premise RAG assistant",
+      "subtitle": "answers staff questions about policies, people and internal tools, on our own server",
+      "category": "rag",
+      "year": "2025–now",
+      "status": "in production",
+      "summary": "Staff needed answers about company policies, the org structure, the glossary and hundreds of internal tools. That knowledge was spread across documents and databases. I built the assistant that answers from all of it, as the sole developer, with local models so no company data leaves the building.",
+      "problem": "The knowledge was spread across documents and databases, and most questions were about internal tools. Many of those are counting questions, which document search handles badly.",
+      "constraints": [
+        "no company data leaves our own server",
+        "runs on one graphics card, with no paid cloud AI",
+        "no answer is better than a made-up answer"
+      ],
+      "approach": "A small model first works out what kind of question it is. Counting questions go to a database agent that can only read. Everything else goes to three searches that run side by side, by meaning, by keyword and by relationship. Their results are merged and re-ranked, and the answer is checked against the source text before anyone sees it.",
+      "outcomes": [
+        "1,386 questions answered in 339 sessions",
+        "73% of rated answers got a thumbs-up (196 up, 73 down)",
+        "the right document is in the top 10 results 97.6% of the time",
+        "cached answers about 100 times faster after I audited the system"
+      ],
+      "disclosure": "Usage is from the assistant's own log, September 2025 to July 2026. Search quality is measured. Answer quality is judged by user thumbs up and down.",
+      "bars": [
+        {
+          "title": "what people ask about",
+          "unit": "of every 100 questions",
+          "type": "grid",
+          "key": "100 squares is every logged question. Most are about internal tools.",
+          "rows": [
+            {
+              "label": "questions",
+              "value": 100
             },
             {
-              "label": "validated selector",
-              "value": "1"
+              "label": "about internal tools",
+              "value": 61,
+              "hi": true
+            }
+          ]
+        },
+        {
+          "title": "how users rated 269 answers",
+          "unit": "answers",
+          "per": 20,
+          "icon": "answer",
+          "key": "Each pictogram is 20 rated answers, rounded to the nearest half.",
+          "rows": [
+            {
+              "label": "thumbs up",
+              "value": 196
+            },
+            {
+              "label": "thumbs down",
+              "value": 73,
+              "hi": true
+            }
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "from question to answer",
+          "steps": [
+            {
+              "value": "1 call",
+              "label": "works out what kind of question it is"
+            },
+            {
+              "value": "3 searches",
+              "label": "by meaning, by keyword, by relationship"
+            },
+            {
+              "value": "30",
+              "label": "best candidates merged and re-ranked"
+            },
+            {
+              "value": "1 check",
+              "label": "answer backed by sources, or \"no info\""
             }
           ]
         }
       ],
       "tables": [
         {
-          "title": "system performance",
+          "title": "what my audit improved",
           "cols": [
-            "measure",
-            "value"
+            "area",
+            "result"
           ],
           "rows": [
             [
-              "automation success",
-              "98.5%"
+              "cached answers",
+              "about 100× faster"
             ],
             [
-              "selector cache hit rate",
-              "70–80%"
+              "long answers",
+              "no more timeouts"
             ],
             [
-              "image classification",
-              "87%"
+              "search steps",
+              "run in parallel: 30–100 ms saved per question"
             ],
             [
-              "uptime",
-              "99.9%"
-            ]
-          ]
-        },
-        {
-          "title": "api latency",
-          "cols": [
-            "endpoint",
-            "p50"
-          ],
-          "rows": [
-            [
-              "GET /api/tickets",
-              "45ms"
-            ],
-            [
-              "GET /api/status",
-              "12ms"
-            ],
-            [
-              "WebSocket message",
-              "8ms"
-            ],
-            [
-              "POST /api/start",
-              "120ms"
-            ]
-          ]
-        },
-        {
-          "title": "what breaks first if this grows",
-          "cols": [
-            "dimension",
-            "today",
-            "next move"
-          ],
-          "rows": [
-            [
-              "tickets per run",
-              "100+",
-              "parallelize browsers"
-            ],
-            [
-              "concurrent users",
-              "10",
-              "redis sessions"
-            ],
-            [
-              "database",
-              "10K+ tickets",
-              "postgres past 100K"
-            ],
-            [
-              "llm inference",
-              "single gpu",
-              "shard across gpus"
+              "model warm-up",
+              "~30 s cold starts avoided"
             ]
           ]
         }
       ],
       "challenges": [
         {
-          "title": "the platform kept moving the buttons",
-          "problem": "Every UI update broke a selector somewhere. This is the number one maintenance cost in browser automation and it never stops.",
-          "solution": "Describe intent, not structure. Compress 200KB of DOM down to ~2KB of plausible candidates, have a local model pick one with a confidence score, validate it against the live page before trusting it, cache it for an hour."
+          "title": "some questions are counting questions",
+          "problem": "\"How many tools does this team use?\" has an exact answer in a table. Document search handles counting and listing badly, and tools are 61% of all questions.",
+          "solution": "A LangGraph agent answers them with SQL. It can only read, only from an approved list of tables. If it fails, normal search answers instead."
         },
         {
-          "title": "asking a model for every click is slow",
-          "problem": "A model call per element lookup added one to two seconds per interaction. Multiply by a few hundred interactions and the run stops being worth doing.",
-          "solution": "Cache on url pattern + intent + DOM hash, 60-minute TTL. 70—80% hit rate, and average lookup dropped from 1.5s to 0.3s. The cache does most of the work; the model is the fallback."
+          "title": "a model will answer even when it has nothing",
+          "problem": "Without a check, the model fills gaps with a plausible guess.",
+          "solution": "If nothing relevant is found, it says so. An answer the sources do not support gets one strict retry, then a fixed fallback answer."
         },
         {
-          "title": "half-downloaded tickets",
-          "problem": "Site wifi drops. A ticket would end up with 30 of its 50 files and nothing to indicate which 20 were missing.",
-          "solution": "Transactional commits — a ticket's files all land or none do. SHA256 dedup, SQLite for tracking, exponential backoff over three retries."
-        },
-        {
-          "title": "nobody trusts a process with no output",
-          "problem": "A 30-minute run with a silent terminal is indistinguishable from a hung one, so people kill it and start over.",
-          "solution": "WebSocket streaming: percentage, live log lines, per-ticket completions, auto-reconnect. Mostly this exists so people leave it alone while it works."
-        }
-      ],
-      "stack": {
-        "backend": [
-          "python 3.11",
-          "fastapi",
-          "playwright (async)"
-        ],
-        "models": [
-          "ollama / llama3.2",
-          "yolo11 (11MB)",
-          "48 intent templates"
-        ],
-        "data": [
-          "sqlite (WAL)",
-          "sha256 dedup",
-          "in-memory cache"
-        ],
-        "frontend": [
-          "react 18",
-          "typescript",
-          "vite"
-        ],
-        "realtime": [
-          "websocket hub",
-          "progress streaming"
-        ],
-        "infra": [
-          "systemd",
-          "linux box",
-          "chrome extension"
-        ]
-      }
-    },
-    {
-      "id": "rag-platform",
-      "title": "internal answer engine",
-      "subtitle": "retrieval over everything the company knows",
-      "category": "rag",
-      "year": "2024–now",
-      "status": "in production",
-      "summary": "Our knowledge lived in a wiki nobody trusted, a ticketing system, and three people's heads. I built the thing that answers questions across all of it, with sources attached so you can check its work.",
-      "problem": "People asked the same questions over and over, got different answers depending on who they asked, and every new hire burned a senior engineer's afternoon for the first month. Search already existed. It just never found anything.",
-      "constraints": [
-        "enterprise data governance — nothing leaves the boundary",
-        "mixed sources: prose documents and relational tables",
-        "follow-up questions have to keep the thread",
-        "every answer cites where it came from, or it doesn't ship"
-      ],
-      "approach": "Probe all sources cheaply first, then deep-retrieve only from the ones that look relevant. Rank semantic and lexical scores together, then rerank the shortlist with a cross-encoder. Analytical questions — \"how many tools in category X\" — get routed to SQL instead, because no amount of document retrieval answers a COUNT.",
-      "outcomes": [
-        "time-to-answer went from minutes of searching to seconds",
-        "repeat questions come back from cache",
-        "the wiki stopped being the bottleneck",
-        "fewer contradictory answers, because there is now one path to an answer"
-      ],
-      "disclosure": "The numbers below are indexed against a baseline, not absolute. This is my employer's system and I can't publish real latencies. I'd rather show you the shape than round something up.",
-      "bars": [
-        {
-          "title": "query resolution time",
-          "unit": "relative to baseline",
-          "rows": [
-            {
-              "label": "baseline",
-              "value": 100
-            },
-            {
-              "label": "optimized",
-              "value": 12
-            },
-            {
-              "label": "cached",
-              "value": 2,
-              "hi": true
-            }
-          ],
-          "type": "grid",
-          "key": "100 squares is the old query time. Indexed, not absolute."
-        },
-        {
-          "title": "where answers come from",
-          "unit": "% of answers",
-          "per": 5,
-          "key": "Each pictogram is 5% of answers.",
-          "rows": [
-            {
-              "label": "generated",
-              "value": 60,
-              "icon": "answer"
-            },
-            {
-              "label": "served from cache",
-              "value": 25,
-              "icon": "bolt",
-              "hi": true
-            },
-            {
-              "label": "structured SQL query",
-              "value": 15,
-              "icon": "table"
-            }
-          ]
-        }
-      ],
-      "pipeline": [
-        {
-          "title": "retrieval pipeline",
-          "unit": "documents",
-          "steps": [
-            {
-              "label": "sources probed",
-              "value": 5
-            },
-            {
-              "label": "initial retrieval",
-              "value": 25
-            },
-            {
-              "label": "after reranking",
-              "value": 12
-            },
-            {
-              "label": "used to generate",
-              "value": 5
-            }
-          ],
-          "icon": "doc",
-          "key": "Each pictogram is one document."
-        }
-      ],
-      "tables": [],
-      "challenges": [
-        {
-          "title": "querying every source, every time",
-          "problem": "Hitting all collections on every request was slow and dragged in noise from sources that had nothing to do with the question.",
-          "solution": "Two-stage retrieval. Cheap probe across everything, deep retrieval only where the probe scored. Faster, and the context got cleaner, which mattered more."
-        },
-        {
-          "title": "semantic search misses exact terms",
-          "problem": "Vector search couldn't find an error code. Keyword search couldn't find a concept. Each one failed on the other's queries.",
-          "solution": "Run both, fuse the scores. Not clever, but it killed the class of failure where someone pastes an exact string and gets nothing back."
-        },
-        {
-          "title": "some questions aren't retrieval questions",
-          "problem": "\"How many X are in category Y\" has an exact answer sitting in a table, and a language model asked to read documents will happily guess at it.",
-          "solution": "Intent routing. Counting and aggregation go to SQL and come back exact. The model only writes the sentence around the number."
+          "title": "knowing whether a change helped",
+          "problem": "Without a baseline, every tuning change is a guess.",
+          "solution": "I built a test suite from real questions and captured the baseline before changing anything. I also audited the whole system and labelled each finding as measured or estimated."
         }
       ],
       "stack": {
         "retrieval": [
-          "vector search",
-          "lexical ranking",
-          "hybrid fusion"
-        ],
-        "ranking": [
+          "chromadb",
+          "bm25",
+          "neo4j",
+          "reciprocal rank fusion",
           "cross-encoder reranker"
         ],
+        "agents": [
+          "langgraph",
+          "langchain",
+          "read-only text-to-sql"
+        ],
         "models": [
-          "enterprise llm runtime",
-          "fallback gateway"
+          "ollama",
+          "qwen 2.5",
+          "gemma",
+          "sentence-transformers"
         ],
         "services": [
-          "python api",
-          "relational store",
-          "session store"
+          "python 3.12",
+          "fastapi",
+          "celery",
+          "redis",
+          "postgresql"
+        ],
+        "frontend": [
+          "next.js 16",
+          "react 19",
+          "nextauth",
+          "tailwind"
         ],
         "infra": [
-          "containers",
-          "cache layer"
+          "docker compose",
+          "nginx"
         ]
       }
     }
   ],
+  "others": [
+    {
+      "title": "construction-photo AI",
+      "body": "YOLO models I trained check site photos for required evidence, and they are the ones deployed in the app. Best validation mAP@50: 0.985 measuring ruler, 0.970 marker ball, 0.919 trench. Low-confidence detections go to a person for review."
+    },
+    {
+      "title": "agent orchestration",
+      "body": "Two tools for working safely with AI coding agents, with 184 passing tests. A worker and reviewer loop with test gates, rollback and a budget cap fixed a 39-finding UI audit in one round for $1.96."
+    },
+    {
+      "title": "automated retraining",
+      "body": "Watches the annotation store, validates labels and starts training once 500 new images arrive. Training is deterministic code; the LLM only writes the report."
+    },
+    {
+      "title": "resource allocation agent",
+      "body": "Prototype. Chat over engineers' skills, certifications and assignments. All numbers come from a deterministic scoring engine, and the only write needs approval in the UI."
+    },
+    {
+      "title": "GIS copilot",
+      "body": "Prototype. A \"talk to your map\" QGIS plugin for network design. Graph algorithms run without an LLM, and generated code is checked, reviewed by a person and run with rollback."
+    },
+    {
+      "title": "CRM follow-up reminders",
+      "body": "Prototype. Every summary bullet must quote its source note word for word, and code checks it. Unverifiable bullets are dropped."
+    }
+  ],
   "principles": [
     {
-      "title": "look at the data before you pick the architecture",
-      "body": "Most retrieval problems I've been handed were data problems wearing a retrieval costume. A week reading what is actually in the corpus beats a month of tuning."
+      "title": "deterministic core, LLM at the edges",
+      "body": "Scores, training configs, graph algorithms and SQL safety are plain, testable code. The LLM routes, explains and writes."
     },
     {
-      "title": "boring architecture, interesting problems",
-      "body": "Postgres and a cache will outlive the framework I would have been excited about. I'd rather spend the novelty budget on the part of the system nobody has solved yet."
+      "title": "use the simplest model that works",
+      "body": "The ticket bot went from LLM captions to a 70B pipeline to a small trained YOLO model. The allocation agent uses a scoring engine, not LLM math."
     },
     {
-      "title": "measure retrieval before you blame the model",
-      "body": "If the right document never made the shortlist, no prompt fixes that. I check what came back before I touch what generated the answer."
+      "title": "fall back, don't fail",
+      "body": "SQL agent, then retrieval. Ungrounded answer, then a strict retry, then a fixed answer. Low-confidence detection, then a person."
     },
     {
-      "title": "build for the second year",
-      "body": "A demo has one user who knows exactly what to type. Both systems here have run long enough to become someone else's problem on a Friday, and that changes what you build."
+      "title": "measure before claiming",
+      "body": "Findings are labelled measured or estimated. Baselines are captured before changes."
+    },
+    {
+      "title": "engineer the safety in",
+      "body": "Read-only database sessions, allowlists, deny lists, protected tests and worktrees. Safety lives in code, not in prompts."
+    },
+    {
+      "title": "self-hosted and cost-aware",
+      "body": "One 24 GB GPU with explicit context and generation budgets. Agent runs are capped in dollars."
     }
   ],
   "stack": {
-    "languages": [
-      "python",
-      "c++",
-      "typescript",
-      "sql"
-    ],
     "retrieval": [
-      "vector search",
-      "pgvector",
-      "lexical ranking",
-      "rerankers"
+      "chromadb",
+      "bm25",
+      "neo4j",
+      "rank fusion",
+      "cross-encoder reranking"
+    ],
+    "agents": [
+      "langgraph",
+      "tool calling",
+      "text-to-sql",
+      "claude code"
     ],
     "models": [
-      "local llms via ollama",
-      "hosted model apis",
-      "yolo",
-      "opencv",
-      "scikit-learn",
-      "tensorflow"
+      "ollama (qwen, gemma, llama)",
+      "anthropic claude"
     ],
-    "services": [
+    "vision": [
+      "yolo11 / yolo26",
+      "rt-detr",
+      "detectron2",
+      "roboflow"
+    ],
+    "backend": [
+      "python",
       "fastapi",
-      "playwright",
-      "websockets",
-      "streamlit"
+      "django",
+      "celery",
+      "redis",
+      "postgresql"
+    ],
+    "frontend": [
+      "next.js",
+      "react",
+      "tailwind",
+      "chrome extensions"
+    ],
+    "automation": [
+      "playwright"
     ],
     "infra": [
-      "docker",
+      "docker compose",
+      "nginx",
       "systemd",
-      "azure",
-      "redis",
-      "sqlite",
-      "postgres"
-    ],
-    "tools": [
-      "git",
-      "abb robotstudio"
+      "azure devops",
+      "gitlab"
     ]
   },
   "changelog": [
     {
-      "date": "2026-08",
-      "note": "rebuilt this page from scratch. dropped the chart library, the modals, and about 2,000 lines of css."
+      "date": "2026-11",
+      "note": "rewrote every case study from measured numbers. matrix became a dog."
     },
     {
       "date": "2026-08",
-      "note": "published the fiber ticket automation writeup. it sat finished in a json file for months."
+      "note": "rebuilt this page from scratch. dropped the chart library, the modals, and about 2,000 lines of css."
     },
     {
       "date": "2025",
