@@ -7,3 +7,6 @@ CLAUDE.md
 .impeccable/build/
 .impeccable/live/
 .impeccable/config.local.json
+
+# design tooling, local only
+.impeccable/
