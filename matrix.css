@@ -17,7 +17,8 @@
 .matrix-btn:active { transform: translateY(1px); }
 
 .mx-fig { display: block; height: var(--mx-h); width: auto; aspect-ratio: 48 / 64; fill: currentColor; overflow: visible; }
-.mx-dog { aspect-ratio: 168 / 298; filter: url(#mx-key); }
+/* Rive cancels touch events on its canvas, so a tap never became a click; the button handles input and fires the hello itself. */
+.mx-dog { aspect-ratio: 168 / 298; filter: url(#mx-key); pointer-events: none; }
 /* The dog's frame is see-through, so it stands on the page instead of a white tile. */
 .matrix:has(.mx-dog) { --mx-h: 11rem; }
 .matrix-btn:has(.mx-dog) { background: transparent; }
@@ -168,4 +169,7 @@
   .matrix { --mx-h: 52px; --mx-edge: 0.75rem; }
   .matrix:has(.mx-dog) { --mx-h: 8.5rem; }
   .matrix-bubble { top: 0.4rem; }
+  /* Above the dog a phone leaves ~45px for answers: cover the dog instead and use the height. */
+  .matrix-panel { bottom: var(--mx-edge); max-height: calc(100dvh - 2 * var(--mx-edge)); }
+  .matrix-panel:has(.matrix-log li) .matrix-intro { display: none; }
 }
