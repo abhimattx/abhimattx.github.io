@@ -6,9 +6,17 @@
 <title>Abhishek Singh, AI engineer</title>
 <meta name="description" content="AI engineer in Prague. I build RAG, computer vision and automation systems that run in production on our own hardware. My ticket bot has handled 7,364 fiber trouble tickets.">
 <meta name="color-scheme" content="light">
-<link rel="icon" href="pic/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abhimattx.github.io/">
+<meta property="og:title" content="Abhishek Singh, AI engineer">
+<meta property="og:description" content="AI engineer in Prague. RAG, computer vision and automation systems that run in production on our own hardware. 7,364 fiber trouble tickets handled by my bot.">
+<meta property="og:image" content="https://abhimattx.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/jost-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <link rel="stylesheet" href="matrix.css?v=4">
 </head>
 <body>
@@ -31,11 +39,11 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="mast">
-  <a class="mast-name" href="#top">Abhishek Singh</a>
+  <a class="mast-name" href="#top">Abhishek Singh <span class="mast-role">AI engineer, Prague</span></a>
   <nav class="mast-nav" aria-label="Sections">
     <a href="#work">Work</a>
-    <a href="#method">Method</a>
-    <a href="#kit">Kit</a>
+    <a href="#method">How I build</a>
+    <a href="#kit">Stack</a>
     <a href="#contact">Contact</a>
   </nav>
   <a class="btn btn--small" href="mailto:abhimattx@gmail.com?subject=Hiring%20conversation">Hire me</a>
@@ -45,7 +53,7 @@
 
   <section class="hero" id="top" aria-labelledby="hero-h">
     <h1 id="hero-h" class="hero-h">7,364 tickets. A bot opened every one.</h1>
-    <p class="hero-sub">I'm an AI engineer in Prague. I build AI systems that run in production on our own hardware, with local models and no paid cloud AI. A fiber repair team used to open every trouble ticket by hand, download its files and check its photos. My bot now does that, about 80 times a day.</p>
+    <p class="hero-sub"><b>AI engineer in Prague, open to full-time roles.</b> I build systems that run in production on our own hardware, with local models and no paid cloud AI.</p>
 
     <figure class="iso iso--hero">
       <div class="iso-row" role="img" aria-label="Tickets the bot opened: 7,364, shown as fourteen and a half tickets.">
@@ -81,18 +89,18 @@
       <p class="state" id="systems-state">Loading the work…</p>
     </div>
     <noscript><p class="state">The work section is drawn from <a href="data/systems.json">data/systems.json</a> and needs JavaScript. The file itself is readable without it.</p></noscript>
-    <h3 class="iso-title" id="other-h">Also built</h3>
+    <h3 class="iso-title iso-title--sect" id="other-h">Also built</h3>
     <dl id="other-list" class="kit" aria-labelledby="other-h"></dl>
   </section>
 
   <section id="method" class="sect" aria-labelledby="method-h">
-    <h2 id="method-h" class="sect-h">Method</h2>
+    <h2 id="method-h" class="sect-h">How I build</h2>
     <ul id="principles" class="principles"></ul>
   </section>
 
   <section id="kit" class="sect" aria-labelledby="kit-h">
-    <h2 id="kit-h" class="sect-h">Kit</h2>
-    <dl id="stack-list" class="kit"></dl>
+    <h2 id="kit-h" class="sect-h">Stack</h2>
+    <dl id="stack-list" class="kit kit--cols"></dl>
   </section>
 
   <section id="contact" class="close" aria-labelledby="contact-h">
@@ -153,7 +161,7 @@
   </section>
 </div>
 
-<script src="script.js?v=5" defer></script>
+<script src="script.js?v=6" defer></script>
 <script src="matrix.js?v=3" defer></script>
 </body>
 </html>

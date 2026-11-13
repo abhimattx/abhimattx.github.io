@@ -43,10 +43,10 @@ function pictogram(icon, tone, isHalf) {
 /* ---------------------------------------------------------------- charts */
 
 /** A labelled row of identical pictograms; count may end in .5. */
-function isoRow(label, count, icon, tone, total, slots) {
+function isoRow(label, count, icon, tone, total, slots, unit) {
   const row = el('div', 'iso-row');
   row.setAttribute('role', 'img');
-  row.setAttribute('aria-label', label + ': ' + total);
+  row.setAttribute('aria-label', label + ': ' + total + (unit && !String(unit).startsWith('%') ? ' ' + unit : ''));
 
   const icons = el('span', 'iso-icons count');
   icons.style.setProperty('--n', String(slots));
@@ -80,7 +80,7 @@ function rowsChart(spec) {
   rows.forEach(row => {
     const tone = row.hi ? 'red' : ROW_TONES[toneIndex++ % ROW_TONES.length];
     const count = Math.round((Number(row.value) / per) * 2) / 2;
-    fig.appendChild(isoRow(row.label, count, row.icon || spec.icon, tone, Number(row.value).toLocaleString('en') + suffix, slots));
+    fig.appendChild(isoRow(row.label, count, row.icon || spec.icon, tone, Number(row.value).toLocaleString('en') + suffix, slots, spec.unit));
   });
   return appendAll(fig, [caption]);
 }
@@ -120,8 +120,8 @@ function gridChart(spec) {
     const row = rows[index];
     const value = Math.max(0, Math.min(GRID_CELLS, Number(row.value)));
     [...grid.children].forEach((cell, i) => {
-      cell.classList.toggle('is-on', i < value);
-      cell.classList.toggle('is-hi', i < value && Boolean(row.hi));
+      cell.classList.toggle('is-on', i < Math.round(value));
+      cell.classList.toggle('is-hi', i < Math.round(value) && Boolean(row.hi));
     });
     buttons.forEach((b, i) => b.setAttribute('aria-pressed', String(i === index)));
     grid.setAttribute('aria-label', row.label + ': ' + value + ' of ' + GRID_CELLS);
@@ -278,7 +278,12 @@ function renderPrinciples(principles) {
 function renderOthers(others) {
   const mount = document.getElementById('other-list');
   others.forEach(o => {
-    appendAll(mount, [appendAll(el('div', 'kit-row'), [el('dt', null, o.title), el('dd', null, o.body)])]);
+    // Lead with the measured figure; entries without one show their label alone.
+    const fig = appendAll(el('dd', 'kit-fig'), [
+      o.figure ? el('b', null, o.figure) : null,
+      o.figureLabel ? el('span', null, o.figureLabel) : null,
+    ]);
+    appendAll(mount, [appendAll(el('div', 'kit-row kit-row--fig'), [el('dt', null, o.title), fig, el('dd', null, o.body)])]);
   });
 }
 
