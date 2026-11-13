@@ -163,6 +163,23 @@
           ]
         },
         {
+          "title": "how often search finds the right document",
+          "unit": "of every 100 test questions",
+          "type": "grid",
+          "key": "100 squares is the test set. The right document is in the top 10 results for 97.6 of every 100 questions, drawn as 98 squares.",
+          "rows": [
+            {
+              "label": "test questions",
+              "value": 100
+            },
+            {
+              "label": "right document in the top 10",
+              "value": 97.6,
+              "hi": true
+            }
+          ]
+        },
+        {
           "title": "how users rated 269 answers",
           "unit": "answers",
           "per": 20,
@@ -171,12 +188,12 @@
           "rows": [
             {
               "label": "thumbs up",
-              "value": 196
+              "value": 196,
+              "hi": true
             },
             {
               "label": "thumbs down",
-              "value": 73,
-              "hi": true
+              "value": 73
             }
           ]
         }
@@ -290,27 +307,36 @@
   "others": [
     {
       "title": "construction-photo AI",
-      "body": "YOLO models I trained check site photos for required evidence, and they are the ones deployed in the app. Best validation mAP@50: 0.985 measuring ruler, 0.970 marker ball, 0.919 trench. Low-confidence detections go to a person for review."
+      "figure": "0.985",
+      "figureLabel": "best validation mAP@50",
+      "body": "YOLO models I trained check site photos for required evidence, and they are the ones deployed in the app. Low-confidence detections go to a person."
     },
     {
       "title": "agent orchestration",
-      "body": "Two tools for working safely with AI coding agents, with 184 passing tests. A worker and reviewer loop with test gates, rollback and a budget cap fixed a 39-finding UI audit in one round for $1.96."
+      "figure": "184",
+      "figureLabel": "passing tests",
+      "body": "Two tools for working safely with AI coding agents. A worker and reviewer loop with test gates fixed a 39-finding UI audit in one round for $1.96."
     },
     {
       "title": "automated retraining",
-      "body": "Watches the annotation store, validates labels and starts training once 500 new images arrive. Training is deterministic code; the LLM only writes the report."
+      "figure": "500",
+      "figureLabel": "new images start a run",
+      "body": "Watches the annotation store and validates labels. Training is deterministic code; the LLM only writes the report."
     },
     {
       "title": "resource allocation agent",
-      "body": "Prototype. Chat over engineers' skills, certifications and assignments. All numbers come from a deterministic scoring engine, and the only write needs approval in the UI."
+      "figureLabel": "prototype",
+      "body": "Chat over engineers' skills, certifications and assignments. All numbers come from a deterministic scoring engine."
     },
     {
       "title": "GIS copilot",
-      "body": "Prototype. A \"talk to your map\" QGIS plugin for network design. Graph algorithms run without an LLM, and generated code is checked, reviewed by a person and run with rollback."
+      "figureLabel": "prototype",
+      "body": "A \"talk to your map\" QGIS plugin for network design. Graph algorithms run without an LLM; generated code runs with rollback."
     },
     {
       "title": "CRM follow-up reminders",
-      "body": "Prototype. Every summary bullet must quote its source note word for word, and code checks it. Unverifiable bullets are dropped."
+      "figureLabel": "prototype",
+      "body": "Every summary bullet must quote its source note word for word, and code checks it."
     }
   ],
   "principles": [
@@ -323,20 +349,8 @@
       "body": "The ticket bot went from LLM captions to a 70B pipeline to a small trained YOLO model. The allocation agent uses a scoring engine, not LLM math."
     },
     {
-      "title": "fall back, don't fail",
-      "body": "SQL agent, then retrieval. Ungrounded answer, then a strict retry, then a fixed answer. Low-confidence detection, then a person."
-    },
-    {
       "title": "measure before claiming",
       "body": "Findings are labelled measured or estimated. Baselines are captured before changes."
-    },
-    {
-      "title": "engineer the safety in",
-      "body": "Read-only database sessions, allowlists, deny lists, protected tests and worktrees. Safety lives in code, not in prompts."
-    },
-    {
-      "title": "self-hosted and cost-aware",
-      "body": "One 24 GB GPU with explicit context and generation budgets. Agent runs are capped in dollars."
     }
   ],
   "stack": {

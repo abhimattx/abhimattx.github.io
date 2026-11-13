@@ -68,6 +68,7 @@ a:hover { text-decoration-color: var(--red); }
 :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
 
 h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
+p, dd, li, figcaption { text-wrap: pretty; }
 
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
@@ -105,13 +106,16 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
 .mast-name {
   font-weight: 600; text-transform: uppercase; letter-spacing: var(--track);
   text-decoration: none; margin-right: auto;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.9rem;
+  padding-block: 0.5rem;
 }
+.mast-role { font-size: var(--t-label); font-weight: 500; color: var(--ink-2); }
 
 .mast-nav { display: flex; gap: clamp(1rem, 2.4vw, 2.25rem); }
 .mast-nav a {
   font-size: var(--t-label); font-weight: 500; text-transform: uppercase;
   letter-spacing: var(--track); text-decoration: none;
-  padding-block: 0.35rem; border-bottom: 3px solid transparent;
+  padding-block: 0.7rem; border-bottom: 3px solid transparent;
   transition: border-color 200ms var(--ease);
 }
 .mast-nav a:hover { border-bottom-color: var(--red); }
@@ -130,14 +134,14 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
 .btn-arrow { width: 1em; height: 1em; fill: currentColor; flex: none; transition: transform 220ms var(--ease); }
 .btn:hover .btn-arrow { transform: translateX(0.25em); }
 
-.btn--small { background: var(--red); font-size: var(--t-label); padding: 0.6rem 1rem; }
+.btn--small { background: var(--red); font-size: var(--t-label); padding: 0.75rem 1rem; }
 .btn--small:hover { background: var(--ink); }
 .btn--big { font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem); padding: 1.1rem 1.75rem; }
 
 /* -------------------------------------------------------------------- hero */
 
 .hero {
-  padding-top: clamp(2.5rem, 1rem + 5vw, 5rem);
+  padding-top: clamp(2rem, 1rem + 3vw, 3.5rem);
   padding-bottom: var(--space-section);
 }
 
@@ -153,9 +157,10 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
   margin-top: 1.25rem;
   font-size: var(--t-lede);
   line-height: 1.4;
-  max-width: 44ch;
+  max-width: 62ch;
   color: var(--ink-2);
 }
+.hero-sub b { font-weight: 600; color: var(--ink); }
 
 .hero-foot {
   margin-top: clamp(2rem, 1rem + 3vw, 3.5rem);
@@ -171,13 +176,15 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
 /* ------------------------------------------------------------ iso charts */
 
 .iso { display: grid; gap: 0.9rem; }
-.iso--hero { margin-top: clamp(2.25rem, 1rem + 4vw, 4rem); gap: 1.1rem; }
+.iso--hero { margin-top: clamp(2rem, 1rem + 3vw, 3rem); gap: 1.1rem; }
 
 .iso-title {
   font-size: var(--t-label); text-transform: uppercase; letter-spacing: var(--track);
   padding-top: 0.9rem; border-top: 3px solid var(--ink);
   margin-bottom: 0.4rem;
 }
+.iso-title--sect { margin-top: var(--space-section); }
+.iso-title--sect + .kit { margin-top: 0.5rem; border-top: 0; }
 
 .iso-row {
   display: grid;
@@ -281,7 +288,7 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
   font: inherit; font-size: var(--t-label); font-weight: 500;
   text-transform: uppercase; letter-spacing: var(--track);
   background: var(--paper); color: var(--ink);
-  border: 0; padding: 0.55rem 0.9rem; cursor: pointer;
+  border: 0; padding: 0.75rem 0.9rem; cursor: pointer;
   transition: background-color 160ms var(--ease), color 160ms var(--ease);
 }
 .grid-btn + .grid-btn { border-left: 2px solid var(--ink); }
@@ -307,14 +314,14 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
 .grid-readout b { font-size: 2.5rem; font-weight: 600; margin-right: 0.3rem; font-variant-numeric: tabular-nums; }
 
 /* Numbered strip for pipelines whose steps change units. */
-.strip { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); }
+.strip { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
 .strip-step { display: grid; gap: 0.25rem; padding: 0.75rem 1rem 0.75rem 0; border-top: 2px solid var(--blue); position: relative; }
 .strip-step + .strip-step { padding-left: 1rem; }
 .strip-step + .strip-step::before {
   content: ""; position: absolute; left: -0.45rem; top: -0.55rem;
   border: 0.45rem solid transparent; border-left: 0.6rem solid var(--blue); border-right: 0;
 }
-.strip-val { font-size: 2.25rem; font-weight: 600; line-height: 1; color: var(--blue); font-variant-numeric: tabular-nums; }
+.strip-val { font-size: 1.75rem; font-weight: 600; line-height: 1; white-space: nowrap; color: var(--blue); font-variant-numeric: tabular-nums; }
 .strip-step--hi { border-top-color: var(--red); }
 .strip-step--hi .strip-val { color: var(--red); }
 .strip-label { font-size: var(--t-small); color: var(--ink-2); }
@@ -384,6 +391,17 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
 .kit--small { margin-top: 0.25rem; }
 .kit--small dd { font-size: var(--t-body); color: var(--ink-2); }
 
+/* Also built: title, the measured figure, then one line of text. */
+.kit-row--fig { grid-template-columns: minmax(6rem, 12rem) minmax(8rem, 11rem) 1fr; align-items: baseline; }
+.kit-row--fig dd { font-size: var(--t-body); max-width: 62ch; }
+.kit-row--fig .kit-fig { display: grid; gap: 0.15rem; font-size: var(--t-label); font-weight: 500; text-transform: uppercase; letter-spacing: var(--track); line-height: 1.2; color: var(--ink-2); }
+.kit-fig b { font-size: 2.25rem; font-weight: 600; line-height: 1; letter-spacing: 0; color: var(--red); font-variant-numeric: tabular-nums; }
+
+@media (min-width: 62rem) {
+  .kit--cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 1rem + 4vw, 5rem); }
+  .kit--cols .kit-row { grid-template-columns: minmax(6rem, 8rem) 1fr; }
+}
+
 /* ------------------------------------------------------------------- close */
 
 .close {
@@ -402,7 +420,7 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
 .close-photo { width: 100%; height: auto; display: block; aspect-ratio: 4 / 5; object-fit: cover; }
 
 .close-body { display: grid; gap: 1.25rem; justify-items: start; }
-.close-h { font-size: var(--t-h2); text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; max-width: 14ch; }
+.close-h { font-size: clamp(2rem, 0.6rem + 6.5vw, 6rem); text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; max-width: 14ch; }
 .close-sub { font-size: var(--t-lede); line-height: 1.4; max-width: 42ch; }
 
 .close .btn { background: var(--paper); color: var(--ink); margin-top: 0.5rem; text-transform: none; letter-spacing: 0; }
@@ -410,6 +428,7 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
 
 .close-links { list-style: none; padding: 0; display: flex; gap: 2rem; }
 .close-links a {
+  display: inline-block; padding-block: 0.75rem;
   font-weight: 600; text-transform: uppercase; letter-spacing: var(--track); font-size: var(--t-label);
   text-decoration-color: var(--paper);
 }
@@ -427,9 +446,17 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
 
 /* ------------------------------------------------------------------ narrow */
 
+/* The contact headline needs the full measure until the sheet is wide. */
+@media (max-width: 70rem) {
+  .mast-role { display: none; }
+  .close { grid-template-columns: 1fr; }
+  .close-photo { max-width: 14rem; }
+}
+
 @media (max-width: 46rem) {
-  .mast { flex-wrap: wrap; row-gap: 0.5rem; }
-  .mast-nav { order: 3; width: 100%; justify-content: space-between; }
+  .mast { flex-wrap: wrap; row-gap: 0; padding-block: 0.5rem 0; }
+  .mast-nav { order: 3; width: 100%; justify-content: space-between; gap: 0.5rem; }
+  .mast-nav a { letter-spacing: 0.04em; }
 
   .iso-row, .iso--hero .iso-row {
     grid-template-columns: 1fr auto;
@@ -441,9 +468,8 @@ h1, h2, h3, h4 { font-weight: 600; line-height: 1.02; text-wrap: balance; }
   .iso-total { grid-area: total; }
   .iso-icons { grid-area: icons; }
 
-  .close { grid-template-columns: 1fr; }
-  .close-photo { max-width: 14rem; }
-  .kit-row { grid-template-columns: 1fr; }
+  .kit-row, .kit-row--fig { grid-template-columns: 1fr; }
+  .kit-row--fig { row-gap: 0.6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
